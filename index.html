@@ -1169,9 +1169,18 @@ let DB=load();
 if(!DB.settings.heroImages||!DB.settings.heroImages.length){DB.settings.heroImages=DB.settings.heroOverride?[DB.settings.heroOverride]:[];}
 if(!DB.posts)DB.posts=[];
 let heroTimer=null;
-function load(){try{const r=localStorage.getItem(KEY);if(r){const d=JSON.parse(r);if(d&&d.projects)return d;}}catch(e){}
- try{const t=document.getElementById("embedded-data");if(t){const d=JSON.parse(t.textContent);if(d&&d.projects){try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}return d;}}}catch(e){}
- const s=seed();try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}return s;}
+function load(){
+ let localData=null;
+ try{const r=localStorage.getItem(KEY);if(r){const d=JSON.parse(r);if(d&&d.projects)localData=d;}}catch(e){}
+ let embedData=null;
+ try{const t=document.getElementById("embedded-data");if(t&&t.textContent){const d=JSON.parse(t.textContent);if(d&&d.projects)embedData=d;}}catch(e){}
+ if(embedData&&(!localData||(embedData._publishedAt||0)>(localData._publishedAt||0))){
+   try{localStorage.setItem(KEY,JSON.stringify(embedData));}catch(e){}
+   return embedData;
+ }
+ if(localData)return localData;
+ const s=seed();try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}return s;
+}
 const HKEY=KEY+"_history";
 function getHistory(){try{return JSON.parse(localStorage.getItem(HKEY)||"[]");}catch(e){return [];}}
 function save(){
@@ -2184,7 +2193,8 @@ function buildUpdatedHtml(){
  const doc=document.cloneNode(true);
  let tag=doc.getElementById("embedded-data");
  if(!tag){tag=doc.createElement("script");tag.id="embedded-data";tag.type="application/json";doc.body.appendChild(tag);}
- tag.textContent=JSON.stringify(DB).replace(/</g,"\\u003c");
+ const exportData=Object.assign({},DB,{_publishedAt:Date.now()});
+ tag.textContent=JSON.stringify(exportData).replace(/</g,"\\u003c");
  const app=doc.getElementById("app");if(app)app.innerHTML="";
  ["menu","search","lightbox","present","admin"].forEach(id=>{const el=doc.getElementById(id);if(el)el.classList.remove("open");});
  const tb=doc.getElementById("topbar");if(tb)tb.className="hero-mode";
