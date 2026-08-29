@@ -1,0 +1,2263 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5">
+<meta name="theme-color" content="#060606">
+<title>Kamanashish Barua — Architecture / Selected Works</title>
+<meta name="description" content="Selected architectural works of Kamanashish Barua, B.Arch (BUET), BIMSTEC Scholar. Architecture, urban design, landscape, interior, engineering, research.">
+<meta property="og:title" content="Kamanashish Barua — Architecture / Selected Works">
+<meta property="og:type" content="website">
+<meta property="og:description" content="A curated archive of architectural works — Bangladesh and beyond.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Hind+Siliguri:wght@300;400;500;600&family=Noto+Serif+Bengali:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{
+  --bg:#ffffff; --ink:#080808; --ink-2:#232323;
+  --grey-1:#666666; --grey-2:#9a9a9a; --grey-3:#c9c9c9;
+  --line:#e4e4e4; --line-2:#cfcfcf; --paper:#f4f3f1;
+  --display:'Archivo',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --bn:'Hind Siliguri',sans-serif;
+  --bn-serif:'Noto Serif Bengali',serif;
+  --maxw:1520px;
+  --pad:clamp(18px,5vw,64px);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html[data-lang="bn"]{ --body:var(--bn); }
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.55;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+html[data-lang="bn"] body{line-height:1.75}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;border-radius:0}
+input,textarea,select{font-family:inherit;font-size:14px;color:inherit;border-radius:0}
+::selection{background:#000;color:#fff}
+h1,h2,h3,h4{font-family:var(--display);font-weight:800;line-height:.98;letter-spacing:-.035em}
+html[data-lang="bn"] h1,html[data-lang="bn"] h2,html[data-lang="bn"] h3{font-family:var(--bn-serif);letter-spacing:0;line-height:1.2}
+.mono{font-family:var(--mono);letter-spacing:.02em}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--grey-1)}
+.eyebrow::before{content:"";display:inline-block;width:16px;height:1px;background:currentColor;margin-right:9px;vertical-align:middle;opacity:.6}
+html[data-lang="bn"] .eyebrow{font-family:var(--mono)}
+.hairline{height:1px;background:var(--line);width:100%}
+
+/* scroll progress */
+#progress{position:fixed;top:0;left:0;height:2px;width:0;background:#fff;z-index:120;transition:width .1s linear;mix-blend-mode:difference}
+
+/* top bar — permanent black chrome; transparent only while riding over the hero image */
+#topbar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--pad);height:64px;background:rgba(6,6,6,.88);backdrop-filter:saturate(1.4) blur(14px);color:#fff;
+  border-bottom:1px solid transparent;transition:background .4s var(--ease),border-color .4s var(--ease),color .4s var(--ease)}
+#topbar.solid{border-bottom-color:rgba(255,255,255,.14)}
+#topbar.hero-mode{background:transparent;border-bottom-color:transparent}
+.brand{display:flex;flex-direction:column;line-height:1;gap:4px}
+.brand-name{font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:.08em;color:#fff}
+.brand-sub{font-family:var(--mono);font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.tb-right{display:flex;align-items:center;gap:2px}
+.tb-links{display:flex}
+.tb-btn{position:relative;padding:9px 13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.62);transition:color .2s}
+.tb-btn::after{content:"";position:absolute;left:13px;right:13px;bottom:5px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+.tb-btn:hover::after,.tb-btn.active::after{transform:scaleX(1)}
+.tb-btn:hover{color:#fff}
+.tb-btn.active{color:#fff}
+.lang-toggle{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.32);padding:6px 10px;transition:.2s var(--ease)}
+.lang-toggle:hover{border-color:#fff;color:#fff}
+.menu-btn{display:none}
+
+/* layout */
+#app{min-height:100vh;padding-bottom:80px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+.section{padding:clamp(48px,9vw,130px) 0}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:40px;position:relative;padding-left:22px}
+.section-head::before{content:"";position:absolute;left:0;top:.2em;bottom:.2em;width:2px;background:var(--ink)}
+.section-title{font-size:clamp(24px,3.4vw,38px);font-weight:800;letter-spacing:-.03em}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* HERO */
+.hero{position:relative;height:100svh;min-height:560px;width:100%;overflow:hidden;background:#0a0a0a}
+.hero-media{position:absolute;inset:0}
+.hero-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;
+  transform:scale(1.06);transition:opacity 1.5s var(--ease)}
+.hero-slide.active{opacity:1;animation:kb 20s var(--ease) forwards}
+@keyframes kb{to{transform:scale(1)}}
+.hero-dots{position:absolute;right:var(--pad);bottom:34px;z-index:2;display:flex;gap:8px}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);transition:.3s var(--ease)}
+.hero-dot.on{background:#fff;width:22px;border-radius:3px}
+.hero::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,0) 32%,rgba(0,0,0,.1) 55%,rgba(0,0,0,.68) 100%)}
+.hero::before{content:"";position:absolute;z-index:2;left:var(--pad);top:64px;width:min(46vw,620px);height:min(46vw,620px);
+  border:1px solid rgba(255,255,255,.16);border-radius:50% 50% 50% 4%/54% 54% 46% 46%;pointer-events:none;
+  transform:rotate(-8deg);opacity:.55}
+.hero-inner{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:var(--pad);padding-bottom:clamp(90px,14vh,150px);color:#fff}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.85);margin-bottom:20px}
+.hero-name{font-family:var(--display);font-weight:800;font-size:clamp(40px,10vw,124px);line-height:.9;letter-spacing:-.045em;max-width:17ch}
+html[data-lang="bn"] .hero-name{font-family:var(--bn-serif);letter-spacing:0;line-height:1.1;font-size:clamp(30px,7.5vw,84px)}
+.hero-disc{margin-top:22px;display:flex;flex-wrap:wrap;gap:6px 22px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+.hero-cta{margin-top:36px;display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;
+  text-transform:uppercase;padding:14px 24px;border:1px solid rgba(255,255,255,.5);color:#fff;transition:.3s var(--ease)}
+.btn:hover{background:#fff;color:#000;border-color:#fff;letter-spacing:.22em}
+.btn-dark{border-color:var(--ink);color:var(--ink)}
+.btn-dark:hover{background:var(--ink);color:#fff}
+.btn-fill{background:#fff;color:#000;border-color:#fff}
+.btn-fill:hover{background:transparent;color:#fff}
+.hero-scroll{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);z-index:2;color:rgba(255,255,255,.7);
+  font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;text-align:center}
+.hero-scroll span{display:block;width:1px;height:34px;background:rgba(255,255,255,.5);margin:8px auto 0;animation:drop 2s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}
+  55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media(max-width:820px){.hero::before{display:none}}
+
+/* FEATURED STREAM */
+.feat{border-top:1px solid var(--line)}
+.feat-item{position:relative;display:block;border-bottom:1px solid var(--line);overflow:hidden}
+.feat-media{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--paper)}
+@media(min-width:900px){.feat-media{aspect-ratio:21/9}}
+.feat-media img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.feat-item:hover .feat-media img{transform:scale(1.045)}
+.feat-cap{position:absolute;left:0;right:0;bottom:0;padding:var(--pad);color:#fff;
+  background:linear-gradient(180deg,transparent,rgba(0,0,0,.68));z-index:2}
+.feat-idx{font-family:var(--mono);font-size:11px;letter-spacing:.24em;opacity:.85}
+.feat-title{font-family:var(--display);font-weight:800;font-size:clamp(26px,4.8vw,58px);letter-spacing:-.035em;margin:8px 0 10px;max-width:20ch}
+html[data-lang="bn"] .feat-title{font-family:var(--bn-serif);letter-spacing:0}
+.feat-meta{display:flex;flex-wrap:wrap;gap:4px 18px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.feat-idea{margin-top:14px;font-size:15px;max-width:60ch;color:rgba(255,255,255,.9);font-family:var(--body)}
+.feat-item::before{content:"";position:absolute;top:22px;right:22px;z-index:3;width:28px;height:28px;border:1px solid rgba(255,255,255,.6);
+  border-radius:50%;opacity:0;transform:scale(.6) rotate(-30deg);transition:.4s var(--ease)}
+.feat-item::after{content:"→";position:absolute;top:22px;right:22px;z-index:3;width:28px;height:28px;display:grid;place-items:center;
+  color:#fff;font-size:13px;opacity:0;transform:scale(.6) rotate(-30deg);transition:.4s var(--ease)}
+.feat-item:hover::before,.feat-item:hover::after{opacity:1;transform:none}
+
+/* ARCHIVE */
+.filterbar{position:sticky;top:64px;z-index:40;background:rgba(6,6,6,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(255,255,255,.12);padding:14px var(--pad)}
+.filter-row{display:flex;gap:14px;align-items:center}
+.chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chip{white-space:nowrap;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+  padding:9px 14px;border:1px solid rgba(255,255,255,.28);color:rgba(255,255,255,.65);transition:.25s var(--ease);flex:0 0 auto}
+.chip:hover{border-color:#fff;color:#fff}
+.chip.active{background:#fff;color:#000;border-color:#fff}
+.view-toggle{display:flex;border:1px solid rgba(255,255,255,.28);flex:0 0 auto}
+.view-toggle button{padding:9px 12px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:rgba(255,255,255,.65);transition:.2s}
+.view-toggle button.active{background:#fff;color:#000}
+.searchbtn{flex:0 0 auto;padding:9px 13px;border:1px solid rgba(255,255,255,.28);font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.65);transition:.2s var(--ease)}
+.searchbtn:hover{border-color:#fff;color:#fff}
+
+.grid{display:grid;gap:clamp(20px,3vw,44px);grid-template-columns:1fr}
+@media(min-width:640px){.grid.two{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.grid.three{grid-template-columns:1fr 1fr 1fr}}
+.card{display:block;cursor:pointer;opacity:0;transform:translateY(20px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.card.in{opacity:1;transform:none}
+.card-media{position:relative;overflow:hidden;background:var(--paper);aspect-ratio:4/3}
+.card-media img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease),filter .6s}
+.card:hover .card-media img{transform:scale(1.05)}
+.card-fav{position:absolute;top:12px;right:12px;z-index:3;width:34px;height:34px;display:grid;place-items:center;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(6px);color:var(--ink);font-size:15px;opacity:0;transition:.25s}
+.card:hover .card-fav,.card-fav.on{opacity:1}
+.card-fav.on{color:#000}
+.card-body{padding:16px 2px 0;position:relative}
+.card-title{font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:-.02em;line-height:1.1}
+html[data-lang="bn"] .card-title{font-family:var(--bn-serif)}
+.card-meta{margin-top:8px;display:flex;flex-wrap:wrap;gap:2px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-1)}
+
+/* INDEX list view */
+.indexlist{border-top:2px solid var(--ink)}
+.index-row{display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:center;padding:20px 2px;border-bottom:1px solid var(--line);cursor:pointer;transition:.3s var(--ease)}
+.index-row:hover{background:var(--paper);padding-left:14px}
+.index-no{font-family:var(--mono);font-size:12px;color:var(--grey-2)}
+.index-t{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.6vw,28px);letter-spacing:-.02em}
+html[data-lang="bn"] .index-t{font-family:var(--bn-serif)}
+.index-sub{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey-1);margin-top:4px}
+.index-year{font-family:var(--mono);font-size:13px;color:var(--grey-1);text-align:right}
+.empty{padding:80px 0;text-align:center;color:var(--grey-1);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+
+/* DETAIL */
+.d-hero{position:relative;height:86svh;min-height:480px;overflow:hidden;background:#0a0a0a}
+.d-hero img{width:100%;height:100%;object-fit:cover}
+.d-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),transparent 40%,rgba(0,0,0,.68))}
+.d-hero-cap{position:absolute;left:0;right:0;bottom:0;padding:var(--pad);color:#fff;z-index:2}
+.d-cat{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.d-title{font-family:var(--display);font-weight:800;font-size:clamp(32px,6.8vw,84px);line-height:.92;letter-spacing:-.04em;margin:14px 0 12px;max-width:18ch}
+html[data-lang="bn"] .d-title{font-family:var(--bn-serif);letter-spacing:0;line-height:1.15}
+.d-locyear{display:flex;gap:24px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.9)}
+.backbar{padding:16px var(--pad);border-bottom:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;align-items:center;position:sticky;top:64px;background:rgba(6,6,6,.92);backdrop-filter:blur(8px);z-index:40}
+.backlink{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.backlink:hover{color:#fff}
+.d-actions{display:flex;gap:6px}
+.d-actions button{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.65);padding:7px 11px;border:1px solid rgba(255,255,255,.25);transition:.2s var(--ease)}
+.d-actions button:hover{color:#000;border-color:#fff;background:#fff}
+
+/* title block (signature) */
+.titleblock{border:1px solid var(--ink);margin:clamp(40px,8vw,80px) 0}
+.tb-grid{display:grid;grid-template-columns:1fr;border-collapse:collapse}
+@media(min-width:640px){.tb-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.tb-grid{grid-template-columns:1fr 1fr 1fr}}
+.tb-cell{padding:18px 20px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.tb-key{font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-2);margin-bottom:7px}
+.tb-val{font-family:var(--body);font-size:14.5px;color:var(--ink);line-height:1.4}
+html[data-lang="bn"] .tb-val{font-family:var(--bn)}
+.d-body{max-width:760px;margin:0 auto}
+.d-intro{font-size:clamp(18px,2.4vw,24px);line-height:1.45;font-family:var(--display);font-weight:400;letter-spacing:-.015em;color:var(--ink-2);margin:8px 0 clamp(40px,7vw,72px)}
+html[data-lang="bn"] .d-intro{font-family:var(--bn-serif);line-height:1.7}
+.d-sec{margin-bottom:clamp(34px,5vw,52px)}
+.d-sec h3{font-size:12.5px;font-family:var(--mono);font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--grey-1);margin-bottom:16px;padding-left:16px;border-left:2px solid var(--ink)}
+html[data-lang="bn"] .d-sec h3{font-family:var(--mono)}
+.d-sec p{font-size:16px;color:var(--ink-2);margin-bottom:14px}
+.d-sec p:last-child{margin-bottom:0}
+
+/* gallery */
+.gallery{margin:clamp(44px,8vw,90px) 0}
+.g-full{margin:26px 0}
+.g-two{display:grid;grid-template-columns:1fr;gap:14px;margin:26px 0}
+@media(min-width:700px){.g-two{grid-template-columns:1fr 1fr}}
+.g-three{display:grid;grid-template-columns:1fr;gap:14px;margin:26px 0}
+@media(min-width:700px){.g-three{grid-template-columns:2fr 1fr}.g-three .gi:first-child{grid-row:span 2}}
+.gi{position:relative;overflow:hidden;background:var(--paper);cursor:zoom-in}
+.gi img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.gi:hover img{transform:scale(1.04)}
+.gi-cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--grey-1);margin-top:9px;text-transform:uppercase}
+.g-swipe{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin:26px calc(-1*var(--pad));padding:0 var(--pad);scrollbar-width:none}
+.g-swipe::-webkit-scrollbar{display:none}
+.g-swipe .gi{flex:0 0 82%;scroll-snap-align:center;aspect-ratio:3/2}
+@media(min-width:800px){.g-swipe .gi{flex:0 0 46%}}
+
+/* drawings */
+.draw-strip{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:700px){.draw-strip{grid-template-columns:1fr 1fr}}
+.draw{border:1px solid var(--line);background:var(--paper);cursor:zoom-in;position:relative}
+.draw img{width:100%;object-fit:contain;background:#fff}
+.draw-lab{position:absolute;top:0;left:0;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 10px}
+
+/* sustainability tags */
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line-2);padding:9px 13px;color:var(--ink-2);transition:.2s var(--ease)}
+.tag:hover{border-color:var(--ink);color:var(--ink)}
+
+/* related / next */
+.next-proj{position:relative;height:60svh;min-height:360px;overflow:hidden;display:block;background:#0a0a0a;margin-top:clamp(50px,8vw,90px)}
+.next-proj img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.next-proj:hover img{transform:scale(1.06)}
+.next-proj::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.46)}
+.next-cap{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;padding:var(--pad)}
+.next-lab{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;opacity:.85;margin-bottom:16px}
+.next-t{font-family:var(--display);font-weight:800;font-size:clamp(28px,5.4vw,66px);letter-spacing:-.03em}
+html[data-lang="bn"] .next-t{font-family:var(--bn-serif)}
+
+/* video */
+.videowrap{position:relative;aspect-ratio:16/9;background:#000;margin:26px 0}
+.videowrap iframe,.videowrap video{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* about */
+.about-hero{padding:clamp(60px,12vw,140px) 0 clamp(30px,6vw,60px)}
+.about-name{font-size:clamp(36px,7.4vw,96px);font-weight:800;letter-spacing:-.04em;line-height:.92}
+.about-cols{display:grid;grid-template-columns:1fr;gap:clamp(30px,5vw,60px)}
+@media(min-width:900px){.about-cols{grid-template-columns:1fr 1.4fr}}
+.about-portrait{background:var(--paper);aspect-ratio:3/4;overflow:hidden}
+.about-portrait img{width:100%;height:100%;object-fit:cover}
+.about-block{margin-bottom:38px}
+.about-block h3{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--grey-1);margin-bottom:16px}
+.about-block p{font-size:16px;color:var(--ink-2);margin-bottom:12px}
+.tl{border-top:2px solid var(--ink)}
+.tl-row{display:grid;grid-template-columns:70px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--line);transition:.2s}
+.tl-row:hover{padding-left:8px}
+.tl-year{font-family:var(--mono);font-size:13px;color:var(--grey-1)}
+.tl-txt{font-size:15px}
+.exp-grid{display:grid;grid-template-columns:1fr;gap:0;border-top:1px solid var(--line)}
+@media(min-width:640px){.exp-grid{grid-template-columns:1fr 1fr}}
+.exp-item{padding:16px 0;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);display:flex;gap:12px}
+.exp-item span{color:var(--grey-3)}
+
+/* map */
+#map{height:70svh;min-height:440px;width:100%;border:1px solid var(--line);background:var(--paper);filter:grayscale(.15) contrast(1.05)}
+.leaflet-popup-content{margin:0;font-family:var(--body)}
+.mp-pop{width:200px}
+.mp-pop img{width:100%;height:110px;object-fit:cover}
+.mp-pop .mp-b{padding:10px}
+.mp-pop .mp-t{font-family:var(--display);font-weight:700;font-size:15px}
+.mp-pop .mp-m{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey-1);margin-top:3px}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line)}
+@media(min-width:700px){.contact-grid{grid-template-columns:1fr 1fr}}
+.contact-item{background:var(--bg);border:1px solid var(--line);padding:26px;transition:.25s var(--ease)}
+.contact-item:hover{border-color:var(--ink);background:var(--ink);color:#fff}
+.contact-item:hover .ci-k{color:rgba(255,255,255,.7)}
+.contact-item .ci-k{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey-1);transition:.25s}
+.contact-item .ci-v{font-family:var(--display);font-weight:700;font-size:22px;margin-top:9px}
+
+/* bottom nav (mobile) */
+#bottomnav{position:fixed;left:0;right:0;bottom:0;z-index:90;display:none;background:rgba(6,6,6,.94);
+  backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,.12);padding:8px 6px calc(8px + env(safe-area-inset-bottom))}
+.bn-row{display:flex;justify-content:space-around}
+.bn-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px 8px;font-family:var(--mono);
+  font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);transition:.2s}
+.bn-item svg{width:20px;height:20px}
+.bn-item.active{color:#fff}
+@media(max-width:820px){#bottomnav{display:block}#topbar .tb-links{display:none}.menu-btn{display:block}}
+
+/* overlay menu */
+#menu{position:fixed;inset:0;z-index:110;background:#060606;color:#fff;transform:translateY(-100%);transition:transform .6s var(--ease);
+  display:flex;flex-direction:column;padding:var(--pad);padding-top:80px;overflow:auto}
+#menu.open{transform:none}
+.menu-close{position:absolute;top:16px;right:var(--pad);font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:8px}
+.menu-link{font-family:var(--display);font-weight:800;font-size:clamp(30px,8vw,60px);letter-spacing:-.035em;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.16);transition:.3s var(--ease)}
+html[data-lang="bn"] .menu-link{font-family:var(--bn-serif)}
+.menu-link:hover{padding-left:18px;color:rgba(255,255,255,.55)}
+
+/* search overlay */
+#search{position:fixed;inset:0;z-index:115;background:rgba(6,6,6,.98);color:#fff;transform:translateY(-100%);transition:transform .5s var(--ease);padding:var(--pad);padding-top:80px;overflow:auto}
+#search.open{transform:none}
+#searchInput{width:100%;border:none;border-bottom:2px solid #fff;color:#fff;caret-color:#fff;font-family:var(--display);font-size:clamp(26px,6vw,54px);font-weight:800;padding:10px 0;letter-spacing:-.03em;outline:none;background:transparent}
+#searchInput::placeholder{color:rgba(255,255,255,.35)}
+.search-hint{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:14px}
+.search-results{margin-top:30px}
+#search .indexlist{border-top-color:#fff}
+#search .index-row{border-bottom-color:rgba(255,255,255,.14)}
+#search .index-row:hover{background:rgba(255,255,255,.07)}
+#search .index-no{color:rgba(255,255,255,.4)}
+#search .index-t{color:#fff}
+#search .index-sub{color:rgba(255,255,255,.55)}
+#search .empty{color:rgba(255,255,255,.5)}
+
+/* lightbox */
+#lightbox{position:fixed;inset:0;z-index:130;background:rgba(6,6,6,.98);display:none;flex-direction:column}
+#lightbox.open{display:flex}
+.lb-top{display:flex;justify-content:space-between;align-items:center;padding:14px var(--pad);color:#fff}
+.lb-count{font-family:var(--mono);font-size:12px;letter-spacing:.16em}
+.lb-tools{display:flex;gap:4px}
+.lb-tools button{color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;border:1px solid rgba(255,255,255,.3);transition:.2s}
+.lb-tools button:hover{border-color:#fff}
+.lb-stage{flex:1;position:relative;overflow:hidden;display:grid;place-items:center;touch-action:none}
+.lb-stage img{max-width:100%;max-height:100%;object-fit:contain;transition:transform .2s ease-out;cursor:grab}
+.lb-cap{padding:14px var(--pad);color:rgba(255,255,255,.75);font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-align:center;text-transform:uppercase}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:30px;padding:20px;opacity:.7;z-index:3;user-select:none;transition:.2s}
+.lb-nav:hover{opacity:1}
+.lb-prev{left:0}.lb-next{right:0}
+
+/* presentation mode */
+#present{position:fixed;inset:0;z-index:140;background:#000;display:none}
+#present.open{display:block}
+.pr-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s var(--ease)}
+.pr-slide.active{opacity:1}
+.pr-slide img{width:100%;height:100%;object-fit:cover}
+.pr-slide .pr-cap{position:absolute;left:0;right:0;bottom:0;padding:var(--pad);color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.65))}
+.pr-cap .pr-t{font-family:var(--display);font-weight:800;font-size:clamp(20px,4vw,44px);letter-spacing:-.02em}
+.pr-ctrl{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;justify-content:space-between;padding:16px var(--pad)}
+.pr-ctrl button{color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:8px 12px;border:1px solid rgba(255,255,255,.3);transition:.2s}
+.pr-ctrl button:hover{border-color:#fff}
+.pr-arrows{position:absolute;inset:0;display:flex;z-index:2}
+.pr-arrows div{flex:1;cursor:pointer}
+.pr-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:3}
+.pr-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4)}
+.pr-dot.on{background:#fff}
+
+/* toast */
+#toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);z-index:160;
+  background:var(--ink);color:#fff;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  padding:13px 22px;opacity:0;pointer-events:none;transition:.35s var(--ease)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* music toggle */
+.music-toggle{position:fixed;left:var(--pad);bottom:28px;z-index:95;width:44px;height:44px;border-radius:50%;
+  background:rgba(6,6,6,.55);backdrop-filter:blur(8px);color:#fff;display:grid;place-items:center;
+  border:1px solid rgba(255,255,255,.3);transition:.3s var(--ease),opacity .3s}
+.music-toggle:hover{background:rgba(6,6,6,.85);border-color:#fff}
+.music-toggle.hide{display:none}
+.music-toggle svg{opacity:.85}
+.music-toggle.playing svg{animation:musicPulse 1.4s ease-in-out infinite}
+@keyframes musicPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+@media(max-width:820px){.music-toggle{bottom:calc(78px + env(safe-area-inset-bottom))}}
+
+/* footer */
+.foot{background:#060606;color:#fff;padding:clamp(50px,8vw,100px) 0 44px;margin-top:60px}
+.foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:flex-end;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,.16)}
+.foot-name{font-family:var(--display);font-weight:800;font-size:clamp(26px,4.4vw,50px);letter-spacing:-.035em;color:#fff}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.foot-links a{position:relative}
+.foot-links a:hover{color:#fff}
+.foot-bottom{margin-top:24px;font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;color:rgba(255,255,255,.35);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+/* ADMIN */
+#admin{position:fixed;inset:0;z-index:125;background:var(--bg);display:none;overflow:auto}
+#admin.open{display:block}
+.adm-bar{position:sticky;top:0;background:var(--ink);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:12px var(--pad);z-index:5}
+.adm-bar .brand-name{color:#fff}
+.adm-bar .adm-sub{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+.adm-tabs{display:flex;gap:2px;flex-wrap:wrap;padding:12px var(--pad);border-bottom:1px solid var(--line);position:sticky;top:49px;background:#fff;z-index:4}
+.adm-tab{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:9px 13px;color:var(--grey-1);border:1px solid transparent;transition:.2s}
+.adm-tab.active{color:var(--ink);border-color:var(--line-2)}
+.adm-body{padding:clamp(20px,4vw,40px) var(--pad);max-width:1100px}
+.adm-h{font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-.03em;margin-bottom:6px}
+.adm-note{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--grey-1);margin-bottom:24px;line-height:1.6}
+.adm-list{border-top:1px solid var(--ink)}
+.adm-item{display:grid;grid-template-columns:22px 56px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);transition:opacity .15s,border-color .15s}
+.adm-item.dragging{opacity:.35}
+.adm-item.drag-over{border-top:2px solid var(--ink)}
+.adm-drag{cursor:grab;color:var(--grey-2);font-size:16px;text-align:center;user-select:none;touch-action:none}
+.adm-drag:hover{color:var(--ink)}
+.adm-thumb{width:56px;height:42px;object-fit:cover;background:var(--paper)}
+.adm-it-t{font-family:var(--display);font-weight:600;font-size:15px}
+.adm-it-m{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--grey-1);margin-top:2px}
+.adm-it-m .badge{border:1px solid var(--line-2);padding:1px 5px;margin-right:5px}
+.adm-it-m .badge.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.adm-ctrls{display:flex;gap:4px;flex-wrap:wrap}
+.adm-ctrls button{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:6px 8px;border:1px solid var(--line-2);color:var(--grey-1)}
+.adm-ctrls button:hover{border-color:var(--ink);color:var(--ink)}
+.adm-primary{background:var(--ink);color:#fff !important;border-color:var(--ink) !important;padding:12px 20px !important;font-size:11px !important}
+.adm-danger:hover{border-color:#b00 !important;color:#b00 !important}
+.field{margin-bottom:16px}
+.field label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey-1);margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;padding:11px 13px;border:1px solid var(--line-2);background:#fff;outline:none}
+.field input:focus,.field textarea:focus{border-color:var(--ink)}
+.field textarea{min-height:90px;resize:vertical;line-height:1.6}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:560px){.field-row{grid-template-columns:1fr}}
+.field-hint{font-family:var(--mono);font-size:10px;color:var(--grey-2);margin-top:4px}
+.chk{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;margin:0 16px 8px 0;cursor:pointer}
+.catbox{display:flex;flex-wrap:wrap;gap:6px;max-height:150px;overflow:auto;border:1px solid var(--line);padding:12px}
+.catbox .chip{cursor:pointer}
+.img-manager{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:10px}
+.img-cell{border:1px solid var(--line);position:relative}
+.img-cell img{width:100%;height:90px;object-fit:cover}
+.img-cell input{width:100%;border:none;border-top:1px solid var(--line);font-size:10px;padding:5px}
+.img-cell .rm{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.7);color:#fff;width:20px;height:20px;font-size:12px;display:grid;place-items:center}
+.img-cell .mv{position:absolute;bottom:26px;left:2px;display:flex;gap:2px}
+.img-cell .mv button{background:rgba(0,0,0,.7);color:#fff;width:20px;height:20px;font-size:11px}
+.adm-login{max-width:340px;margin:14vh auto;text-align:center}
+.adm-login h2{font-size:22px;margin-bottom:8px}
+.editor-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:24px;position:sticky;bottom:0;background:#fff;padding:14px 0;border-top:1px solid var(--line)}
+.sec-editor{border:1px solid var(--line);padding:14px;margin-bottom:10px}
+.sec-editor .field{margin-bottom:8px}
+.hide{display:none !important}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<header id="topbar" class="hero-mode">
+  <a class="brand" href="#/" data-nav>
+    <span class="brand-name">KAMANASHISH BARUA</span>
+    <span class="brand-sub">Architecture / Selected Works</span>
+  </a>
+  <div class="tb-right">
+    <nav class="tb-links">
+      <a class="tb-btn" href="#/projects" data-nav data-route="projects">Projects</a>
+      <a class="tb-btn" href="#/collections" data-nav data-route="collections">Collections</a>
+      <a class="tb-btn" href="#/research" data-nav data-route="research">Research</a>
+      <a class="tb-btn" href="#/blog" data-nav data-route="blog">Blog</a>
+      <a class="tb-btn" href="#/about" data-nav data-route="about">About</a>
+      <a class="tb-btn" href="#/contact" data-nav data-route="contact">Contact</a>
+    </nav>
+    <button class="tb-btn" id="openSearch" aria-label="Search">Search</button>
+    <button class="lang-toggle" id="langToggle" aria-label="Toggle language">বাংলা</button>
+    <button class="tb-btn menu-btn" id="openMenu" aria-label="Menu">Menu</button>
+  </div>
+</header>
+
+<main id="app" aria-live="polite"></main>
+
+<nav id="bottomnav" aria-label="Primary">
+  <div class="bn-row">
+    <a class="bn-item" href="#/" data-nav data-route="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</a>
+    <a class="bn-item" href="#/projects" data-nav data-route="projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Projects</a>
+    <a class="bn-item" href="#/explore" data-nav data-route="explore"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="10" r="3"/><path d="M12 21c5-5 7-8 7-11a7 7 0 10-14 0c0 3 2 6 7 11z"/></svg>Explore</a>
+    <a class="bn-item" href="#/about" data-nav data-route="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>About</a>
+    <a class="bn-item" href="#/contact" data-nav data-route="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 5h16v14H4z"/><path d="M4 6l8 6 8-6"/></svg>Contact</a>
+  </div>
+</nav>
+
+<div id="menu">
+  <button class="menu-close" id="closeMenu">Close ✕</button>
+  <a class="menu-link" href="#/" data-nav>Home</a>
+  <a class="menu-link" href="#/projects" data-nav>Projects</a>
+  <a class="menu-link" href="#/explore" data-nav>Explore · Map</a>
+  <a class="menu-link" href="#/collections" data-nav>Collections</a>
+  <a class="menu-link" href="#/research" data-nav>Research</a>
+  <a class="menu-link" href="#/blog" data-nav>Blog</a>
+  <a class="menu-link" href="#/about" data-nav>About</a>
+  <a class="menu-link" href="#/saved" data-nav>Saved</a>
+  <a class="menu-link" href="#/contact" data-nav>Contact</a>
+</div>
+
+<div id="search">
+  <button class="menu-close" id="closeSearch">Close ✕</button>
+  <input id="searchInput" placeholder="Search projects…" autocomplete="off">
+  <div class="search-hint" id="searchHint">Title · type · location · client · material · keyword</div>
+  <div class="search-results" id="searchResults"></div>
+</div>
+
+<div id="lightbox">
+  <div class="lb-top">
+    <span class="lb-count" id="lbCount"></span>
+    <div class="lb-tools">
+      <button id="lbZoom">Zoom</button>
+      <button id="lbClose">Close ✕</button>
+    </div>
+  </div>
+  <div class="lb-stage" id="lbStage">
+    <div class="lb-nav lb-prev" id="lbPrev">‹</div>
+    <img id="lbImg" alt="">
+    <div class="lb-nav lb-next" id="lbNext">›</div>
+  </div>
+  <div class="lb-cap" id="lbCap"></div>
+</div>
+
+<div id="present">
+  <div class="pr-ctrl">
+    <button id="prExit">Exit ✕</button>
+    <div style="display:flex;gap:4px">
+      <button id="prAuto">Auto</button>
+      <button id="prFull">Fullscreen</button>
+    </div>
+  </div>
+  <div id="prSlides"></div>
+  <div class="pr-arrows"><div id="prPrev"></div><div id="prNext"></div></div>
+  <div class="pr-dots" id="prDots"></div>
+</div>
+
+<div id="admin"></div>
+<div id="toast"></div>
+<audio id="bgAudio" loop preload="none"></audio>
+<button id="musicToggle" class="music-toggle hide" aria-label="Toggle background music">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+</button>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+"use strict";
+/* ============================ KB PORTFOLIO — single-file engine ============================ */
+const KEY="kb_portfolio_v6";
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const IMG=(seed,w=1600,h=1000)=>`https://picsum.photos/seed/${seed}/${w}/${h}`;
+const uid=()=>Math.random().toString(36).slice(2,9);
+const slugify=s=>(s||"").toLowerCase().replace(/[^a-z0-9\u0980-\u09FF]+/g,"-").replace(/^-|-$/g,"");
+function toast(m,ms){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),ms||1900);}
+
+/* ---------- categories master ---------- */
+const CATS=["Residential","Commercial","Institutional","Public / Civic","Urban Design","Master Planning","Landscape","Interior","Hospitality","Religious / Spiritual","Educational","Healthcare","High-Rise","Industrial","Restoration","Climate-Responsive Design","Disaster Resilience","Seismic / Structural","Research","Competition","Under Construction","Completed","Conceptual"];
+const SUSTAIN=["Passive Cooling","Natural Ventilation","Daylighting","Rainwater Harvesting","Solar Energy","Flood Resilience","Climate Responsive","Low Carbon Materials","Native Landscape","Water Efficiency","Energy Efficiency","Adaptive Reuse","Slope Protection","Biodiversity","Heat Mitigation","Disaster Resilience"];
+
+/* ---------- i18n UI strings ---------- */
+const I={
+ explore:{en:"Explore Projects",bn:"প্রকল্প দেখুন"}, selected:{en:"Selected Works",bn:"নির্বাচিত কাজ"},
+ about:{en:"About",bn:"পরিচিতি"}, contact:{en:"Contact",bn:"যোগাযোগ"},
+ featured:{en:"Featured Works",bn:"নির্বাচিত কাজ"}, archive:{en:"Project Archive",bn:"প্রকল্প সংগ্রহ"},
+ all:{en:"All",bn:"সব"}, viewGrid:{en:"Grid",bn:"গ্রিড"}, viewIndex:{en:"Index",bn:"সূচি"},
+ facts:{en:"Project Facts",bn:"প্রকল্প তথ্য"}, intro:{en:"Introduction",bn:"সারসংক্ষেপ"},
+ drawings:{en:"Architectural Drawings",bn:"স্থাপত্য অঙ্কন"}, sustain:{en:"Sustainability",bn:"টেকসইতা"},
+ related:{en:"Related Projects",bn:"সম্পর্কিত প্রকল্প"}, next:{en:"Next Project",bn:"পরবর্তী প্রকল্প"},
+ present:{en:"Presentation Mode",bn:"উপস্থাপনা"}, share:{en:"Share",bn:"শেয়ার"}, save:{en:"Save",bn:"সংরক্ষণ"},
+ saved:{en:"Saved Projects",bn:"সংরক্ষিত প্রকল্প"}, back:{en:"All Projects",bn:"সব প্রকল্প"},
+ collections:{en:"Collections",bn:"সংকলন"}, research:{en:"Research & Publications",bn:"গবেষণা ও প্রকাশনা"},
+ map:{en:"Project Map",bn:"প্রকল্প মানচিত্র"}, expertise:{en:"Expertise",bn:"দক্ষতা"},
+ timeline:{en:"Timeline",bn:"সময়রেখা"}, video:{en:"Project Video",bn:"ভিডিও"},
+ startProject:{en:"Start a Project",bn:"প্রকল্প শুরু করুন"}
+};
+const lang=()=>document.documentElement.getAttribute("data-lang");
+const t=k=>{const o=I[k];return o?(o[lang()]||o.en):k;};
+const L=(o)=>{ if(o==null)return""; if(typeof o==="string")return o; return o[lang()]||o.en||""; };
+
+/* ---------- FACT field labels ---------- */
+const FACTS=[
+ ["type","Project Type","প্রকল্পের ধরন"],["location","Location","অবস্থান"],["client","Client","ক্লায়েন্ট"],
+ ["architect","Architect","স্থপতি"],["team","Design Team","ডিজাইন দল"],["collaborators","Collaborators","সহযোগী"],
+ ["structural","Structural Consultant","স্ট্রাকচারাল কনসালট্যান্ট"],["mep","MEP Consultant","এমইপি কনসালট্যান্ট"],
+ ["landscapeC","Landscape Consultant","ল্যান্ডস্কেপ কনসালট্যান্ট"],["interiorC","Interior Consultant","ইন্টেরিয়র কনসালট্যান্ট"],
+ ["status","Status","অবস্থা"],["designYear","Design Year","ডিজাইন বছর"],["constYear","Construction","নির্মাণকাল"],
+ ["compYear","Completion","সমাপ্তি"],["site","Site Area","সাইট এরিয়া"],["built","Built-up Area","নির্মিত এলাকা"],
+ ["floors","Floors","তলা"],["budget","Budget","বাজেট"],["role","Role of Architect","স্থপতির ভূমিকা"],
+ ["photo","Photography","ফটোগ্রাফি"],["awards","Awards","পুরস্কার"],["publication","Publication","প্রকাশনা"]
+];
+
+/* ============================ SEED DATA ============================ */
+function seed(){
+ const P=(o)=>Object.assign({id:uid(),published:true,featured:false,images:[],drawings:[],sections:[],sustainability:[],video:"",lat:null,lng:null},o);
+ const AC="https://www.archcellbd.com/storage/img/";
+ const proj=[
+  P({slug:"bsmmu-medical-convention-centre",title:{en:"Medical Convention Centre, BSMMU",bn:""},
+    category:["Institutional","Public / Civic","Completed"],
+    location:"Paribagh, Dhaka, Bangladesh",lat:23.7383,lng:90.3958,year:2019,status:"Completed",clientType:"Government",
+    scale:"Large",service:"Architecture · Engineering",featured:true,
+    oneLiner:{en:"A 300,000 sq ft convention venue for Bangabandhu Sheikh Mujib Medical University — Bangladesh's central hub for medical conferences and research exchange.",bn:""},
+    hero:AC+"proj_fi_3Gy0M3eov7Oj1iEFmdJxRhiaHLvgDn.jpg",
+    intro:{en:"A medical convention centre for BSMMU, opposite the Dhaka Sheraton in Paribagh, built to host medical conferences, seminars and research activity for the country's largest medical university. The project pairs a contemporary architectural language with environmentally responsible construction across a 300,000 sq ft built form on a compact 15,968 sq ft site.",bn:""},
+    facts:{type:"Medical Convention Centre · Institutional",client:"Bangabandhu Sheikh Mujib Medical University (BSMMU)",architect:"Kamanashish Barua",team:"arch_CELL",status:"Completed",designYear:"2012",constYear:"2012–2019",compYear:"2019",site:"15,968 sq ft",built:"300,000 sq ft",role:"Architecture & engineering design"},
+    sections:[
+     {title:{en:"Function",bn:""},body:{en:"The centre operates as a dedicated venue for medical conferences, seminars, workshops and research activity, serving BSMMU's academic and clinical community as well as visiting delegations from across South Asia.",bn:""}},
+     {title:{en:"Approach",bn:""},body:{en:"On a tight urban site opposite the Sheraton, the brief called for a high-rise convention building rather than a low sprawling one — an integration of contemporary architectural design with environmental responsibility and resource efficiency for dense, central Dhaka.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_vZdXgHrARBjEx7BwQqMbnXAyTVigiZ.jpg",caption:"Convention centre exterior",credit:"arch_CELL"},
+            {url:AC+"proj_gi_yUpoSuVOgC4W1T7saNOMwQaVEdWxwI.jpg",caption:"Facade study",credit:"arch_CELL"},
+            {url:AC+"proj_gi_6Ih0IBIH8BKugUHNYVo5CHvo52wEkc.JPG",caption:"Entrance approach",credit:"arch_CELL"},
+            {url:AC+"proj_gi_yOTXjTXJcCEESyQdF5Z3aJp8unC6GL.jpg",caption:"Elevation detail",credit:"arch_CELL"},
+            {url:AC+"proj_gi_VHHqpMWzqe5ndWL7tsVa06MIv0wDoU.jpg",caption:"Massing at street level",credit:"arch_CELL"},
+            {url:AC+"proj_gi_zQOZ0ZJoTbXqPHsVpZa4yuhsn6wyh5.jpg",caption:"Night view",credit:"arch_CELL"}],
+    photo:"arch_CELL"}),
+
+  P({slug:"bsmmu-convention-centre-interior",title:{en:"Interior of BSMMU Medical Convention Centre",bn:""},
+    category:["Interior","Institutional","Completed"],
+    location:"Paribagh, Dhaka, Bangladesh",lat:23.7383,lng:90.3958,year:2019,status:"Completed",clientType:"Government",
+    scale:"Large",service:"Interior Design",
+    oneLiner:{en:"A neutral, technology-integrated interior fit-out for South Asia's medical convention hub — marble, acoustic conference halls and a VIP lounge.",bn:""},
+    hero:AC+"proj_fi_Z1PJ9v5wAzOiTHas3vmjC00rxsVJ1p.jpg",
+    intro:{en:"Interior fit-out for the BSMMU Medical Convention Centre, designed to host conferences, educational seminars, workshops and exhibitions for medical professionals across Bangladesh and the wider region. The palette stays neutral — beige, white and light grey — so the technology and the delegates stay the focus.",bn:""},
+    facts:{type:"Interior · Institutional",client:"Bangabandhu Sheikh Mujib Medical University (BSMMU)",architect:"Kamanashish Barua",team:"arch_CELL",status:"Completed",designYear:"2012",constYear:"2012–2019",compYear:"2019",built:"300,000 sq ft",role:"Interior design & fit-out"},
+    sections:[
+     {title:{en:"Spaces",bn:""},body:{en:"A spacious entrance in glass and polished marble leads to multiple conference halls fitted with advanced audio-visual systems and acoustic treatment, flexible exhibition areas under modern track lighting, breakout rooms, dining with an optional outdoor terrace, a VIP lounge and fully accessible circulation.",bn:""}},
+     {title:{en:"Material Language",bn:""},body:{en:"Neutral tones, integrated technology infrastructure and strategically placed greenery keep the interior calm and professional across its full scale.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_0XQRgpRgZnuRJCEoiI5XWbGmnkmQei.jpg",caption:"Entrance lobby",credit:"arch_CELL"},
+            {url:AC+"proj_gi_ZDDfu1cm2pYWZKzLycyM7gG11BFsnl.jpg",caption:"Conference hall",credit:"arch_CELL"},
+            {url:AC+"proj_gi_z4TzDId9KgW1x71la6WrBP70fR6dg1.jpg",caption:"Exhibition space",credit:"arch_CELL"},
+            {url:AC+"proj_gi_vZot3QOiJmwsC33KmYjtockDeQObZZ.jpg",caption:"VIP lounge",credit:"arch_CELL"},
+            {url:AC+"proj_gi_szbbKBRAaCAso4LRlwAVlbYTRZoajl.jpg",caption:"Breakout room",credit:"arch_CELL"},
+            {url:AC+"proj_gi_iqEoUbXJPdSbmKszZtCdy4sHVVVjN7.jpg",caption:"Circulation corridor",credit:"arch_CELL"}],
+    sustainability:["Daylighting","Energy Efficiency"],photo:"arch_CELL"}),
+
+  P({slug:"bsmmu-opd-block",title:{en:"Outpatient Building Block, BSMMU",bn:""},
+    category:["Institutional","Healthcare","Public / Civic","Completed"],
+    location:"Paribagh (Shahbag), Dhaka, Bangladesh",lat:23.7383,lng:90.3958,year:2019,status:"Completed",clientType:"Government",
+    scale:"Large",service:"Architecture · Engineering",
+    oneLiner:{en:"A 278,000 sq ft outpatient block for BSMMU — accessible, patient-centric healthcare architecture in central Dhaka.",bn:""},
+    hero:AC+"proj_fi_dtSx6y8PXMRc9Rks8jjBHJAAVM68Vy.jpg",
+    intro:{en:"An outpatient department (OPD) block for BSMMU in Shahbag, commissioned through the Public Works Department, designed as a state-of-the-art healthcare facility that is accessible, patient-centric and efficient — integrating modern healthcare planning with Dhaka's cultural and urban context.",bn:""},
+    facts:{type:"Outpatient Healthcare Block · Institutional",client:"Public Works Department, Bangladesh (for BSMMU)",architect:"Kamanashish Barua",team:"arch_CELL",status:"Completed",compYear:"2019",site:"4 acre",built:"278,000 sq ft",floors:"12,000 sq ft/floor",role:"Architecture & engineering design"},
+    sections:[
+     {title:{en:"Patient Experience",bn:""},body:{en:"Open, functional floor plates combine contemporary healthcare planning with local architectural heritage, prioritising operational efficiency, sustainability and a calmer patient experience than the typical outpatient block.",bn:""}},
+     {title:{en:"Servicing",bn:""},body:{en:"150 car parking spaces, four elevators and an automatic fire control system support the scale of daily outpatient traffic passing through the building.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_wax1vO5yu8b76vvR1qJmOP7l22tMnj.jpg",caption:"OPD block exterior",credit:"arch_CELL"},
+            {url:AC+"proj_gi_C1xDYOftIIuMiCrhYE8Pr1RY0LhI6d.jpg",caption:"Facade detail",credit:"arch_CELL"},
+            {url:AC+"proj_gi_361ofPGSqh6L0z7Lv2gfZgFheUINmy.jpg",caption:"Entrance canopy",credit:"arch_CELL"},
+            {url:AC+"proj_gi_wuQ5EAXsXqTRgfSFVdl1PqGrT3qogM.jpg",caption:"Elevation study",credit:"arch_CELL"},
+            {url:AC+"proj_gi_K3dkw2jsO6ziI2GnT2RfPMVIbgQqUu.jpg",caption:"Street context",credit:"arch_CELL"}],
+    photo:"arch_CELL"}),
+
+  P({slug:"supreme-court-bar-council-bhavan",title:{en:"Bangladesh Supreme Court Bar Council Bhavan",bn:""},
+    category:["Institutional","Public / Civic"],
+    location:"Dhaka, Bangladesh",lat:23.7315,lng:90.4064,status:"Design Development",clientType:"Institutional",
+    scale:"Large",service:"Architecture · Interior",featured:true,
+    oneLiner:{en:"A civic building for Bangladesh's legal profession, designed around three principles: Tradition, Transparency and Functionality.",bn:""},
+    hero:AC+"proj_fi_ZIEN382NmHnzl3VOWauL5nAvKhBUJb.jpg",
+    intro:{en:"A pivotal building for Bangladesh's legal community, designed so the architecture itself reflects the values of the profession — integrity, transparency and respect for tradition — while embracing modern functionality and sustainability. The result is a blend of elegance and function suited to the importance of the Bar Council in the country's legal history.",bn:""},
+    facts:{type:"Civic / Legal Institution",client:"Bangladesh Supreme Court Bar Council",architect:"Kamanashish Barua",team:"arch_CELL",role:"Architecture & interior design"},
+    sections:[
+     {title:{en:"Design Principles",bn:""},body:{en:"Three principles govern the design: Tradition, Transparency and Functionality — carried through from the entrance and lobby sequence into the courtrooms and chambers themselves.",bn:""}},
+     {title:{en:"Programme",bn:""},body:{en:"Entrance and lobby, courtrooms and chambers, a library and research area, conference and meeting rooms with audiovisual technology, cafeteria and lounge areas, and sustainable building features throughout.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_oeNJ7lS6HlfDRnRFy3CCG2rzZJKgXV.jpg",caption:"Entrance facade",credit:"arch_CELL"},
+            {url:AC+"proj_gi_96G2G7AysDC3uGjTKNv2d2ZFfBgeWg.jpg",caption:"Lobby",credit:"arch_CELL"},
+            {url:AC+"proj_gi_9gl4wQp76RBrGF27qsOHiiERSiqRRa.jpg",caption:"Library & research area",credit:"arch_CELL"},
+            {url:AC+"proj_gi_Z52utqeXTrJhTAokrWnqyzyAVV9BTn.jpg",caption:"Conference room",credit:"arch_CELL"},
+            {url:AC+"proj_gi_epoeHbT6oAHIEWKqXgqpYD6YbP3XLe.jpeg",caption:"Courtroom chamber",credit:"arch_CELL"},
+            {url:AC+"proj_gi_VxLgSK8Nx7UOOxJDmySXYS2NI8gAZx.jpeg",caption:"Facade at dusk",credit:"arch_CELL"}],
+    sustainability:["Daylighting","Energy Efficiency"],photo:"arch_CELL"}),
+
+  P({slug:"peace-tower-coxs-bazar",title:{en:"Peace Tower at Cox's Bazar",bn:""},
+    category:["Commercial","Hospitality","High-Rise","Climate-Responsive Design"],
+    location:"Cox's Bazar, Bangladesh",lat:21.4272,lng:92.0058,status:"Design Development",clientType:"Private",
+    scale:"Large",service:"Architecture",featured:true,
+    oneLiner:{en:"Twin vertical masses around a central atrium — a climate-resilient coastal hotel tower maximising ocean views on a land-scarce beach frontage.",bn:""},
+    hero:AC+"proj_fi_5gjGRpXOUL7AUZHfXUpD0Q4vwS9AFn.jpg",
+    intro:{en:"A context-sensitive, climate-resilient and aesthetically modern hotel tower for Cox's Bazar. Twin vertical masses connect through a central atrium, maximising ocean views while responding to the tropical coastal environment — addressing land scarcity in one of Bangladesh's highest-demand tourist zones.",bn:""},
+    facts:{type:"Hotel Tower · Commercial & Hospitality",client:"Private",architect:"Kamanashish Barua",team:"arch_CELL",role:"Architecture & climate-responsive design"},
+    sections:[
+     {title:{en:"Climate Response",bn:""},body:{en:"Open balconies, recessed windows, deep overhangs and an elevated base for flood resilience respond directly to Cox's Bazar's tropical, cyclone-exposed coastline.",bn:""}},
+     {title:{en:"Materiality & Operations",bn:""},body:{en:"Concrete and metal are used for durability in saline coastal air, with strategic greenery woven through the facade. Repetitive floor plates and an adaptable, open ground floor support efficient day-to-day hotel operation.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_wmPBrzn0CW8u7sZ6m0oraJM2CKpcVz.jpg",caption:"Twin-tower massing",credit:"arch_CELL"},
+            {url:AC+"proj_gi_z8nFUhdJQrylRgcGGLH9Q8YgQuKHIs.jpg",caption:"Ocean-facing elevation",credit:"arch_CELL"},
+            {url:AC+"proj_gi_KM7HcaA7tyT2QbSY1ehcLVMCwdUldP.jpg",caption:"Central atrium",credit:"arch_CELL"},
+            {url:AC+"proj_gi_UDMPMkoNUXsMibZmu0JxsmJISLjDAM.jpg",caption:"Balcony detail",credit:"arch_CELL"},
+            {url:AC+"proj_gi_KhQR2Awhp2pCAXlnQxDXnAhOMDqzRq.jpg",caption:"Night render",credit:"arch_CELL"}],
+    sustainability:["Flood Resilience","Climate Responsive","Disaster Resilience"],photo:"arch_CELL"}),
+
+  P({slug:"genetic-ataturk-tower",title:{en:"The Genetic Ataturk Tower",bn:""},
+    category:["Commercial","High-Rise"],
+    location:"Gulshan-2, Dhaka, Bangladesh",lat:23.7925,lng:90.4078,status:"Design Development",clientType:"Private",
+    scale:"Large",service:"Architecture",
+    oneLiner:{en:"A 14-storey glass office tower for Gulshan-2 with vertical gardens and living walls threaded through the facade.",bn:""},
+    hero:AC+"proj_fi_LYfTGtGYLlBZEkZNtApIUssCcHaZiz.jpg",
+    intro:{en:"An architectural tribute to modern innovation and the Ataturk legacy, sited in Dhaka's premium Gulshan-2 economic zone. Vertical gardens, green terraces and living walls establish connectivity between dense urban development and natural environment, wrapped in reflective glass and sharp angular forms.",bn:""},
+    facts:{type:"Office Tower · Commercial",client:"Private",architect:"Kamanashish Barua",team:"arch_CELL",site:"15 katha",built:"1,800–3,600 sq ft/floor",floors:"14 floors + 4 basements",role:"Architecture"},
+    sections:[
+     {title:{en:"Facade & Energy",bn:""},body:{en:"Reflective glazing and angular massing achieve a contemporary aesthetic while reducing reliance on artificial climate control, supported by extensive glazing for natural light.",bn:""}},
+     {title:{en:"Tenancy",bn:""},body:{en:"Targeted at multinational corporations and financial institutions, with flexible office configurations, high-speed elevators, backup power, and 24-hour security.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_aYzjla71yr3rqbGqXmWnfK1B9WuY9c.jpg",caption:"Tower facade",credit:"arch_CELL"},
+            {url:AC+"proj_gi_NnmXjMSK0TdQMLnNvPyH8BTQq7SC4T.jpg",caption:"Vertical garden detail",credit:"arch_CELL"},
+            {url:AC+"proj_gi_BhEH58kH5aLZcEJPle0aVeKTEchIh8.jpg",caption:"Street-level entrance",credit:"arch_CELL"},
+            {url:AC+"proj_gi_zC36Hpjw99T732400PGo6oE603a3vn.jpg",caption:"Corner elevation",credit:"arch_CELL"},
+            {url:AC+"proj_gi_jT2zVgmgI14nIDNG3yNfFW6MSXGRyu.jpg",caption:"Night view",credit:"arch_CELL"}],
+    sustainability:["Native Landscape","Energy Efficiency","Daylighting"],photo:"arch_CELL"}),
+
+  P({slug:"bsrm-tower-chittagong",title:{en:"BSRM Tower, Chittagong",bn:""},
+    category:["Commercial","High-Rise","Research"],
+    location:"Chittagong, Bangladesh",lat:22.3569,lng:91.7969,status:"Design Development",clientType:"Private",
+    scale:"Large",service:"Architecture · Research",
+    oneLiner:{en:"A 30-storey, 339,600 sq ft tower for BSRM — steel-industry strength read through Chittagong's urban and industrial fabric.",bn:""},
+    hero:AC+"proj_gi_Eo1T1cObE2gIEcHi3E8TH2LXVJyRaT.jpg",
+    intro:{en:"A 30-storey commercial tower for BSRM in Chittagong, developed alongside a research paper on the architectural design of tall buildings. The design represents the strength and resilience of the steel industry BSRM represents, integrating modern architectural aesthetics with sustainable design principles drawn from Chittagong's dynamic urban fabric and industrial heritage.",bn:""},
+    facts:{type:"Commercial Tower · High-Rise",client:"BSRM",architect:"Kamanashish Barua",team:"arch_CELL",site:"35 katha",built:"339,600.58 sq ft (30 storeys)",role:"Architecture, tall-building research",publication:"Paper on Architectural Design of Tall Buildings"},
+    sections:[
+     {title:{en:"Programme",bn:""},body:{en:"265,300 sq ft of office floor and 59,600 sq ft of service floor, with separate office and showroom lobbies, six express elevators and 100 parking spaces on a dual-lane driveway.",bn:""}},
+     {title:{en:"Systems",bn:""},body:{en:"Central HVAC, CCTV integrated with a building management system, and fire detection and hydrant systems throughout — engineered alongside the architectural research into tall-building design for the region.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_9sGhLm3WG9j5qqQZQ8tzohGjoXgno7.jpg",caption:"Tower massing",credit:"arch_CELL"},
+            {url:AC+"proj_gi_o2FxYrOc5QeR0U1NCtedqssLOeDMi7.jpg",caption:"Facade study",credit:"arch_CELL"},
+            {url:AC+"proj_gi_s8BS7ncYQIswylgWVwChMn9dInA7IE.jpg",caption:"Lobby entrance",credit:"arch_CELL"},
+            {url:AC+"proj_gi_prkibkYBYUN8E3vHcClDs8Oe3WGILm.jpg",caption:"Elevation detail",credit:"arch_CELL"}],
+    photo:"arch_CELL"}),
+
+  P({slug:"triplex-purbachal",title:{en:"Swapnogatha — Triplex at Purbachal, Dhaka",bn:""},
+    category:["Residential","Climate-Responsive Design","Completed"],
+    location:"Purbachal New Town, Dhaka, Bangladesh",lat:23.8087,lng:90.4977,status:"Completed",clientType:"Private",
+    scale:"Medium",service:"Architecture",
+    oneLiner:{en:"Interlocking cubic masses generate cantilevered balconies and shaded verandas across a three-storey tropical residence.",bn:""},
+    hero:AC+"proj_fi_FWhqJl49hY6UHXR0QSgsZiY7yojg9e.jpg",
+    intro:{en:"Swapnogatha is a single-family residence in Purbachal, Dhaka's government-developed urban expansion area, reflecting a fusion of modern tropical architecture, environmental consciousness and contextual response to the evolving suburban fabric of the capital. The house maintains a modest footprint, fenced for privacy, with light materials and vegetation avoiding a fortress-like appearance.",bn:""},
+    facts:{type:"Single-Family Residence",client:"Private",architect:"Kamanashish Barua",team:"arch_CELL",status:"Completed",site:"12.03 katha",built:"10,200 sq ft",floors:"G+2 (Triplex)",role:"Architecture"},
+    sections:[
+     {title:{en:"Spatial Organisation",bn:""},body:{en:"The ground floor holds public zones — living, dining, kitchen — opening onto a green courtyard; upper floors house private bedrooms with landscape views; the rooftop is a multifunctional leisure garden.",bn:""}},
+     {title:{en:"Climate Response",bn:""},body:{en:"Exposed concrete frames, brick and terracotta cladding and glass curtain walls sit alongside cascading planters at every level, deep overhangs, operable windows, perforated brickwork and green roofs to cut mechanical cooling load in Dhaka's monsoon climate.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_3x8iOq4IYbgyKbtq9v77PQp5E69ppu.jpg",caption:"Street facade",credit:"arch_CELL"},
+            {url:AC+"proj_gi_m3SrE5mXFj9XFEmAm2F21wutAruLfR.jpg",caption:"Cantilevered balcony",credit:"arch_CELL"},
+            {url:AC+"proj_gi_BACg2FQaZ9bqq9rYmbWrpFd5LCwDAg.jpg",caption:"Courtyard-facing living room",credit:"arch_CELL"},
+            {url:AC+"proj_gi_dytlcQWslxK52HwwaCxs5ftbgt8ETW.jpg",caption:"Perforated brick screen",credit:"arch_CELL"},
+            {url:AC+"proj_gi_43stNoteLklo9B2uhdlA1bi3ZXSnUz.jpg",caption:"Rooftop garden",credit:"arch_CELL"},
+            {url:AC+"proj_gi_yzZ7XTDA2OVLnfaXwTFam2sS9iPbg6.jpg",caption:"Night elevation",credit:"arch_CELL"}],
+    sustainability:["Passive Cooling","Natural Ventilation","Daylighting","Low Carbon Materials"],photo:"arch_CELL"}),
+
+  P({slug:"sustainable-flood-housing",title:{en:"Sustainable Housing for Flood-Prone Areas",bn:""},
+    category:["Residential","Disaster Resilience","Climate-Responsive Design","Research","Conceptual"],
+    location:"Flood-prone char land, Bangladesh",lat:24.4530,lng:89.7006,status:"Concept Design",clientType:"Institutional",
+    scale:"Small",service:"Architecture · Research",
+    oneLiner:{en:"A two-storey bamboo-and-concrete house lifted two feet above flood level for communities facing 1–4 months of seasonal flooding.",bn:""},
+    hero:AC+"proj_fi_tPXnf9GLG0cx6Ovb1erDqb6WUkYMAq.jpg",
+    intro:{en:"A concept design addressing critical housing needs for marginalised communities affected by seasonal flooding lasting one to four months depending on location. The two-storey house elevates its living spaces two feet above maximum flood level on concrete poles and treated bamboo scaffolding, prioritising low-cost, sustainable, health-friendly housing built through indigenous technologies and community involvement.",bn:""},
+    facts:{type:"Concept Housing · Research",client:"Institutional study",architect:"Kamanashish Barua",team:"arch_CELL",site:"80' × 18' (2 katha)",built:"~450 sq ft (ground) + ~500 sq ft (upper)",role:"Concept design & research"},
+    sections:[
+     {title:{en:"Ground & Upper Floor",bn:""},body:{en:"The ground floor accommodates senior household members, livestock space (barn, goat and poultry areas) and sanitation; the upper floor provides three living rooms and two verandas that serve as refuge through the flood season, connected by a bamboo stair.",bn:""}},
+     {title:{en:"Materials",bn:""},body:{en:"Concrete poles, chemically treated bamboo, corrugated iron sheeting, galvanised wire and simple hardware — materials chosen for local availability, low cost and ease of community-led construction and repair.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_5vd8wXt6AD5doY3GDVOwZAPwpnyiBM.jpg",caption:"Elevated house on stilts",credit:"arch_CELL"},
+            {url:AC+"proj_gi_eaBmXzPgSHydOWG7Ifjv56F32w4dl5.jpg",caption:"Bamboo stair & veranda",credit:"arch_CELL"},
+            {url:AC+"proj_gi_YsuNqOThQTd4r4Onk4z2b0gEPfW0To.jpg",caption:"Ground floor livestock bay",credit:"arch_CELL"},
+            {url:AC+"proj_gi_JeIJzhFmFkmJLh9LE5yaZnPaHOfS9h.jpg",caption:"Section through flood level",credit:"arch_CELL"},
+            {url:AC+"proj_gi_3ergS4ZanL0ZE2GgNTsErgGCJWqAUJ.jpg",caption:"Upper floor living room",credit:"arch_CELL"}],
+    sustainability:["Flood Resilience","Disaster Resilience","Low Carbon Materials"],photo:"arch_CELL"}),
+
+  P({slug:"residence-bandarban",title:{en:"Residence at Bandarban",bn:""},
+    category:["Residential","Climate-Responsive Design"],
+    location:"Bandarban, Chittagong Hill Tracts",lat:22.1953,lng:92.2184,status:"Design Development",clientType:"Private",
+    scale:"Medium",service:"Architecture",
+    oneLiner:{en:"A hillside residence in the Chittagong Hill Tracts, blending ergonomic, aesthetic form with the region's steep, forested terrain.",bn:""},
+    hero:AC+"proj_fi_xUS69hbD2ft92lowwB9uzOUxae2hPN.jpg",
+    intro:{en:"A private residence in the hill terrain of Bandarban, part of arch_CELL's broader work across the Chittagong Hill Tracts, blending technology, form and functionality into an ergonomic, aesthetic response to a steep, forested site.",bn:""},
+    facts:{type:"Private Residence",client:"Private",architect:"Kamanashish Barua",team:"arch_CELL",role:"Architecture"},
+    sections:[
+     {title:{en:"Site",bn:""},body:{en:"The house negotiates Bandarban's hill terrain directly, working with the natural slope rather than against it, in keeping with arch_CELL's approach to building across the Chittagong Hill Tracts.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_yYA1az9WJjAeJhXqTgmksmSlK5e7Cw.jpg",caption:"Hillside elevation",credit:"arch_CELL"},
+            {url:AC+"proj_gi_qS6iEuJKmLDTg4BC2cdvY0vazThcCf.jpg",caption:"Approach view",credit:"arch_CELL"},
+            {url:AC+"proj_gi_oelOygDeSdqulf2wRiNgcQR5lCgifo.jpg",caption:"Terrace",credit:"arch_CELL"},
+            {url:AC+"proj_gi_l5mLtLs0BqrqrBulGpKc9DeYFffDgO.jpg",caption:"Valley view",credit:"arch_CELL"},
+            {url:AC+"proj_gi_gyIrLU23LPHCK8KMnUV2bQKIevgGV6.jpg",caption:"Facade detail",credit:"arch_CELL"}],
+    photo:"arch_CELL"}),
+
+  P({slug:"dc-office-landscape-moulvibazar",title:{en:"Premises Landscape & Green Master Plan — DC Office Moulvibazar",bn:""},
+    category:["Landscape","Institutional","Public / Civic"],
+    location:"Moulvibazar, Bangladesh",lat:24.4829,lng:91.7774,status:"Design Development",clientType:"Government",
+    scale:"Medium",service:"Landscape Architecture",featured:true,
+    oneLiner:{en:"A tea-district government compound reorganised into seven zones around one rule: not one healthy mature tree is cut.",bn:""},
+    hero:AC+"proj_fi_J4O5ZpQQpF1ou583zeUgStXdU5nWBx.jpg",
+    intro:{en:"A landscape and green master plan for the Deputy Commissioner's office compound on Court Road, Moulvibazar. The compound had mature canopy trees but no coherent spatial organisation. Rather than decorative theming, the design threads the district's identity as a tea-producing region sparingly through four strategic locations, reorganising the grounds into seven distinct functional zones.",bn:""},
+    facts:{type:"Landscape Master Plan · Institutional",client:"Office of the Deputy Commissioner, Moulvibazar",architect:"Kamanashish Barua",team:"arch_CELL",role:"Landscape architecture & master planning"},
+    sections:[
+     {title:{en:"Preservation First",bn:""},body:{en:"The guiding rule of the plan: not one healthy mature tree is cut. Existing canopy is preserved and built around rather than cleared, with a meandering pedestrian path curving through courtyards and around tree trunks, with integrated seating.",bn:""}},
+     {title:{en:"Water & Entrance",bn:""},body:{en:"Permeable paving and rain gardens manage Moulvibazar's 4,000+ mm annual rainfall. A redesigned entrance gateway uses laser-cut fascia and living green walls, and an underused canteen building is converted into a community gathering space, delivered in four phases without interrupting daily office operation.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_12i9XMmkf7mLNEO400epdr2CZWWF2b.jpg",caption:"Entrance gateway",credit:"arch_CELL"},
+            {url:AC+"proj_gi_LCyD1xDQ2x60XrQUubkZ9Hfxy5nKX1.jpg",caption:"Pedestrian path around preserved trees",credit:"arch_CELL"},
+            {url:AC+"proj_gi_ZfmsYObCYr2wjBXVrXyjMuwwwnHahY.jpg",caption:"Courtyard seating",credit:"arch_CELL"},
+            {url:AC+"proj_gi_06QKlKzv5AoveCUWe5KXAN4e8RhRIm.jpg",caption:"Rain garden detail",credit:"arch_CELL"},
+            {url:AC+"proj_gi_vcR6b05ekTDldMTDkSFeqJvCVuJXTh.jpg",caption:"Community gathering space",credit:"arch_CELL"},
+            {url:AC+"proj_gi_KHMHbzJJwR0q98lyoPv7ltH810Mra4.jpg",caption:"Boundary wall planting",credit:"arch_CELL"}],
+    sustainability:["Native Landscape","Rainwater Harvesting","Water Efficiency","Biodiversity"],photo:"arch_CELL"}),
+
+  P({slug:"dc-park-munshiganj",title:{en:"DC Park, Munshiganj",bn:""},
+    category:["Landscape","Public / Civic"],
+    location:"Near Idrakpur Fort, Munshiganj, Bangladesh",lat:23.5422,lng:90.5305,status:"Design Development",clientType:"Government",
+    scale:"Medium",service:"Landscape Architecture",
+    oneLiner:{en:"A 26,091 sq ft community park by Idrakpur Fort, with an amphitheatre, boardwalked lake and thematic gardens.",bn:""},
+    hero:AC+"proj_fi_MJep3lFwYkpsLS1e5SfOnfD1d9SzgX.jpg",
+    intro:{en:"A vibrant, community-centred urban park for the DC Office, Munshiganj, near the historic Idrakpur Fort, blending natural beauty with modern landscape architecture across 26,091 sq ft. The design honours regional cultural heritage while prioritising sustainable development through integrated green space, recreation and cultural venues.",bn:""},
+    facts:{type:"Urban Landscape Park",client:"DC Office, Munshiganj",architect:"Kamanashish Barua",team:"arch_CELL",site:"26,091 sq ft",role:"Landscape architecture"},
+    sections:[
+     {title:{en:"Key Features",bn:""},body:{en:"A central plaza and amphitheatre for cultural events, interconnected green trails under native tree canopy, a man-made lake with natural filtration and boardwalks, a nature-inspired children's play area, thematic Butterfly, Medicinal Herb and Seasonal Flower gardens, an outdoor fitness and yoga zone, a food court for local cuisine, and an eco-education centre for workshops.",bn:""}},
+     {title:{en:"Sustainability",bn:""},body:{en:"Eco-friendly materials, solar-powered lighting, rainwater harvesting for irrigation and native plantings reduce environmental impact while supporting local ecosystems, delivered across a four-phase implementation.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_u7WIjTkpduEhOS55yFTBlESyMqeDsj.jpg",caption:"Central plaza & amphitheatre",credit:"arch_CELL"},
+            {url:AC+"proj_gi_Hfz6oKo6xC7sTMRQHbDdkXBQmwUEg2.jpg",caption:"Lake boardwalk",credit:"arch_CELL"},
+            {url:AC+"proj_gi_zUShz815AzTlCmMD8IW33jgwMKGhyC.jpg",caption:"Children's play area",credit:"arch_CELL"},
+            {url:AC+"proj_gi_yQhIDUBZ2kTsAbq4aiK0hy0TNm5C94.jpg",caption:"Thematic garden",credit:"arch_CELL"},
+            {url:AC+"proj_gi_DOM4J65rris8k9gudztm8u8FGBlivR.jpg",caption:"Green trail",credit:"arch_CELL"},
+            {url:AC+"proj_gi_xXKBta8BlhK3Odcr5QDcCbBu0Z5XfU.jpg",caption:"Outdoor fitness zone",credit:"arch_CELL"}],
+    sustainability:["Solar Energy","Rainwater Harvesting","Native Landscape","Biodiversity"],photo:"arch_CELL"}),
+
+  P({slug:"ppimsc-mosque-munshiganj",title:{en:"PPIMSC Mosque at Munshiganj",bn:""},
+    category:["Religious / Spiritual","Institutional","Completed"],
+    location:"Iazuddin College, Munshiganj, Bangladesh",lat:23.5422,lng:90.5305,year:2019,status:"Completed",clientType:"Institutional",
+    scale:"Medium",service:"Architecture",featured:true,
+    oneLiner:{en:"A 9,806 sq ft campus mosque and community centre blending modern minimalism with traditional Islamic architecture.",bn:""},
+    hero:AC+"proj_fi_BNzKIOX1A9VuNjBJcwZ9leUyvcH1K7.jpg",
+    intro:{en:"A mosque for Iazuddin College, Munshiganj, blending modernity and traditional Islamic architecture to create a space that fosters community engagement, spirituality and environmental sustainability. It functions as both a worship venue and a community centre for social, educational and spiritual activity — a pillar of the college and the wider community.",bn:""},
+    facts:{type:"Mosque & Community Centre · Religious",client:"Iazuddin College, Munshiganj",architect:"Kamanashish Barua",team:"arch_CELL",status:"Completed",compYear:"2019",site:"6,000 sq ft",built:"9,806 sq ft",role:"Architecture"},
+    sections:[
+     {title:{en:"Programme",bn:""},body:{en:"A spacious, well-lit main prayer hall, an ablution space for ritual cleansing, a mezzanine floor reserved for women worshippers, and a library for Islamic learning.",bn:""}},
+     {title:{en:"Form",bn:""},body:{en:"Clean lines and sharp angles give the mosque a modern minimalist reading, while its planning and proportion stay rooted in traditional Islamic architectural principles.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_85mChRgsWLzSmkiAy3xUm4f18QdFow.jpg",caption:"Mosque exterior",credit:"arch_CELL"},
+            {url:AC+"proj_gi_1SFMcWoNMu29I2ogFYgCHyfU7JZmY0.jpg",caption:"Main prayer hall",credit:"arch_CELL"},
+            {url:AC+"proj_gi_PmG4K5Tbntr2vAEdXwlPyrjzhH7fDx.jpg",caption:"Mezzanine floor",credit:"arch_CELL"},
+            {url:AC+"proj_gi_8XXqcf0lYhLQMHAFuZRdZLnHxISqJ0.jpg",caption:"Ablution space",credit:"arch_CELL"},
+            {url:AC+"proj_gi_bzp4SGLKSZf7zXvolQupgIBjEhV80v.jpg",caption:"Facade detail",credit:"arch_CELL"},
+            {url:AC+"proj_gi_h9vhz5XbLv8sxQxMKce4MJ0NYbAB8J.jpg",caption:"Library",credit:"arch_CELL"}],
+    sustainability:["Daylighting","Natural Ventilation"],photo:"arch_CELL"}),
+
+  P({slug:"aranya-kutir-forest-meditation-center",title:{en:"Madhyam Pratipada Aranya Kutir — Forest Meditation Centre",bn:""},
+    category:["Religious / Spiritual","Landscape","Climate-Responsive Design","Conceptual"],
+    location:"Bhai-Bon Chhara, Panchhari, Khagrachhari",lat:23.2500,lng:91.9500,status:"Concept Design",clientType:"Institutional",
+    scale:"Large",service:"Architecture · Landscape",
+    oneLiner:{en:"A meditation centre proposed for a 200-acre forest — compact, centralised massing that leaves the tree canopy almost entirely undisturbed.",bn:""},
+    hero:AC+"proj_gi_BXI05oCJjXAvwy87rGQy7heEHQEyLM.jpg",
+    intro:{en:"A forest meditation centre for a roughly 200-acre site in Panchhari, Khagrachhari, designed around climate-responsive and ecologically sensitive architecture. The proposal prioritises forest preservation over land clearing — dense tree canopy reduces solar radiation and ambient temperature, creating conditions suited to meditation, so the forest becomes integral to the experience rather than a backdrop to it.",bn:""},
+    facts:{type:"Forest Meditation Centre · Religious",client:"Institutional",architect:"Kamanashish Barua",team:"arch_CELL",site:"~200 acre forest",role:"Architecture, landscape & environmental planning"},
+    sections:[
+     {title:{en:"Compact Massing",bn:""},body:{en:"Core functions — the main temple, meditation hall and library — are concentrated into a compact centralised massing, keeping the great majority of the forested site undisturbed.",bn:""}},
+     {title:{en:"Passive Strategy",bn:""},body:{en:"A large dome, elevated volume, open circulation and shaded verandas provide thermal comfort without mechanical cooling, while permeable pathways, bioswales, retention basins and rainwater harvesting work with the monsoon rather than against it.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_TA9XS8TruoiNfk0Gagd24Ouf64jJ8y.jpg",caption:"Forest approach",credit:"arch_CELL"},
+            {url:AC+"proj_gi_O8skHbAm2sTizRszymaq2EFOHPdgLg.jpg",caption:"Meditation hall concept",credit:"arch_CELL"},
+            {url:AC+"proj_gi_OWAUvilcTED1dK4JVeubHEsAZLSVrw.jpg",caption:"Dome study",credit:"arch_CELL"},
+            {url:AC+"proj_gi_YyKPLMYQEpguMR9DCrX3GCMXCWmoB7.jpg",caption:"Shaded veranda",credit:"arch_CELL"},
+            {url:AC+"proj_gi_3VPvyStSH4Iq98UUgSAztFZnqkaNmZ.jpg",caption:"Site within canopy",credit:"arch_CELL"}],
+    sustainability:["Passive Cooling","Rainwater Harvesting","Biodiversity","Native Landscape"],photo:"arch_CELL"}),
+
+  P({slug:"circuit-house-lounge-bandarban",title:{en:"The Circuit House Lounge, Bandarban",bn:""},
+    category:["Interior","Hospitality"],
+    location:"Bandarban, Chittagong Hill Tracts",lat:22.1953,lng:92.2184,status:"Completed",clientType:"Government",
+    scale:"Small",service:"Interior Design",
+    oneLiner:{en:"A hill-tract lounge interior where a dark-timber, glass-balustrade staircase becomes the room's centrepiece.",bn:""},
+    hero:AC+"proj_fi_HDWzNsqV8bbzxdjNUmD8uMi4e0slOz.jpg",
+    intro:{en:"An interior for the Circuit House lounge in Bandarban, blending contemporary luxury with the warmth and rustic charm of the Chittagong Hill Tracts. The design draws on the surrounding natural environment, incorporating local materials, traditional motifs and a refined sense of space throughout.",bn:""},
+    facts:{type:"Interior · Hospitality",client:"Government (Circuit House)",architect:"Kamanashish Barua",team:"arch_CELL",status:"Completed",role:"Interior design"},
+    sections:[
+     {title:{en:"Staircase as Centrepiece",bn:""},body:{en:"A dark-stained hardwood staircase with open risers and a glass balustrade anchors the lounge, with midway seating nooks and integrated LED lighting.",bn:""}},
+     {title:{en:"Outlook",bn:""},body:{en:"Large windows frame panoramic views of the surrounding hill greenery, keeping the landscape present throughout the lounge.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_I8TcdgsMEDh8THpynACOrNhv1ODg6V.jpg",caption:"Feature staircase",credit:"arch_CELL"},
+            {url:AC+"proj_gi_NVBmt9IhATpvoNVARDLyIFqL3tzqDZ.jpg",caption:"Seating nook",credit:"arch_CELL"},
+            {url:AC+"proj_gi_nyGJbpmrc7IsxghDSN21wql5fpn2UJ.jpg",caption:"Lounge seating",credit:"arch_CELL"},
+            {url:AC+"proj_gi_BYcjQ6Vu1rnbHqY3nj5EvPIdaZkjhc.jpg",caption:"Window view over the hills",credit:"arch_CELL"},
+            {url:AC+"proj_gi_i14JsAyM61EJYb6pNHlQQ2GMovjd9Y.jpg",caption:"Timber & glass detail",credit:"arch_CELL"},
+            {url:AC+"proj_gi_0gpwKIBr4uLQUp9W797LNqV8oqol6W.jpg",caption:"Evening lighting",credit:"arch_CELL"}],
+    photo:"arch_CELL"}),
+
+  P({slug:"zaman-park-place",title:{en:"Zaman Park Place",bn:""},
+    category:["Residential","High-Rise"],
+    location:"Gulshan-2, Dhaka, Bangladesh",lat:23.7925,lng:90.4078,status:"Design Development",clientType:"Private",
+    scale:"Medium",service:"Architecture",
+    oneLiner:{en:"A single-unit-per-floor tower on Gulshan-2 — 16 apartments of 3,275–4,000 sq ft each, rising Ground+9 over a basement.",bn:""},
+    hero:AC+"proj_fi_0bwv9ARxA04LcCHaeQ8LWC8niJtfio.jpg",
+    intro:{en:"An apartment building on an 8.03 katha plot in Gulshan-2 — a prestigious, well-regulated Dhaka neighbourhood of embassies and corporate offices. Designing here calls for a blend of modern architectural expression, luxury living standards, urban sensitivity and environmental responsibility; the building reflects a design philosophy rooted in contemporary aesthetics, structural boldness and premium residential planning.",bn:""},
+    facts:{type:"Luxury Apartment Tower",client:"Private",architect:"Kamanashish Barua",team:"arch_CELL",site:"8.03 katha",floors:"Ground+9 + 1 Basement",built:"3,275–4,000 sq ft/unit",role:"Architecture"},
+    sections:[
+     {title:{en:"Planning",bn:""},body:{en:"One single apartment per floor across 16 units keeps every residence full-floor and dual-aspect, served by two lifts and a generous lift lobby and lounge at ground level.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_R5UmSiM2y5TUkVgYybnLkqnjtZ7ktb.jpg",caption:"Tower facade",credit:"arch_CELL"},
+            {url:AC+"proj_gi_zUuV8V5cpYcv4fxqOKjISBB6dQDQQY.jpg",caption:"Entrance lobby",credit:"arch_CELL"},
+            {url:AC+"proj_gi_HkX1jtlRL9HAo98oB5URYRafxInGjf.jpg",caption:"Living & dining",credit:"arch_CELL"},
+            {url:AC+"proj_gi_Yc3KzVjcSNUpWISRoDW773g1yxAuVS.jpg",caption:"Master suite",credit:"arch_CELL"},
+            {url:AC+"proj_gi_X6BLz8S8CjXvTfizFVv1y6epDcrF1M.jpg",caption:"Terrace",credit:"arch_CELL"}],
+    photo:"arch_CELL"}),
+
+  P({slug:"genetic-northern-retreat",title:{en:"Genetic Northern Retreat",bn:""},
+    category:["Residential"],
+    location:"Gulshan Avenue (North), Gulshan-2, Dhaka",lat:23.7925,lng:90.4078,status:"Design Development",clientType:"Private",
+    scale:"Medium",service:"Architecture",
+    oneLiner:{en:"A biophilic Gulshan-2 residence blending modern urban living with cross-ventilation, rooftop solar and rainwater harvesting.",bn:""},
+    hero:AC+"proj_fi_aYUoYW4aIoMk9cgYvJMxHL1SQn9894.png",
+    intro:{en:"The Northern Retreat aims to blend modern urban living with the natural beauty and tranquility of its surroundings. Located in the bustling Gulshan-2 area, the building reflects the aspiration of providing a serene escape from the city while maintaining connectivity to its core, incorporating sustainable, contemporary architecture with a focus on biophilic design principles that enhance residents' well-being.",bn:""},
+    facts:{type:"Residential Apartment Building",client:"Private",architect:"Kamanashish Barua",team:"arch_CELL",role:"Architecture"},
+    sections:[
+     {title:{en:"Climate Response",bn:""},body:{en:"Cross-ventilation and strategically placed trees and shading devices provide passive cooling; solar panels on the rooftop supplement energy needs, and rainwater harvesting systems contribute to water conservation.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_xRvNyHpQxPI4c6bxIVULmpBvISk0g1.jpg",caption:"Facade",credit:"arch_CELL"},
+            {url:AC+"proj_gi_eV5YiboFaJdy4WisqJvN034LNh3YVl.jpg",caption:"Balcony greenery",credit:"arch_CELL"},
+            {url:AC+"proj_gi_Wdes6U9nurilBPSELqBuTEGQ1G1qdE.jpg",caption:"Living space",credit:"arch_CELL"},
+            {url:AC+"proj_gi_EBoConTQug29eP74nJqlRBe3YliUfQ.jpg",caption:"Interior detail",credit:"arch_CELL"}],
+    sustainability:["Solar Energy","Rainwater Harvesting","Natural Ventilation"],photo:"arch_CELL"}),
+
+  P({slug:"mahbuba-wasim",title:{en:"Mahbuba Wasim",bn:""},
+    category:["Residential","High-Rise"],
+    location:"Gulshan-2, Dhaka, Bangladesh",lat:23.7925,lng:90.4078,status:"Design Development",clientType:"Private",
+    scale:"Medium",service:"Architecture",
+    oneLiner:{en:"A mid-rise apartment building on a 9-katha Gulshan-2 plot, balancing structural expression with contextual responsiveness.",bn:""},
+    hero:AC+"proj_fi_TmL76N9kuMc8qOxG3cgKoFcB6bnNQV.jpg",
+    intro:{en:"A well-articulated example of contemporary urban residential architecture. Rising prominently within its environment, this mid-rise apartment structure embodies a thoughtful balance between functionality, structural expression and contextual responsiveness, combining symmetrical massing, material authenticity and environmental awareness with the demands of high-density urban living.",bn:""},
+    facts:{type:"Residential Apartment Building",client:"Private",architect:"Kamanashish Barua",team:"arch_CELL",site:"9 katha",floors:"Ground+9",built:"2,500 & 5,000 sq ft units",role:"Architecture"},
+    images:[{url:AC+"proj_gi_9TIEstsJRwtrHa2zQxUshia8923cIm.jpg",caption:"Street facade",credit:"arch_CELL"},
+            {url:AC+"proj_gi_iyBWmf2cgYXEVyJHOVU8k4ibg7risL.jpg",caption:"Elevation study",credit:"arch_CELL"},
+            {url:AC+"proj_gi_1OXcWsotSPeu1HBpE6TDbG73BF5XQi.jpg",caption:"Entrance",credit:"arch_CELL"},
+            {url:AC+"proj_gi_bGcgkQ4qokG6OsWTKuFt5g3hduW87r.jpg",caption:"Facade detail",credit:"arch_CELL"}],
+    photo:"arch_CELL"}),
+
+  P({slug:"housing-uttara-akash-prodeep",title:{en:"Genetic Akash Prodeep, Uttara",bn:""},
+    category:["Residential","High-Rise"],
+    location:"Sector 4, Uttara, Dhaka",lat:23.8759,lng:90.3795,status:"Design Development",clientType:"Private",
+    scale:"Medium",service:"Architecture",
+    oneLiner:{en:"A geometric Uttara high-rise with vertical gardens filling its balconies — Ground+13 over a basement on 6.92 katha.",bn:""},
+    hero:AC+"proj_fi_zbOH6mNjRb3Q6b4cQc99JbzWO3LKFm.jpg",
+    intro:{en:"The structure of Genetic Akash Prodeep is characterised by its clean, geometric form, rising vertically with multiple floors neatly stacked and broken up by strategic setbacks and terraces to reduce the imposing feel often associated with high-rise buildings. Balconies filled with greenery act as personal gardens for residents, improving both aesthetics and environmental performance.",bn:""},
+    facts:{type:"Residential High-Rise",client:"Private",architect:"Kamanashish Barua",team:"arch_CELL",site:"6.92 katha",floors:"Ground+13 + 1 Basement",built:"3,000 & 1,500 sq ft units",role:"Architecture"},
+    sections:[
+     {title:{en:"Green Balconies",bn:""},body:{en:"Small vertical gardens on every balcony provide natural insulation, aiding energy efficiency and reducing the urban heat island effect, while keeping the building connected to key transport and commercial areas of Uttara.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_h8PN9k2ooZqGdHcWsVOtqkZdrD71rw.jpg",caption:"Tower facade",credit:"arch_CELL"},
+            {url:AC+"proj_gi_whYpgvQTFwujMYwHm9UErh2X0KjBfS.jpg",caption:"Balcony greenery",credit:"arch_CELL"},
+            {url:AC+"proj_gi_XT4Muax6I6nAYBERhA7MWvt8BMKMJJ.jpg",caption:"Street elevation",credit:"arch_CELL"},
+            {url:AC+"proj_gi_0lpvbwSKOefRnTlxD2QJVSYjzH9J0Y.jpg",caption:"Entrance",credit:"arch_CELL"}],
+    sustainability:["Native Landscape","Heat Mitigation","Energy Efficiency"],photo:"arch_CELL"}),
+
+  P({slug:"residential-cantonment-verbana",title:{en:"Verbana, Dhaka Cantonment",bn:""},
+    category:["Residential"],
+    location:"Dhaka Cantonment, Bangladesh",lat:23.8103,lng:90.3897,status:"Under Construction",clientType:"Private",
+    scale:"Medium",service:"Architecture",
+    oneLiner:{en:"42 apartments across Ground+8 and two basements for Fortune Developers, on a quiet 15-katha Cantonment plot.",bn:""},
+    hero:AC+"proj_fi_ASlvFqfbDAXHNUQZiNPwyXhZa1kyV5.jpg",
+    intro:{en:"Designing an apartment building in the Cantonment area of Dhaka requires a thoughtful balance between urban living needs, environmental sustainability and the socio-cultural fabric of the neighbourhood — a relatively quiet, organised environment combining residential and commercial development with green spaces.",bn:""},
+    facts:{type:"Residential Apartment Building",client:"Fortune Developers",architect:"Kamanashish Barua",team:"arch_CELL",status:"Under Construction",site:"15 katha",floors:"Ground+8 + 2 Basements",built:"1,650–3,000 sq ft/unit",role:"Architecture"},
+    images:[{url:AC+"proj_gi_tJA73OMlnccTnH2VDxL92v4YKwWF3V.jpg",caption:"Facade",credit:"arch_CELL"},
+            {url:AC+"proj_gi_asuMCuG4uUrrkQFylfMBOYPqbFB8qm.jpg",caption:"Elevation study",credit:"arch_CELL"},
+            {url:AC+"proj_gi_CzPEKyj7L9S6GV5uZu7k1SKFWGfIVc.jpg",caption:"Entrance",credit:"arch_CELL"}],
+    photo:"arch_CELL"}),
+
+  P({slug:"shakyasingha-sadhana-bisuddha-banabihar",title:{en:"Shakkyasingha Sadhana Bishuddha Banabihara Buddhist Temple",bn:""},
+    category:["Religious / Spiritual","Conceptual"],
+    location:"Gujjapara, Manikchari, Khagrachhari",lat:23.1500,lng:91.9333,status:"Design Development",clientType:"Institutional",
+    scale:"Medium",service:"Architecture",
+    oneLiner:{en:"A monastery in concentric spiral form, its Dhamma-spiral walkway rising toward a seated Buddha statue crowning the upper terrace.",bn:""},
+    hero:AC+"proj_fi_e0ykjSPnrN03QIyywdGHBtxQCvxtpw.jpg",
+    intro:{en:"The design draws profound inspiration from nature, Buddhist philosophy and sacred geometry. \"Bodhi\" symbolises enlightenment, while \"Aranya\" translates to forest — together invoking the essence of spiritual awakening within the tranquility of nature, harmonising built form and surrounding forest into an immersive sanctuary for meditation.",bn:""},
+    facts:{type:"Buddhist Monastery · Religious",client:"Madhyam Pratipada Aranya Kuthir (Forest Meditation Centre)",architect:"Kamanashish Barua",team:"arch_CELL",status:"Design Development",designYear:"2025",site:"2 acre",built:"12,000 sq ft",role:"Architecture"},
+    sections:[
+     {title:{en:"Spiral Geometry",bn:""},body:{en:"The monastery is designed in a concentric spiral form, symbolising the Buddhist path to enlightenment — from the outer world of desire and illusion inward toward the centre of peace and awakening — its rising walkway mirroring the Eightfold Path.",bn:""}},
+     {title:{en:"Three Levels",bn:""},body:{en:"A ground level of reception, meditation garden and lotus pond; a mid-level of monastic residences, classrooms and library; and an upper level of prayer hall, terrace meditation zones and a stupa-inspired roof garden beneath the central Buddha statue.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_YOZPItS3MoCdnPGupFLFehE86707v3.jpg",caption:"Spiral monastery concept",credit:"arch_CELL"},
+            {url:AC+"proj_gi_r8qfYJN8AXRZBVDS7avKanMv6EPpxv.jpg",caption:"Buddha statue terrace",credit:"arch_CELL"},
+            {url:AC+"proj_gi_FugIV7r4YNgow9Y23jtfbH6p2LQ15F.jpg",caption:"Forest setting",credit:"arch_CELL"},
+            {url:AC+"proj_gi_a9adFf4YEx2Js1ZYJmU0UforGtjyUG.jpg",caption:"Courtyard",credit:"arch_CELL"}],
+    sustainability:["Biodiversity","Rainwater Harvesting","Passive Cooling","Native Landscape"],photo:"arch_CELL"}),
+
+  P({slug:"temple-shilghata",title:{en:"Shilghata Punurnirman Bihar",bn:""},
+    category:["Religious / Spiritual","Completed"],
+    location:"Shilghata, Bandarban",lat:22.1953,lng:92.2184,year:2015,status:"Completed",clientType:"Institutional",
+    scale:"Medium",service:"Architecture",
+    oneLiner:{en:"A reconstructed Buddhist monastery in the hills of Bandarban, rooted in the region's prayer-flag and pagoda traditions.",bn:""},
+    hero:AC+"proj_fi_nrITOkShPYEAgCetmSKca0U08o1ZbZ.jpg",
+    intro:{en:"Situated in the serene hills of Bandarban, this monastery blends traditional monastic architecture with modern sustainability principles, honouring the cultural heritage of the Buddhist community while responding to the natural landscape of a region known for lush greenery, tranquil rivers and spiritual ambiance. The design revolves around three pillars: spiritual harmony, environmental sustainability and cultural continuity.",bn:""},
+    facts:{type:"Buddhist Monastery · Religious",client:"Shilghata Punurnirman Bihar Committee",architect:"Kamanashish Barua",team:"arch_CELL",status:"Completed",designYear:"2015",site:"14,000 sq ft",built:"9,806 sq ft",role:"Architecture"},
+    sections:[
+     {title:{en:"Programme",bn:""},body:{en:"Main prayer hall, meditation hall, Sima Ghar, altar for the Buddha statue, monks' quarters, Sangraloya and library — deeply rooted in the local Buddhist architectural traditions of the Chittagong Hill Tracts, with prayer flags, pagodas and decorative elements reflecting the region's heritage.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_mggWWyqb8KlhkRZaGEhNvZ9f6MCJ8i.jpg",caption:"Monastery exterior",credit:"arch_CELL"},
+            {url:AC+"proj_gi_hzbfoN4zxZxynOPf0gog90tqBY6kbQ.jpg",caption:"Prayer hall",credit:"arch_CELL"},
+            {url:AC+"proj_gi_zUCBYKOzQoRCTLEk9nTEgwBItGrdek.jpg",caption:"Courtyard",credit:"arch_CELL"},
+            {url:AC+"proj_gi_Qg6Laqqenv8DJbZNFpQmBTpEWY5zyp.jpg",caption:"Altar",credit:"arch_CELL"}],
+    photo:"arch_CELL"}),
+
+  P({slug:"shantiniketan-ambedkar-buddhist-welfare-mission",title:{en:"Santiniketan Ambedkar Buddhist Welfare Mission",bn:""},
+    category:["Religious / Spiritual","Conceptual"],
+    location:"Ballavpur Dhanga, Shantiniketan, West Bengal, India",lat:23.6773,lng:87.6828,status:"Design Development",clientType:"Institutional",
+    scale:"Medium",service:"Architecture",
+    oneLiner:{en:"A spiritual and community centre near Tagore's Shantiniketan, honouring Dr. B.R. Ambedkar's values of peace, compassion and social justice.",bn:""},
+    hero:AC+"proj_fi_pTKqDVMGcZj7BT245EMTTphUcQ0nxi.jpg",
+    intro:{en:"Inspired by the values of peace, compassion and social justice that Dr. B.R. Ambedkar advocated, this project creates an inclusive space for worship, learning and community engagement. The concept draws from the serene landscape of Ballavpur Dhanga and the rich cultural tapestry of Shantiniketan, integrating Buddhist principles of simplicity, mindfulness and tranquility with the region's vibrant artistic traditions.",bn:""},
+    facts:{type:"Religious & Community Centre",client:"Santiniketan Ambedkar Buddhist Welfare Mission",architect:"Kamanashish Barua",team:"arch_CELL",role:"Architecture"},
+    sections:[
+     {title:{en:"Site",bn:""},body:{en:"The site is surrounded by the lush greenery typical of the Shantiniketan area, with a rich history of cultural and intellectual contributions by Rabindranath Tagore. The design respects and enhances existing trees and water features, with open spaces for meditation and an amphitheatre echoing Rabindra-stage tradition.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_CSw8sv5rKdxT8tYBBSQUeZrgo2dEF3.jpg",caption:"Meditation centre concept",credit:"arch_CELL"},
+            {url:AC+"proj_gi_7OOZdfWYuHJ2cq0UWRZRjCk9XT7axM.jpg",caption:"Open amphitheatre",credit:"arch_CELL"},
+            {url:AC+"proj_gi_8fnd10e2aKEuSPTUr4OdJR8cfoZHX3.jpg",caption:"Landscape setting",credit:"arch_CELL"},
+            {url:AC+"proj_gi_fsRTHpxEOBjnL6jFfxmyjn8LEZvcqb.jpg",caption:"Site plan",credit:"arch_CELL"}],
+    sustainability:["Solar Energy","Rainwater Harvesting","Native Landscape"],photo:"arch_CELL"}),
+
+  P({slug:"hotel-sun-n-shade-madagascar",title:{en:"Hotel Sun-n-Shade",bn:""},
+    category:["Commercial","Hospitality","High-Rise"],
+    location:"Tsaralalana, Antananarivo, Madagascar",lat:-18.9100,lng:47.5361,status:"Design Development",clientType:"Private",
+    scale:"Large",service:"Architecture",featured:true,
+    oneLiner:{en:"A 20-storey, 308-room hotel and convention complex for Madagascar's capital — five restaurants, a casino and a rooftop bar over the city.",bn:""},
+    hero:AC+"proj_fi_S846sA7NtoXcYukjg9YF3VZG9nnPLv.jpg",
+    intro:{en:"Envisioned as a luxurious 20-storey high-rise blending modern elegance with Madagascar's unique cultural and natural heritage. Situated in Tsaralalana, Antananarivo, the design offers guests a sophisticated, tranquil environment that harmonises with the urban landscape while providing spectacular views of the city and surrounding hills.",bn:""},
+    facts:{type:"Hotel & Convention Complex",client:"Five Continents Credit Ltd., Hong Kong",architect:"Kamanashish Barua",team:"arch_CELL",site:"1.11 acre",built:"278,800 sq ft (20 storeys)",floors:"Hotel Block 218,300 sft · Convention Centre 27,700 sft · Community Centre 13,850 sft",role:"Architecture"},
+    sections:[
+     {title:{en:"Programme",bn:""},body:{en:"308 guest rooms including VIP suites, five restaurants, a rooftop restaurant and bar, a business centre, a fitness centre with sauna and massage, a pool with poolside bar, a children's play area, a casino, landscaped entry gardens and 80 basement car parks.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_XKd5aKPaLMLyWtxWUsXhxCG0hhAqDX.jpg",caption:"Tower massing",credit:"arch_CELL"},
+            {url:AC+"proj_gi_N30mD82ZpGgrEYy07kxhCO0picjwD8.jpg",caption:"Facade study",credit:"arch_CELL"},
+            {url:AC+"proj_gi_SpOsUJXmaJs3pc4Nn11o5HFXwhCdJm.jpg",caption:"Ground floor plan",credit:"arch_CELL"}],
+    photo:"arch_CELL"}),
+
+  P({slug:"prasaad-water-world-continental",title:{en:"Prasaad Water World Continental",bn:""},
+    category:["Commercial","Hospitality"],
+    location:"Cox's Bazar, Bangladesh",lat:21.4272,lng:92.0058,status:"Design Development",clientType:"Private",
+    scale:"Large",service:"Architecture",
+    oneLiner:{en:"An organic-form water resort on 2.5 acres beside the world's longest sea beach, its architecture mimicking tidal rhythm.",bn:""},
+    hero:AC+"proj_fi_t6O84wylCQswcgV9ZyLhwKsXVMvUPW.jpg",
+    intro:{en:"Envisioned as a luxurious yet immersive destination that seamlessly integrates with the natural beauty of the world's longest sea beach. The architectural concept celebrates the intersection of water, nature and human interaction, drawing inspiration from the fluidity and tranquility of water, the rhythm of the tides and the expansive horizon of the Bay of Bengal.",bn:""},
+    facts:{type:"Water Resort · Commercial & Hospitality",client:"Prasaad Group of Companies",architect:"Kamanashish Barua",team:"arch_CELL",site:"2.5 acre",built:"143,200 sq ft",role:"Architecture"},
+    sections:[
+     {title:{en:"Sustainability",bn:""},body:{en:"Green roofs, rainwater harvesting, solar panels and energy-efficient materials keep the resort's footprint light on Cox's Bazar's fragile coastal ecosystem, with a water-recycling system minimising local environmental impact.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_vBL4y4VUmSzDzkxHBCqmBiTXVOxNNS.jpg",caption:"Resort massing",credit:"arch_CELL"},
+            {url:AC+"proj_gi_1FWGV7IGAkXDSNpZFENi1ME0IqcPdR.jpg",caption:"Waterfront elevation",credit:"arch_CELL"},
+            {url:AC+"proj_gi_rwfT3o1M79IbL4febnf4yua7ms8Xe5.jpg",caption:"Pool & water features",credit:"arch_CELL"},
+            {url:AC+"proj_gi_K5M4ZEClvoIDlZIE3qkLQX4QrkS7ic.jpg",caption:"Night render",credit:"arch_CELL"}],
+    sustainability:["Solar Energy","Rainwater Harvesting","Water Efficiency"],photo:"arch_CELL"}),
+
+  P({slug:"munshiganj-childrens-park",title:{en:"Munshiganj Children's Park",bn:""},
+    category:["Landscape","Public / Civic"],
+    location:"Near Idrakpur Fort, Munshiganj, Bangladesh",lat:23.5422,lng:90.5305,status:"Design Development",clientType:"Government",
+    scale:"Medium",service:"Landscape Architecture",
+    oneLiner:{en:"A 16,091 sq ft inclusive play landscape beside DC Park — wheelchair-friendly paths and play zones for children of every ability.",bn:""},
+    hero:AC+"proj_fi_vantZxEtC94WP3lThy67FbHN7FPgfu.jpg",
+    intro:{en:"Designed to provide a safe, educational and fun environment for children while responding to the local climate, cultural context and community needs. The park is a dynamic space for children to learn, grow and engage with nature, fostering physical, social and cognitive development through thoughtfully designed play zones and green spaces.",bn:""},
+    facts:{type:"Children's Landscape Park",client:"DC Office, Munshiganj",architect:"Kamanashish Barua",team:"arch_CELL",site:"16,091 sq ft",role:"Landscape architecture"},
+    sections:[
+     {title:{en:"Inclusive Design",bn:""},body:{en:"Wheelchair-friendly paths, ramps and accessible play structures let children of different abilities engage equally and safely, fostering social interaction and teamwork among children of diverse backgrounds.",bn:""}},
+     {title:{en:"Features",bn:""},body:{en:"A mini amphitheatre, giant Ludo board, walkway track, fountain, children's play area, and a landscaped garden with flower beds at the main entry.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_gUNOnFLUs6SbCzoMYz4u5xfeJzxmqA.jpg",caption:"Play area",credit:"arch_CELL"},
+            {url:AC+"proj_gi_DW47rQnVZPSeBrUTW75ApWY7S4p9Hv.jpg",caption:"Giant Ludo board",credit:"arch_CELL"},
+            {url:AC+"proj_gi_MzhjMYJlhjQ8Oo67Vlqm4Qy81faLiQ.jpg",caption:"Walkway track",credit:"arch_CELL"},
+            {url:AC+"proj_gi_42LL6QD6zJaV9D6jWKrZogof34mnrz.jpg",caption:"Entry garden",credit:"arch_CELL"}],
+    sustainability:["Native Landscape","Biodiversity"],photo:"arch_CELL"}),
+
+  P({slug:"cloudcrest-resort-valley",title:{en:"Cloudcrest Resort Valley",bn:""},
+    category:["Commercial","Hospitality","Climate-Responsive Design"],
+    location:"Near Meghla, Bandarban, Chittagong Hill Tracts",lat:22.1857,lng:92.2255,status:"Design Development",clientType:"Private",
+    scale:"Large",service:"Architecture · Interior · Landscape · Structural",featured:true,
+    oneLiner:{en:"\"The building should look as if the hill grew it\" — three terraced plates stepping down a steep valley without levelling the ridge.",bn:""},
+    hero:AC+"proj_fi_pJz5jWGmpcmHBe1HBScEZmEFSijRXP.png",
+    intro:{en:"A hillside boutique resort near Meghla, on the Chittagong–Bandarban road, built on the philosophy that \"the building should look as if the hill grew it, and as if removing it would leave the hill intact.\" Three terraced massing plates step down the contour rather than levelling the site, with lower blocks raised on exposed RCC pilotis to preserve natural drainage and the ridge crest withheld as open landscaped space.",bn:""},
+    facts:{type:"Boutique Resort · Commercial & Hospitality",client:"Private",architect:"Kamanashish Barua",team:"ARCHCELL Design Development",structural:"In-house · terraced RCC pilotis",interiorC:"ARCHCELL",landscapeC:"ARCHCELL",status:"Design Development",role:"Architecture, interior, landscape, structural, electrical & plumbing"},
+    sections:[
+     {title:{en:"Compression & Release",bn:""},body:{en:"The arrival sequence deliberately withholds the valley view, compressing guests through a stone-and-timber lobby before releasing them dramatically into a full-height glazed space — a sequence borrowed from vernacular hill monastery design.",bn:""}},
+     {title:{en:"Materiality",bn:""},body:{en:"A narrow, stratified material palette: local stone-faced RCC at the base, board-formed concrete for structure, textured mineral render on upper walls and thermally-treated hardwood for soffits — all locally repairable and left to age gracefully.",bn:""}},
+     {title:{en:"Climate Response",bn:""},body:{en:"Terraced overhangs, vertical timber fins and cross-ventilation address 2,500–3,200 mm of annual monsoon rainfall and the site's solar angle at 22.2°N without mechanical reliance, with drainage treated as a structural system in its own right.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_cI2DJMHqaTOTDgYEvZITi0w7AmKojI.jpg",caption:"Terraced massing on the valley slope",credit:"arch_CELL"},
+            {url:AC+"proj_gi_kHow9tV3SINmShk19P5qL2cx83vyWX.jpg",caption:"Full-height glazed lobby",credit:"arch_CELL"},
+            {url:AC+"proj_gi_XMf1hj5dLnUfitx2qWvIz4P9Og43lq.jpg",caption:"Stone-and-timber arrival sequence",credit:"arch_CELL"},
+            {url:AC+"proj_gi_ncqmZUZRccRSUV2veUABvZT0qmZrWJ.jpg",caption:"Pilotis raising the lower block",credit:"arch_CELL"},
+            {url:AC+"proj_gi_SA3rwRLSlSpCPkkEh5q5HEVNe33FWB.jpg",caption:"Timber fin detail",credit:"arch_CELL"},
+            {url:AC+"proj_gi_MZbcX4wXsgCb3B4K0N31S9jxZuVY9X.jpg",caption:"Valley view from upper terrace",credit:"arch_CELL"}],
+    sustainability:["Slope Protection","Passive Cooling","Natural Ventilation","Low Carbon Materials"],photo:"arch_CELL"}),
+
+  P({slug:"alokdhara-library",title:{en:"Alokdhara Library — DC Office Moulvibazar",bn:""},
+    category:["Interior","Institutional"],
+    location:"DC Office, Moulvibazar, Bangladesh",lat:24.4829,lng:91.7774,status:"Design Development",clientType:"Government",
+    scale:"Small",service:"Interior Design",
+    oneLiner:{en:"\"Stream of light\" — a civic library interior organised around nature, knowledge and light for the Moulvibazar DC office.",bn:""},
+    hero:AC+"proj_fi_nQZtatAcAdnv2PKT2wlllWp1R82MD2.jpeg",
+    intro:{en:"Alokdhara — meaning \"stream of light\" — is a civic knowledge space designed to foster a culture of reading, learning and intellectual engagement within the Deputy Commissioner's office compound in Moulvibazar. The design merges minimalist modern interiors with nature-inspired elements: a balanced, symmetrical layout with central reading tables encircled by perimeter bookshelves, and a dedicated lounge zone for informal reading and reflection.",bn:""},
+    facts:{type:"Public Library · Interior",client:"Deputy Commissioner Towhiduzzaman Pavel, Moulvibazar",architect:"Kamanashish Barua",team:"arch_CELL",role:"Interior design"},
+    sections:[
+     {title:{en:"Light as Identity",bn:""},body:{en:"Linear ceiling fixtures create continuous illumination symbolising the Alokdhara concept, while landscape photography of Moulvibazar's wetlands, birds and water lilies, alongside indoor plants, strengthens the room's connection to the surrounding tea-district environment.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_zCMNr2CgSRaFVtr6i2LUpr1urkCzaz.jpg",caption:"Central reading tables",credit:"arch_CELL"},
+            {url:AC+"proj_gi_B1l9dK7ub4KZHIc9vLToZQ52EbJ2WS.jpg",caption:"Perimeter bookshelves",credit:"arch_CELL"},
+            {url:AC+"proj_gi_vccALMuExvNNw3OOYLVWgsQ29nGnQ7.jpg",caption:"Reading lounge",credit:"arch_CELL"},
+            {url:AC+"proj_gi_5KDug7blNPAuRfU5AFJilphINuvYbc.jpg",caption:"Linear ceiling lighting",credit:"arch_CELL"},
+            {url:AC+"proj_gi_68TMX5hkLMQHisCs1cgUtsgmH6NY9a.jpg",caption:"Wetland photography wall",credit:"arch_CELL"},
+            {url:AC+"proj_gi_Sehg16FS9KHfNefKfueF6gHjXruZkD.jpg",caption:"Entrance",credit:"arch_CELL"}],
+    sustainability:["Daylighting"],photo:"arch_CELL"}),
+
+  P({slug:"ppimsc-library-munshiganj",title:{en:"PPIMSC Library at Munshiganj",bn:""},
+    category:["Interior","Institutional","Educational"],
+    location:"Iazuddin College, Munshiganj, Bangladesh",lat:23.5422,lng:90.5305,status:"Design Development",clientType:"Institutional",
+    scale:"Small",service:"Interior Design",
+    oneLiner:{en:"A vibrant, zoned campus library — a Kids' Corner, workstations and a group study hall in white, yellow and green.",bn:""},
+    hero:AC+"proj_fi_6tkMUfPf8LijL13ry4aol2HzVYJKkR.jpg",
+    intro:{en:"A vibrant, interactive and accessible library interior for Iazuddin College, Munshiganj, serving user groups from children to advanced students. The design balances functionality, aesthetics and educational engagement across distinct zones, using white, yellow and green tones to symbolise clarity, optimism and growth.",bn:""},
+    facts:{type:"Campus Library · Interior",client:"Iazuddin College, Munshiganj",architect:"Kamanashish Barua",team:"arch_CELL",role:"Interior design"},
+    sections:[
+     {title:{en:"Zoning",bn:""},body:{en:"A Kids' Corner in bright yellow, light green and orange uses playful shelf cutouts and motivational wall graphics; a Workstation Area of ergonomic angular tables in laminated wood and stainless steel supports individual and collaborative work; and a Group Study Area of long rectangular desks under natural light and recessed ceiling lighting enables interactive, semi-private peer study.",bn:""}}
+    ],
+    images:[{url:AC+"proj_gi_equicMFoTC7Tha2YpQ6Z2PeAciq0Ef.jpg",caption:"Kids' Corner",credit:"arch_CELL"},
+            {url:AC+"proj_gi_NSneZW9gm8TXMXkQrYy6BKCm1pypPN.jpg",caption:"Workstation area",credit:"arch_CELL"},
+            {url:AC+"proj_gi_L5Oeob5JsLmSUFn4xh5RVVOco2bf9H.jpg",caption:"Group study desks",credit:"arch_CELL"},
+            {url:AC+"proj_gi_fKFLUUwa9n4LvJhPbUJiqREtSFWWH7.jpg",caption:"Colour-accented bookshelves",credit:"arch_CELL"},
+            {url:AC+"proj_gi_JbenQgnmnlNNhDTbgc2QDipWJpeybU.jpg",caption:"Grid ceiling detail",credit:"arch_CELL"},
+            {url:AC+"proj_gi_0qB3zsJ8Cc8GuXXLg604xZKYkki7Lo.jpg",caption:"Reading corner",credit:"arch_CELL"}],
+    photo:"arch_CELL"}),
+
+  P({slug:"baro-bhuiyan",title:{en:"Baro Bhuiyan",bn:""},
+    category:["Residential"],
+    location:"Bangladesh",status:"Design Development",clientType:"Private",
+    scale:"Medium",service:"Architecture",
+    oneLiner:{en:"A residential design from arch_CELL's ongoing practice.",bn:""},
+    hero:AC+"proj_fi_Xz9mYb1QIhXuOTSbp1ZGHWItO3zbkT.jpg",
+    intro:{en:"A residential project by arch_CELL, part of the firm's wider practice offering a full spectrum of engineering and architectural design, planning and implementation solutions — blending technology, form and functionality into ergonomic, aesthetic buildings.",bn:""},
+    facts:{type:"Residential",client:"Private",architect:"Kamanashish Barua",team:"arch_CELL",role:"Architecture"},
+    photo:"arch_CELL"})
+ ];
+ proj.forEach((p,i)=>p.order=i);
+ const collections=[
+  {id:uid(),slug:"public-architecture",title:{en:"Public & Institutional",bn:"সরকারি ও প্রাতিষ্ঠানিক"},intro:{en:"Civic, government and institutional commissions across Bangladesh — hospitals, civic offices, courts, colleges and libraries.",bn:""},cover:AC+"proj_fi_3Gy0M3eov7Oj1iEFmdJxRhiaHLvgDn.jpg",projectIds:proj.filter(p=>["Institutional","Public / Civic","Healthcare","Educational"].some(c=>p.category.includes(c))).map(p=>p.id)},
+  {id:uid(),slug:"residential",title:{en:"Residential & High-Rise",bn:"আবাসিক ও উচ্চভবন"},intro:{en:"Houses, apartment towers and residential masterplanning across Dhaka and beyond.",bn:""},cover:AC+"proj_fi_FWhqJl49hY6UHXR0QSgsZiY7yojg9e.jpg",projectIds:proj.filter(p=>["Residential","High-Rise"].some(c=>p.category.includes(c))).map(p=>p.id)},
+  {id:uid(),slug:"commercial-hospitality",title:{en:"Commercial & Hospitality",bn:"বাণিজ্যিক ও আতিথেয়তা"},intro:{en:"Hotels, resorts, towers and mixed-use commercial work — in Bangladesh and abroad.",bn:""},cover:AC+"proj_fi_5gjGRpXOUL7AUZHfXUpD0Q4vwS9AFn.jpg",projectIds:proj.filter(p=>["Commercial","Hospitality","High-Rise"].some(c=>p.category.includes(c))).map(p=>p.id)},
+  {id:uid(),slug:"bandarban-hill",title:{en:"Hill Tracts Projects",bn:"পার্বত্য প্রকল্প"},intro:{en:"Building on slope in the Chittagong Hill Tracts.",bn:""},cover:AC+"proj_fi_xUS69hbD2ft92lowwB9uzOUxae2hPN.jpg",projectIds:proj.filter(p=>/Bandarban|Hill|Khagrachhari/.test(p.location)).map(p=>p.id)}
+ ];
+ const about={
+  name:{en:"Kamanashish Barua",bn:"কামনাশীষ বড়ুয়া"},
+  portrait:IMG("kb-portrait",1000,1300),
+  tagline:{en:"Principal Architect · Urban Designer · Sustainability Advocate · 14+ Years of Experience",bn:""},
+  bio:{en:"Kamanashish Barua is a Bangladeshi architect with over 14 years of experience in architectural design, interior solutions and sustainable space planning, working across residential, commercial, urban and institutional projects. As Principal Architect and Co-Founder of ARCHCELL, he leads a team delivering architectural and interior design solutions across Bangladesh and beyond — from concept development to site execution — ensuring every design meets client needs, regulatory standards and sustainable goals.",bn:""},
+  philosophy:{en:"\"My greatest motivation has always been the desire to create better, more sustainable spaces for people to live and thrive in — designing large-scale architectural and interior projects that meet aesthetic and functional needs while prioritising sustainability and renewable energy. Working across public and private organisations has given me a profound understanding of space planning and the importance of reducing carbon footprints, and collaborating with business leaders, engineers, legal consultants and environmental specialists has given me a holistic, cross-disciplinary understanding of the industry.\"",bn:""},
+  timeline:[
+   {year:"2008–09",txt:{en:"B.Arch, Bangladesh University of Engineering & Technology (BUET), Dhaka",bn:""}},
+   {year:"2011–13",txt:{en:"Architect (Intern), Department of Architecture, Public Works Department",bn:""}},
+   {year:"2013–15",txt:{en:"Architect, Ecliptic Architects",bn:""}},
+   {year:"2015–20",txt:{en:"Principal Architect, Genetic Limited",bn:""}},
+   {year:"2020–",txt:{en:"Principal Architect & Co-Founder, ARCHCELL, Banani, Dhaka",bn:""}},
+   {year:"2023–",txt:{en:"Founder, METTA (mettabd.org) — promoting Buddhist values and community service",bn:""}}
+  ],
+  expertise:["Sustainable & Energy-Efficient Design","Concept Development & Technical Drawings","BIM & CAD (AutoCAD, Revit, 3ds Max)","Construction Supervision & Site Coordination","Team Leadership & Cross-Disciplinary Collaboration","Regulatory Compliance & Safety Codes","Client Liaison & Stakeholder Coordination","3D Visualization & Rendering","Animation & Virtual Presentation (Twinmotion)","Urban & Landscape Design","Interior Design","Vendor & Supplier Management"],
+  publications:[
+   {title:{en:"BIMSTEC Scholar, Nalanda University",bn:""},year:"2018",abstract:{en:"Selected as a BIMSTEC Scholar for postgraduate study in Ecology and Environment Studies at Nalanda University, India.",bn:""},keywords:"scholarship, ecology, environment"},
+   {title:{en:"2nd Position, IEB Complex Revitalization Design Competition",bn:""},year:"2005",abstract:{en:"Placed 2nd in the architectural design competition for revitalization of the Institution of Engineers, Bangladesh (IEB) complex in Ramna, Dhaka.",bn:""},keywords:"design competition, IEB, Ramna"},
+   {title:{en:"Nippon Foundation Scholarship, Japan",bn:""},year:"2002–03",abstract:{en:"Awarded in recognition of outstanding academic achievement at BUET.",bn:""},keywords:"scholarship, Nippon Foundation"},
+   {title:{en:"100-Year Urban Master Plan for Bandarban City",bn:""},year:"2026",abstract:{en:"A century-long development vision (2026–2126) for Bandarban under the theme \"Hill–River–Culture–Eco Tourism City.\" The framework addresses climate risks specific to Bangladesh's hill districts — landslides, flash flooding, water scarcity and ecosystem degradation — through climate adaptation, disaster mitigation, ecological conservation, indigenous cultural preservation and nature-based, terrain-responsive planning rather than conventional flatland city models.",bn:""},keywords:"hill city planning, climate adaptation, landslide risk, eco-tourism, Bandarban, Sangu River",url:"https://www.archcellbd.com/research-and-publications/6776"},
+   {title:{en:"Core Concept: \"Hill, River, Culture & Nature-Based Tourism City\"",bn:"মূল ভাবনা: \"পাহাড়, নদী, সংস্কৃতি ও প্রকৃতিনির্ভর পর্যটন নগরী\""},year:"2026",abstract:{en:"The conceptual framework underpinning the Bandarban master plan research — an eco-tourism city model built around hill terrain, river ecology and indigenous culture rather than displacing them.",bn:""},keywords:"eco-tourism, hill terrain, indigenous culture, Bandarban",url:"https://www.archcellbd.com/research-and-publications/6758"},
+   {title:{en:"Nature-Based, Climate-Resilient Urban Design of Bandarban",bn:"বান্দরবানের প্রকৃতিনির্ভর জলবায়ু-সহনশীল নগর নকশা"},year:"2026",abstract:{en:"An urban design framework for Bandarban that works with natural topography — hills, the Sangu River, forests and indigenous culture — rather than against it. Strategies include contour-based planning, riverfront ecological corridors, rainwater harvesting, landslide mitigation through native vegetation, walkable green mobility networks and climate-responsive architecture integrating water security and eco-tourism.",bn:""},keywords:"climate-resilient design, nature-based solutions, water security, landslide mitigation, green infrastructure",url:"https://www.archcellbd.com/research-and-publications/6766"}
+  ]
+ };
+ const settings={heroProjectId:proj[0].id,siteTitle:"KAMANASHISH BARUA",subtitle:"Architecture / Selected Works",
+   heroImages:[AC+"proj_gi_wmPBrzn0CW8u7sZ6m0oraJM2CKpcVz.jpg",AC+"proj_fi_3Gy0M3eov7Oj1iEFmdJxRhiaHLvgDn.jpg",AC+"proj_gi_aYzjla71yr3rqbGqXmWnfK1B9WuY9c.jpg"],
+   bgMusic:"",
+   contact:{email:"mebiplob@hotmail.com",phone:"+88-01711034941",whatsapp:"8801711034941",address:"House #100A, Road 6A, Banani DOHS, Banani, Dhaka, Bangladesh",web:"archcellbd.com"},
+   pin:"archcell", extraCats:[]};
+ return {v:3,projects:proj,collections,about,settings,posts:[]};
+}
+
+/* ---------- store ---------- */
+let DB=load();
+if(!DB.settings.heroImages||!DB.settings.heroImages.length){DB.settings.heroImages=DB.settings.heroOverride?[DB.settings.heroOverride]:[];}
+if(!DB.posts)DB.posts=[];
+let heroTimer=null;
+function load(){try{const r=localStorage.getItem(KEY);if(r){const d=JSON.parse(r);if(d&&d.projects)return d;}}catch(e){}
+ try{const t=document.getElementById("embedded-data");if(t){const d=JSON.parse(t.textContent);if(d&&d.projects){try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}return d;}}}catch(e){}
+ const s=seed();try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}return s;}
+const HKEY=KEY+"_history";
+function getHistory(){try{return JSON.parse(localStorage.getItem(HKEY)||"[]");}catch(e){return [];}}
+function save(){
+ try{
+   const prev=localStorage.getItem(KEY);
+   if(prev){
+     let hist=getHistory();
+     hist.unshift({ts:Date.now(),data:prev});
+     hist=hist.slice(0,5);
+     try{localStorage.setItem(HKEY,JSON.stringify(hist));}catch(e){}
+   }
+   localStorage.setItem(KEY,JSON.stringify(DB));
+ }catch(e){toast("⚠ Storage full — this change did NOT save. Remove some uploaded images or use smaller photos, then try again.",5000);}
+}
+function restoreHistory(i){
+ const hist=getHistory();const snap=hist[i];if(!snap)return;
+ if(!confirm("Restore the version from "+new Date(snap.ts).toLocaleString()+"? This replaces everything currently on the site with that saved snapshot (your present state is itself kept in history, so this can be undone)."))return;
+ try{DB=JSON.parse(snap.data);}catch(e){toast("Couldn't read that version");return;}
+ save();toast("Restored — pick a newer version below to undo this");renderAdmin();
+}
+const allCats=()=>[...CATS,...(DB.settings.extraCats||[])];
+const pubProjects=()=>DB.projects.filter(p=>p.published).sort((a,b)=>(a.order||0)-(b.order||0));
+const projBySlug=s=>DB.projects.find(p=>p.slug===s);
+const projById=id=>DB.projects.find(p=>p.id===id);
+
+/* ---------- favourites ---------- */
+const FAVKEY="kb_favs";
+const getFavs=()=>{try{return JSON.parse(localStorage.getItem(FAVKEY))||[]}catch(e){return[]}};
+function toggleFav(id){let f=getFavs();f=f.includes(id)?f.filter(x=>x!==id):[...f,id];localStorage.setItem(FAVKEY,JSON.stringify(f));return f.includes(id);}
+
+/* ============================ ROUTER ============================ */
+const app=$("#app");
+function go(hash){location.hash=hash;}
+function route(){
+ if(heroTimer){clearInterval(heroTimer);heroTimer=null;}
+ const h=location.hash.replace(/^#/,"")||"/";
+ const parts=h.split("/").filter(Boolean);
+ window.scrollTo(0,0);
+ setTopbar(parts[0]||"home");
+ updateMusicUI(!parts.length);
+ if(!parts.length) return renderHome();
+ switch(parts[0]){
+  case "projects": return renderArchive(parts[1]);
+  case "project": return renderDetail(parts[1]);
+  case "collections": return renderCollections();
+  case "collection": return renderCollection(parts[1]);
+  case "explore": return renderMap();
+  case "research": return renderResearch();
+  case "blog": return renderBlog();
+  case "post": return renderBlogPost(parts[1]);
+  case "about": return renderAbout();
+  case "contact": return renderContact();
+  case "saved": return renderSaved();
+  default: return renderHome();
+ }
+ markNav(parts[0]);
+}
+function setTopbar(r){
+ const tb=$("#topbar");
+ tb.classList.toggle("hero-mode",r==="home"&&!location.hash.replace(/^#/,"").replace("/","")); 
+ if(location.hash==="#/"||location.hash===""||location.hash==="#") tb.classList.add("hero-mode"); else tb.classList.remove("hero-mode");
+ markNav(r);
+}
+function markNav(r){
+ $$("[data-route]").forEach(a=>a.classList.toggle("active",a.dataset.route===r));
+}
+
+/* scroll → solid topbar + progress */
+function onScroll(){
+ const y=window.scrollY;
+ const tb=$("#topbar");
+ tb.classList.toggle("solid",y>40);
+ if((location.hash==="#/"||location.hash===""||location.hash==="#")){ tb.classList.toggle("hero-mode",y<window.innerHeight-120); }
+ const dh=document.documentElement.scrollHeight-window.innerHeight;
+ $("#progress").style.width=(dh>0?(y/dh*100):0)+"%";
+}
+
+/* reveal observer */
+let io;
+function observeReveal(){
+ if(io)io.disconnect();
+ io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}}),{rootMargin:"0px 0px -8% 0px"});
+ $$(".reveal,.card").forEach(el=>io.observe(el));
+}
+
+/* ============================ HOME ============================ */
+function metaLine(p){return [L(p.category&&p.category[0]),p.location,p.year].filter(Boolean).join(" · ");}
+function renderHome(){
+ const heroList=(DB.settings.heroImages&&DB.settings.heroImages.filter(Boolean).length)?DB.settings.heroImages.filter(Boolean):[(projById(DB.settings.heroProjectId)?.hero)||pubProjects()[0]?.hero].filter(Boolean);
+ const feats=pubProjects().filter(p=>p.featured);
+ const featSet=feats.length?feats:pubProjects().slice(0,4);
+ app.innerHTML=`
+ <section class="hero">
+   <div class="hero-media">${heroList.map((src,i)=>`<img class="hero-slide ${i===0?"active":""}" src="${src}" alt="" ${i===0?'fetchpriority="high"':'loading="lazy"'}>`).join("")}</div>
+   ${heroList.length>1?`<div class="hero-dots">${heroList.map((_,i)=>`<span class="hero-dot ${i===0?"on":""}"></span>`).join("")}</div>`:""}
+   <div class="hero-inner">
+     <div class="hero-eyebrow">Architect · B.Arch (BUET) · BIMSTEC Scholar</div>
+     <h1 class="hero-name">${L(DB.about.name)}</h1>
+     <div class="hero-disc"><span>Architecture</span><span>Urban Design</span><span>Landscape</span><span>Interior</span><span>Engineering</span><span>Research</span></div>
+     <div class="hero-cta">
+       <a class="btn btn-fill" href="#/projects" data-nav>${t("explore")}</a>
+       <a class="btn" href="#/collections" data-nav>${t("selected")}</a>
+       <a class="btn" href="#/about" data-nav>${t("about")}</a>
+     </div>
+   </div>
+   <a class="hero-scroll" href="#/projects" data-nav>Scroll<span></span></a>
+ </section>
+ <section class="feat">
+   ${featSet.map((p,i)=>`
+   <a class="feat-item" href="#/project/${p.slug}" data-nav>
+     <div class="feat-media"><img loading="lazy" src="${p.hero}" alt="${L(p.title)}"></div>
+     <div class="feat-cap">
+       <div class="feat-idx">${String(i+1).padStart(2,"0")} / ${String(featSet.length).padStart(2,"0")}</div>
+       <div class="feat-title">${L(p.title)}</div>
+       <div class="feat-meta"><span>${L(p.category[0])}</span><span>${p.location}</span><span>${p.year}</span></div>
+       ${p.oneLiner?`<p class="feat-idea">${L(p.oneLiner)}</p>`:""}
+     </div>
+   </a>`).join("")}
+ </section>
+ ${footer()}`;
+ bindNav();observeReveal();startHeroSlideshow();
+}
+function startHeroSlideshow(){
+ if(heroTimer){clearInterval(heroTimer);heroTimer=null;}
+ const slides=$$(".hero-slide");
+ if(slides.length<2)return;
+ let idx=0;
+ heroTimer=setInterval(()=>{
+   const next=(idx+1)%slides.length;
+   slides[idx].classList.remove("active");$$(".hero-dot")[idx]?.classList.remove("on");
+   slides[next].classList.add("active");$$(".hero-dot")[next]?.classList.add("on");
+   idx=next;
+ },8000);
+}
+function updateMusicUI(onHome){
+ const btn=$("#musicToggle"),audio=$("#bgAudio");
+ if(!btn||!audio)return;
+ const has=!!DB.settings.bgMusic;
+ btn.classList.toggle("hide",!(has&&onHome));
+ if(!(has&&onHome)&&!audio.paused){audio.pause();btn.classList.remove("playing");}
+}
+function toggleMusic(){
+ const audio=$("#bgAudio"),btn=$("#musicToggle"),src=DB.settings.bgMusic;
+ if(!src)return;
+ if(audio.paused){
+   if(audio.getAttribute("src")!==src)audio.src=src;
+   audio.play().then(()=>btn.classList.add("playing")).catch(()=>toast("Couldn't play — try again"));
+ }else{
+   audio.pause();btn.classList.remove("playing");
+ }
+}
+
+/* ============================ ARCHIVE ============================ */
+let archiveState={cat:"All",view:"grid",q:""};
+function renderArchive(cat){
+ if(cat)archiveState.cat=decodeURIComponent(cat);
+ const cats=["All",...allCats().filter(c=>pubProjects().some(p=>p.category.includes(c)))];
+ app.innerHTML=`
+ <div style="height:58px"></div>
+ <div class="wrap section" style="padding-bottom:0">
+   <div class="eyebrow reveal">${String(pubProjects().length).padStart(2,"0")} Works — Complete Archive</div>
+   <h2 class="section-title reveal" style="margin-top:10px">${t("archive")}</h2>
+ </div>
+ <div class="filterbar">
+   <div class="filter-row">
+     <div class="chips">${cats.map(c=>`<button class="chip ${archiveState.cat===c?"active":""}" data-cat="${c}">${c==="All"?t("all"):c}</button>`).join("")}</div>
+     <div class="view-toggle">
+       <button class="${archiveState.view==="grid"?"active":""}" data-view="grid">${t("viewGrid")}</button>
+       <button class="${archiveState.view==="index"?"active":""}" data-view="index">${t("viewIndex")}</button>
+     </div>
+     <button class="searchbtn" id="archSearch">Search</button>
+   </div>
+ </div>
+ <div class="wrap section" id="archGrid" style="padding-top:36px"></div>
+ ${footer()}`;
+ drawArchive();
+ $$("[data-cat]").forEach(b=>b.onclick=()=>{archiveState.cat=b.dataset.cat;go("/projects/"+encodeURIComponent(b.dataset.cat));});
+ $$("[data-view]").forEach(b=>b.onclick=()=>{archiveState.view=b.dataset.view;renderArchive();});
+ $("#archSearch").onclick=openSearch;
+ bindNav();observeReveal();
+}
+function filtered(){
+ let list=pubProjects();
+ if(archiveState.cat!=="All")list=list.filter(p=>p.category.includes(archiveState.cat));
+ return list;
+}
+function drawArchive(){
+ const list=filtered();const el=$("#archGrid");
+ if(!list.length){el.innerHTML=`<div class="empty">No projects in this category yet</div>`;return;}
+ if(archiveState.view==="index"){
+   el.innerHTML=`<div class="indexlist">${list.map((p,i)=>`
+     <div class="index-row" data-slug="${p.slug}">
+       <div class="index-no">${String(i+1).padStart(2,"0")}</div>
+       <div><div class="index-t">${L(p.title)}</div><div class="index-sub">${L(p.category[0])} · ${p.location}</div></div>
+       <div class="index-year">${p.year||""}</div>
+     </div>`).join("")}</div>`;
+   $$(".index-row").forEach(r=>r.onclick=()=>go("/project/"+r.dataset.slug));
+ } else {
+   const favs=getFavs();
+   el.innerHTML=`<div class="grid two">${list.map(p=>cardHTML(p,favs)).join("")}</div>`;
+   bindCards();
+ }
+ observeReveal();
+}
+function cardHTML(p,favs){
+ return `<div class="card" data-slug="${p.slug}">
+   <div class="card-media">
+     <button class="card-fav ${favs.includes(p.id)?"on":""}" data-fav="${p.id}" aria-label="Save">${favs.includes(p.id)?"♥":"♡"}</button>
+     <img loading="lazy" src="${p.hero}" alt="${L(p.title)}">
+   </div>
+   <div class="card-body">
+     <div class="card-title">${L(p.title)}</div>
+     <div class="card-meta"><span>${L(p.category[0])}</span><span>${p.location}</span><span>${p.year||""}</span></div>
+   </div>
+ </div>`;
+}
+function bindCards(){
+ $$(".card").forEach(c=>{
+   c.onclick=e=>{if(e.target.closest("[data-fav]"))return;go("/project/"+c.dataset.slug);};
+ });
+ $$("[data-fav]").forEach(b=>b.onclick=e=>{e.stopPropagation();const on=toggleFav(b.dataset.fav);b.classList.toggle("on",on);b.textContent=on?"♥":"♡";toast(on?"Saved":"Removed");});
+}
+
+/* ============================ DETAIL ============================ */
+function renderDetail(slug){
+ const p=projBySlug(slug);
+ if(!p){app.innerHTML=`<div style="height:120px"></div><div class="empty">Project not found</div>${footer()}`;bindNav();return;}
+ const facts=FACTS.filter(([k])=>p.facts&&p.facts[k]);
+ const list=pubProjects();const idx=list.findIndex(x=>x.id===p.id);
+ const next=list[(idx+1)%list.length];
+ const related=list.filter(x=>x.id!==p.id&&x.category.some(c=>p.category.includes(c))).slice(0,3);
+ const favs=getFavs();
+ app.innerHTML=`
+ <section class="d-hero">
+   <img src="${p.hero}" alt="${L(p.title)}" fetchpriority="high">
+   <div class="d-hero-cap">
+     <div class="d-cat">${p.category.map(c=>c).slice(0,3).join(" · ")}</div>
+     <h1 class="d-title">${L(p.title)}</h1>
+     <div class="d-locyear"><span>${p.location}</span><span>${p.year||""}</span></div>
+   </div>
+ </section>
+ <div class="backbar">
+   <a class="backlink" href="#/projects" data-nav>← ${t("back")}</a>
+   <div class="d-actions">
+     <button data-fav="${p.id}">${favs.includes(p.id)?"♥ Saved":"♡ "+t("save")}</button>
+     <button id="presentBtn">▶ ${t("present")}</button>
+     <button id="shareBtn">↗ ${t("share")}</button>
+   </div>
+ </div>
+ <div class="wrap">
+   ${facts.length?`<div class="titleblock reveal"><div class="tb-grid">
+     ${facts.map(([k,en,bn])=>`<div class="tb-cell"><div class="tb-key">${lang()==="bn"?bn:en}</div><div class="tb-val">${p.facts[k]}</div></div>`).join("")}
+   </div></div>`:""}
+   <div class="d-body">
+     ${p.intro?`<div class="eyebrow reveal">${t("intro")}</div><p class="d-intro reveal">${L(p.intro)}</p>`:""}
+     ${(p.sections||[]).map(s=>`<div class="d-sec reveal"><h3>${L(s.title)}</h3>${String(L(s.body)).split(/\n+/).map(x=>`<p>${x}</p>`).join("")}</div>`).join("")}
+   </div>
+ </div>
+ ${galleryHTML(p)}
+ ${(p.drawings&&p.drawings.length)?`<div class="wrap section reveal"><div class="section-head"><h2 class="section-title">${t("drawings")}</h2><span class="eyebrow">${String(p.drawings.length).padStart(2,"0")} Sheets</span></div>
+   <div class="draw-strip">${p.drawings.map((d,i)=>`<div class="draw" data-draw="${i}"><div class="draw-lab">${d.type||"Drawing"}</div><img loading="lazy" src="${d.url}" alt="${d.type||""}"></div>`).join("")}</div></div>`:""}
+ ${(p.sustainability&&p.sustainability.length)?`<div class="wrap section reveal"><div class="section-head"><h2 class="section-title">${t("sustain")}</h2></div>
+   <div class="tags">${p.sustainability.map(s=>`<span class="tag">${s}</span>`).join("")}</div></div>`:""}
+ ${p.video?`<div class="wrap section reveal"><div class="section-head"><h2 class="section-title">${t("video")}</h2></div><div class="videowrap">${videoEmbed(p.video)}</div></div>`:""}
+ ${related.length?`<div class="wrap section reveal"><div class="section-head"><h2 class="section-title">${t("related")}</h2></div>
+   <div class="grid three">${related.map(r=>cardHTML(r,favs)).join("")}</div></div>`:""}
+ <a class="next-proj" href="#/project/${next.slug}" data-nav>
+   <img src="${next.hero}" alt="">
+   <div class="next-cap"><div class="next-lab">${t("next")}</div><div class="next-t">${L(next.title)}</div></div>
+ </a>
+ ${footer()}`;
+ // bind
+ bindNav();bindGallery(p);observeReveal();
+ $$("[data-fav]").forEach(b=>b.onclick=()=>{const on=toggleFav(p.id);b.textContent=on?"♥ Saved":"♡ "+t("save");toast(on?"Saved":"Removed");});
+ $("#presentBtn").onclick=()=>openPresent(p);
+ $("#shareBtn").onclick=()=>shareProject(p);
+ $$("[data-draw]").forEach(d=>d.onclick=()=>openLightbox(p.drawings.map(x=>({url:x.url,caption:x.type})),+d.dataset.draw));
+}
+function galleryHTML(p){
+ const im=p.images||[];if(!im.length)return"";
+ let out=`<div class="wrap gallery">`;
+ // 1 full, then two-grid, then swipe for the rest — editorial rhythm
+ if(im[0])out+=`<div class="g-full gi" data-img="0"><img loading="lazy" src="${im[0].url}" alt="${im[0].caption||""}">${im[0].caption?`<div class="gi-cap">${im[0].caption}${im[0].credit?" — "+im[0].credit:""}</div>`:""}</div>`;
+ const mid=im.slice(1,3);
+ if(mid.length){out+=`<div class="g-two">`+mid.map((g,i)=>`<div class="gi" data-img="${i+1}"><img loading="lazy" src="${g.url}" alt=""><div class="gi-cap">${g.caption||""}</div></div>`).join("")+`</div>`;}
+ const rest=im.slice(3);
+ if(rest.length){out+=`<div class="g-swipe">`+rest.map((g,i)=>`<div class="gi" data-img="${i+3}"><img loading="lazy" src="${g.url}" alt=""></div>`).join("")+`</div>`;}
+ out+=`</div>`;return out;
+}
+function bindGallery(p){
+ $$("[data-img]").forEach(g=>g.onclick=()=>openLightbox(p.images,+g.dataset.img));
+}
+function videoEmbed(v){
+ if(/youtu/.test(v)){const id=(v.match(/(?:v=|be\/|embed\/)([\w-]{11})/)||[])[1];return `<iframe src="https://www.youtube.com/embed/${id}" allowfullscreen loading="lazy"></iframe>`;}
+ if(/vimeo/.test(v)){const id=(v.match(/vimeo\.com\/(\d+)/)||[])[1];return `<iframe src="https://player.vimeo.com/video/${id}" allowfullscreen loading="lazy"></iframe>`;}
+ return `<video src="${v}" controls playsinline></video>`;
+}
+
+/* ============================ COLLECTIONS ============================ */
+function renderCollections(){
+ app.innerHTML=`<div style="height:58px"></div>
+ <div class="wrap section">
+   <div class="eyebrow reveal">Curated</div>
+   <h2 class="section-title reveal" style="margin:10px 0 34px">${t("collections")}</h2>
+   <div class="grid two">
+   ${DB.collections.map(c=>`<a class="card" href="#/collection/${c.slug}" data-nav>
+     <div class="card-media"><img loading="lazy" src="${c.cover||(projById(c.projectIds[0])?.hero)||IMG(c.slug)}" alt=""></div>
+     <div class="card-body"><div class="card-title">${L(c.title)}</div>
+     <div class="card-meta"><span>${(c.projectIds||[]).length} Projects</span></div></div></a>`).join("")}
+   </div>
+ </div>${footer()}`;
+ bindNav();observeReveal();
+}
+function renderCollection(slug){
+ const c=DB.collections.find(x=>x.slug===slug);
+ if(!c){app.innerHTML=`<div style="height:120px"></div><div class="empty">Collection not found</div>${footer()}`;bindNav();return;}
+ const ps=(c.projectIds||[]).map(projById).filter(p=>p&&p.published);const favs=getFavs();
+ app.innerHTML=`<div style="height:58px"></div>
+ <div class="wrap section" style="padding-bottom:20px">
+   <a class="backlink" href="#/collections" data-nav>← ${t("collections")}</a>
+   <h2 class="section-title reveal" style="margin:20px 0 8px;font-size:clamp(28px,5vw,52px)">${L(c.title)}</h2>
+   ${c.intro?`<p class="reveal" style="max-width:640px;color:var(--grey-1);font-size:17px">${L(c.intro)}</p>`:""}
+   <div class="d-actions" style="margin-top:18px"><button id="colShare">↗ Copy share link</button></div>
+ </div>
+ <div class="wrap"><div class="grid two">${ps.map(p=>cardHTML(p,favs)).join("")||`<div class="empty">No projects yet</div>`}</div></div>
+ ${footer()}`;
+ bindNav();bindCards();observeReveal();
+ $("#colShare").onclick=()=>{copy(location.href);toast("Collection link copied");};
+}
+
+/* ============================ MAP ============================ */
+let mapObj;
+function renderMap(){
+ app.innerHTML=`<div style="height:58px"></div>
+ <div class="wrap section" style="padding-bottom:24px">
+   <div class="eyebrow reveal">Geography of Work</div>
+   <h2 class="section-title reveal" style="margin:10px 0 6px">${t("map")}</h2>
+   <p class="reveal" style="color:var(--grey-1);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase">Tap a marker to open the project</p>
+ </div>
+ <div class="wrap"><div id="map"></div></div>${footer()}`;
+ bindNav();observeReveal();
+ setTimeout(()=>{
+   const pts=pubProjects().filter(p=>p.lat&&p.lng);
+   mapObj=L.map("map",{scrollWheelZoom:false}).setView([23.7,90.4],7);
+   L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png",{attribution:"© OpenStreetMap © CARTO",maxZoom:18}).addTo(mapObj);
+   const grp=[];
+   pts.forEach(p=>{
+     const ic=L.divIcon({className:"",html:`<div style="width:12px;height:12px;background:#0b0b0b;border:2px solid #fff;box-shadow:0 0 0 1px #0b0b0b"></div>`,iconSize:[12,12]});
+     const m=L.marker([p.lat,p.lng],{icon:ic}).addTo(mapObj);
+     m.bindPopup(`<div class="mp-pop"><img src="${p.hero}"><div class="mp-b"><div class="mp-t">${L(p.title)}</div><div class="mp-m">${L(p.category[0])} · ${p.year||""}</div><a class="mp-m" style="color:#000;text-decoration:underline;display:inline-block;margin-top:6px" href="#/project/${p.slug}">Open project →</a></div></div>`);
+     grp.push([p.lat,p.lng]);
+   });
+   if(grp.length)mapObj.fitBounds(grp,{padding:[50,50],maxZoom:9});
+   mapObj.on("popupopen",()=>{$$("#map a[href^='#/']").forEach(a=>a.onclick=e=>{e.preventDefault();go(a.getAttribute("href").slice(1));});});
+ },60);
+}
+
+/* ============================ RESEARCH ============================ */
+function renderResearch(){
+ const pubs=DB.about.publications||[];
+ app.innerHTML=`<div style="height:58px"></div>
+ <div class="wrap section">
+   <div class="eyebrow reveal">Research · Urban Design · Climate · Heritage</div>
+   <h2 class="section-title reveal" style="margin:10px 0 34px">${t("research")}</h2>
+   <div class="indexlist">
+   ${pubs.map((pb,i)=>`<div class="index-row" ${pb.url?`data-url="${pb.url}"`:""} style="align-items:start">
+     <div class="index-no">${String(i+1).padStart(2,"0")}</div>
+     <div><div class="index-t" style="font-size:clamp(17px,2.4vw,24px)">${L(pb.title)}</div>
+       ${pb.abstract?`<p style="color:var(--grey-1);font-size:15px;margin-top:8px;max-width:64ch">${L(pb.abstract)}</p>`:""}
+       ${pb.keywords?`<div class="index-sub" style="margin-top:8px">${pb.keywords}</div>`:""}</div>
+     <div class="index-year">${pb.year||""}</div></div>`).join("")||`<div class="empty">No publications yet</div>`}
+   </div>
+ </div>${footer()}`;
+ bindNav();observeReveal();
+ $$(".index-row[data-url]").forEach(r=>r.onclick=()=>window.open(r.dataset.url,"_blank"));
+}
+
+/* ============================ ABOUT ============================ */
+function renderAbout(){
+ const a=DB.about;
+ app.innerHTML=`<div style="height:58px"></div>
+ <div class="wrap about-hero">
+   <div class="eyebrow reveal">${L(a.tagline)}</div>
+   <h1 class="about-name reveal" style="margin-top:14px">${L(a.name)}</h1>
+ </div>
+ <div class="wrap">
+   <div class="about-cols">
+     <div class="about-portrait reveal"><img src="${a.portrait}" alt="${L(a.name)}"></div>
+     <div>
+       <div class="about-block reveal"><h3>Biography</h3>${String(L(a.bio)).split(/\n+/).map(x=>`<p>${x}</p>`).join("")}</div>
+       <div class="about-block reveal"><h3>Architectural Philosophy</h3>${String(L(a.philosophy)).split(/\n+/).map(x=>`<p>${x}</p>`).join("")}</div>
+     </div>
+   </div>
+ </div>
+ <div class="wrap section">
+   <div class="section-head reveal"><h2 class="section-title">${t("timeline")}</h2></div>
+   <div class="tl reveal">${(a.timeline||[]).map(r=>`<div class="tl-row"><div class="tl-year">${r.year}</div><div class="tl-txt">${L(r.txt)}</div></div>`).join("")}</div>
+ </div>
+ <div class="wrap section" style="padding-top:0">
+   <div class="section-head reveal"><h2 class="section-title">${t("expertise")}</h2></div>
+   <div class="exp-grid reveal">${(a.expertise||[]).map((e,i)=>`<div class="exp-item"><span>${String(i+1).padStart(2,"0")}</span>${e}</div>`).join("")}</div>
+ </div>${footer()}`;
+ bindNav();observeReveal();
+}
+
+/* ============================ CONTACT ============================ */
+function renderContact(){
+ const c=DB.settings.contact||{};
+ app.innerHTML=`<div style="height:58px"></div>
+ <div class="wrap section">
+   <div class="eyebrow reveal">Let's build something considered</div>
+   <h2 class="section-title reveal" style="margin:10px 0 34px;font-size:clamp(30px,6vw,58px)">${t("contact")}</h2>
+   <div class="contact-grid">
+     <a class="contact-item reveal" href="mailto:${c.email||""}"><div class="ci-k">Email</div><div class="ci-v">${c.email||"—"}</div></a>
+     <a class="contact-item reveal" href="https://wa.me/${(c.whatsapp||"").replace(/\D/g,"")}" target="_blank"><div class="ci-k">WhatsApp</div><div class="ci-v">Message the studio</div></a>
+     <a class="contact-item reveal" href="tel:${c.phone||""}"><div class="ci-k">Call</div><div class="ci-v">${c.phone||"—"}</div></a>
+     <div class="contact-item reveal"><div class="ci-k">Office</div><div class="ci-v" style="font-size:18px">${c.address||"—"}</div></div>
+     <a class="contact-item reveal" href="https://${c.web||""}" target="_blank"><div class="ci-k">Studio</div><div class="ci-v">${c.web||"—"}</div></a>
+     <a class="contact-item reveal" href="mailto:${c.email||""}?subject=Start%20a%20Project"><div class="ci-k">Enquiry</div><div class="ci-v">${t("startProject")} →</div></a>
+   </div>
+ </div>${footer()}`;
+ bindNav();observeReveal();
+}
+
+/* ============================ BLOG ============================ */
+function fmtDate(d){if(!d)return"";try{return new Date(d+"T00:00:00").toLocaleDateString("en-US",{year:"numeric",month:"short",day:"numeric"});}catch(e){return d;}}
+function pubPosts(){return (DB.posts||[]).filter(p=>p.published).sort((a,b)=>(b.date||"").localeCompare(a.date||""));}
+function renderBlog(){
+ const posts=pubPosts();
+ app.innerHTML=`<div style="height:58px"></div>
+ <div class="wrap section">
+   <div class="eyebrow reveal">Journal</div>
+   <h2 class="section-title reveal" style="margin:10px 0 34px">Blog</h2>
+   <div class="grid two">
+   ${posts.length?posts.map(p=>`<a class="card" href="#/post/${p.slug}" data-nav>
+     <div class="card-media"><img loading="lazy" src="${p.cover||IMG(p.slug)}" alt="${L(p.title)}"></div>
+     <div class="card-body">
+       <div class="card-meta" style="margin-bottom:6px">${fmtDate(p.date)}</div>
+       <div class="card-title">${L(p.title)}</div>
+       ${p.excerpt?`<p style="margin-top:8px;color:var(--grey-1);font-size:14px;line-height:1.5">${L(p.excerpt)}</p>`:""}
+     </div></a>`).join(""):`<div class="empty">No posts yet</div>`}
+   </div>
+ </div>${footer()}`;
+ bindNav();observeReveal();
+}
+function renderBlogPost(slug){
+ const p=(DB.posts||[]).find(x=>x.slug===slug);
+ if(!p){app.innerHTML=`<div style="height:120px"></div><div class="empty">Post not found</div>${footer()}`;bindNav();return;}
+ const gallery=(p.images||[]).filter(g=>g.url);
+ app.innerHTML=`
+ <div class="d-hero"><img src="${p.cover||""}" alt="${L(p.title)}">
+   <div class="d-hero-cap"><div class="d-cat">Blog · ${fmtDate(p.date)}</div><h1 class="d-title">${L(p.title)}</h1></div>
+ </div>
+ <div class="backbar"><a class="backlink" href="#/blog" data-nav>← Blog</a></div>
+ <div class="wrap d-body section">
+   ${p.excerpt?`<p class="d-intro">${L(p.excerpt)}</p>`:""}
+   ${String(L(p.body)||"").split(/\n+/).filter(Boolean).map(x=>`<p style="margin-bottom:16px;color:var(--ink-2);font-size:16px;line-height:1.7">${x}</p>`).join("")}
+ </div>
+ ${gallery.length?`<div class="wrap gallery">
+   <div class="g-two">${gallery.map((g,i)=>`<div class="gi" data-lb="${i}"><img loading="lazy" src="${g.url}" alt="${g.caption||""}">${g.caption?`<div class="gi-cap">${g.caption}</div>`:""}</div>`).join("")}</div>
+ </div>`:""}
+ ${footer()}`;
+ bindNav();observeReveal();
+ $$("[data-lb]").forEach(el=>el.onclick=()=>openLightbox(gallery.map(g=>({url:g.url,caption:g.caption})),+el.dataset.lb));
+}
+
+/* ============================ SAVED ============================ */
+function renderSaved(){
+ const favs=getFavs();const ps=favs.map(projById).filter(Boolean);
+ app.innerHTML=`<div style="height:58px"></div>
+ <div class="wrap section">
+   <div class="eyebrow reveal">Stored on this device</div>
+   <h2 class="section-title reveal" style="margin:10px 0 34px">${t("saved")}</h2>
+   ${ps.length?`<div class="grid two">${ps.map(p=>cardHTML(p,favs)).join("")}</div>`:`<div class="empty">No saved projects yet — tap ♡ on any project</div>`}
+ </div>${footer()}`;
+ bindNav();bindCards();observeReveal();
+}
+
+/* ============================ FOOTER ============================ */
+function footer(){
+ const c=DB.settings.contact||{};
+ return `<footer class="foot"><div class="wrap">
+   <div class="foot-top">
+     <div class="foot-name">${L(DB.about.name)}</div>
+     <div class="foot-links">
+       <a href="#/projects" data-nav>Projects</a><a href="#/collections" data-nav>Collections</a>
+       <a href="#/explore" data-nav>Map</a><a href="#/research" data-nav>Research</a>
+       <a href="#/blog" data-nav>Blog</a>
+       <a href="#/about" data-nav>About</a><a href="#/contact" data-nav>Contact</a>
+       <a href="#/admin" id="footAdmin">Admin</a>
+     </div>
+   </div>
+   <div class="foot-bottom"><span>© ${new Date().getFullYear()} ${L(DB.about.name)} · ${c.web||""}</span><span class="mono">Selected Works · Digital Monograph</span></div>
+ </div></footer>`;
+}
+
+/* ============================ LIGHTBOX ============================ */
+let lb={items:[],i:0,zoom:1,x:0,y:0};
+function openLightbox(items,i){
+ lb.items=items||[];lb.i=i||0;lb.zoom=1;lb.x=0;lb.y=0;
+ $("#lightbox").classList.add("open");document.body.style.overflow="hidden";lbShow();
+}
+function lbShow(){
+ const it=lb.items[lb.i]||{};
+ $("#lbImg").src=it.url;lb.zoom=1;lb.x=0;lb.y=0;applyLbTransform();
+ $("#lbCount").textContent=`${String(lb.i+1).padStart(2,"0")} / ${String(lb.items.length).padStart(2,"0")}`;
+ $("#lbCap").textContent=[it.caption,it.credit].filter(Boolean).join(" — ");
+}
+function applyLbTransform(){$("#lbImg").style.transform=`translate(${lb.x}px,${lb.y}px) scale(${lb.zoom})`;$("#lbImg").style.cursor=lb.zoom>1?"grab":"default";}
+function lbNext(d){lb.i=(lb.i+d+lb.items.length)%lb.items.length;lbShow();}
+function closeLb(){$("#lightbox").classList.remove("open");document.body.style.overflow="";}
+$("#lbClose").onclick=closeLb;$("#lbPrev").onclick=()=>lbNext(-1);$("#lbNext").onclick=()=>lbNext(1);
+$("#lbZoom").onclick=()=>{lb.zoom=lb.zoom>1?1:2.2;lb.x=0;lb.y=0;applyLbTransform();};
+// zoom & drag & swipe
+(function(){const st=$("#lbStage");let sx,sy,drag=false,px,py,pinch=0;
+ st.addEventListener("dblclick",e=>{lb.zoom=lb.zoom>1?1:2.4;lb.x=0;lb.y=0;applyLbTransform();});
+ st.addEventListener("pointerdown",e=>{if(lb.zoom>1){drag=true;px=e.clientX-lb.x;py=e.clientY-lb.y;}sx=e.clientX;sy=e.clientY;});
+ st.addEventListener("pointermove",e=>{if(drag){lb.x=e.clientX-px;lb.y=e.clientY-py;applyLbTransform();}});
+ st.addEventListener("pointerup",e=>{if(!drag){const dx=e.clientX-sx;if(Math.abs(dx)>60&&lb.zoom<=1)lbNext(dx<0?1:-1);}drag=false;});
+ st.addEventListener("wheel",e=>{if(e.ctrlKey||lb.zoom>1){e.preventDefault();lb.zoom=Math.min(4,Math.max(1,lb.zoom-e.deltaY*0.002));if(lb.zoom===1){lb.x=0;lb.y=0;}applyLbTransform();}},{passive:false});
+})();
+
+/* ============================ PRESENTATION MODE ============================ */
+let pr={slides:[],i:0,auto:null};
+function openPresent(p){
+ const im=[{url:p.hero,caption:L(p.title),sub:p.location+" · "+p.year},...(p.images||[]).map(g=>({url:g.url,caption:g.caption,sub:""})),...(p.drawings||[]).map(d=>({url:d.url,caption:d.type,sub:""}))];
+ pr.slides=im;pr.i=0;
+ $("#prSlides").innerHTML=im.map((s,i)=>`<div class="pr-slide ${i===0?"active":""}"><img src="${s.url}" alt=""><div class="pr-cap"><div class="pr-t">${s.caption||""}</div><div class="feat-meta">${s.sub||""}</div></div></div>`).join("");
+ $("#prDots").innerHTML=im.map((s,i)=>`<div class="pr-dot ${i===0?"on":""}"></div>`).join("");
+ $("#present").classList.add("open");document.body.style.overflow="hidden";
+}
+function prShow(i){pr.i=(i+pr.slides.length)%pr.slides.length;$$("#prSlides .pr-slide").forEach((s,j)=>s.classList.toggle("active",j===pr.i));$$("#prDots .pr-dot").forEach((d,j)=>d.classList.toggle("on",j===pr.i));}
+$("#prNext").onclick=()=>prShow(pr.i+1);$("#prPrev").onclick=()=>prShow(pr.i-1);
+$("#prExit").onclick=()=>{$("#present").classList.remove("open");document.body.style.overflow="";clearInterval(pr.auto);pr.auto=null;$("#prAuto").textContent="Auto";};
+$("#prAuto").onclick=()=>{if(pr.auto){clearInterval(pr.auto);pr.auto=null;$("#prAuto").textContent="Auto";}else{pr.auto=setInterval(()=>prShow(pr.i+1),3500);$("#prAuto").textContent="Pause";}};
+$("#prFull").onclick=()=>{const e=$("#present");if(!document.fullscreenElement)e.requestFullscreen?.();else document.exitFullscreen?.();};
+
+/* ============================ SEARCH ============================ */
+function openSearch(){$("#search").classList.add("open");document.body.style.overflow="hidden";setTimeout(()=>$("#searchInput").focus(),80);}
+function closeSearch(){$("#search").classList.remove("open");document.body.style.overflow="";$("#searchInput").value="";$("#searchResults").innerHTML="";}
+$("#openSearch").onclick=openSearch;$("#closeSearch").onclick=closeSearch;
+$("#searchInput").addEventListener("input",e=>{
+ const q=e.target.value.trim().toLowerCase();
+ if(!q){$("#searchResults").innerHTML="";return;}
+ const res=pubProjects().filter(p=>{
+   const hay=[L(p.title),p.location,p.facts?.client,L(p.oneLiner),L(p.intro),p.year,...(p.category||[]),...(p.sustainability||[]),...(p.sections||[]).map(s=>L(s.body))].join(" ").toLowerCase();
+   return q.split(/\s+/).every(w=>hay.includes(w));
+ });
+ $("#searchResults").innerHTML=res.length?`<div class="indexlist">${res.map((p,i)=>`<div class="index-row" data-slug="${p.slug}"><div class="index-no">${String(i+1).padStart(2,"0")}</div><div><div class="index-t" style="font-size:20px">${L(p.title)}</div><div class="index-sub">${L(p.category[0])} · ${p.location} · ${p.year||""}</div></div></div>`).join("")}</div>`:`<div class="empty">No matches for "${e.target.value}"</div>`;
+ $$("#searchResults .index-row").forEach(r=>r.onclick=()=>{closeSearch();go("/project/"+r.dataset.slug);});
+});
+
+/* ============================ SHARE ============================ */
+function copy(txt){navigator.clipboard?.writeText(txt).catch(()=>{});}
+function shareProject(p){
+ const url=location.origin+location.pathname+"#/project/"+p.slug;
+ const title=L(p.title)+" — Kamanashish Barua";
+ if(navigator.share){navigator.share({title,url}).catch(()=>{});return;}
+ const menu=`Copy Link|WhatsApp|Email|LinkedIn`;
+ // simple share sheet
+ const sheet=document.createElement("div");sheet.style.cssText="position:fixed;inset:0;z-index:150;background:rgba(0,0,0,.5);display:grid;place-items:end center";
+ sheet.innerHTML=`<div style="background:#fff;width:100%;max-width:520px;padding:20px var(--pad) 30px">
+   <div class="eyebrow" style="margin-bottom:14px">Share Project</div>
+   <div style="display:grid;gap:8px">
+     <button class="btn btn-dark" data-s="copy">Copy Link</button>
+     <a class="btn btn-dark" href="https://wa.me/?text=${encodeURIComponent(title+" "+url)}" target="_blank">WhatsApp</a>
+     <a class="btn btn-dark" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}" target="_blank">LinkedIn</a>
+     <a class="btn btn-dark" href="mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(url)}">Email</a>
+     <button class="btn" data-s="close" style="border-color:var(--line-2);color:var(--grey-1)">Close</button>
+   </div></div>`;
+ document.body.appendChild(sheet);
+ sheet.querySelector("[data-s=copy]").onclick=()=>{copy(url);toast("Link copied");sheet.remove();};
+ sheet.querySelector("[data-s=close]").onclick=()=>sheet.remove();
+ sheet.onclick=e=>{if(e.target===sheet)sheet.remove();};
+}
+
+/* ============================ NAV / MENU / LANG ============================ */
+function bindNav(){
+ $$("[data-nav]").forEach(a=>{a.onclick=e=>{const href=a.getAttribute("href");if(href&&href.startsWith("#")){/* hash handled by router */ closeMenu();}};});
+ const fa=$("#footAdmin");if(fa)fa.onclick=e=>{e.preventDefault();openAdmin();};
+}
+function closeMenu(){$("#menu").classList.remove("open");document.body.style.overflow="";}
+$("#openMenu").onclick=()=>{$("#menu").classList.add("open");document.body.style.overflow="hidden";};
+$("#closeMenu").onclick=closeMenu;
+$("#langToggle").onclick=()=>{const nl=lang()==="en"?"bn":"en";document.documentElement.setAttribute("data-lang",nl);$("#langToggle").textContent=nl==="en"?"বাংলা":"EN";localStorage.setItem("kb_lang",nl);route();};
+
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"){closeLb();closeSearch();closeMenu();$("#prExit").click?.();}
+ if($("#lightbox").classList.contains("open")){if(e.key==="ArrowRight")lbNext(1);if(e.key==="ArrowLeft")lbNext(-1);}
+ if($("#present").classList.contains("open")){if(e.key==="ArrowRight")prShow(pr.i+1);if(e.key==="ArrowLeft")prShow(pr.i-1);}
+});
+
+/* ============================ ADMIN / CMS ============================ */
+let ADM={authed:false,tab:"projects",editing:null,editingPost:null};
+const adm=$("#admin");
+function openAdmin(){adm.classList.add("open");document.body.style.overflow="hidden";ADM.authed=sessionStorage.getItem("kb_admin")==="1";renderAdmin();}
+function closeAdmin(){adm.classList.remove("open");document.body.style.overflow="";if(location.hash==="#/admin")go("/");}
+function renderAdmin(){
+ if(!ADM.authed){adm.innerHTML=adminLogin();$("#admPinBtn").onclick=tryLogin;$("#admPin").onkeydown=e=>{if(e.key==="Enter")tryLogin();};$("#admExit0").onclick=closeAdmin;setTimeout(()=>$("#admPin").focus(),60);return;}
+ adm.innerHTML=`
+ <div class="adm-bar"><div><span class="brand-name">CONTROL ROOM</span><div class="adm-sub">Portfolio CMS · no code required</div></div>
+   <div style="display:flex;gap:6px"><button class="adm-tab" id="admView">View Site ↗</button><button class="adm-tab" id="admLogout">Lock</button></div></div>
+ <div class="adm-tabs">
+   ${["projects","blog","collections","about","homepage","backup"].map(x=>`<button class="adm-tab ${ADM.tab===x?"active":""}" data-tab="${x}">${x}</button>`).join("")}
+ </div>
+ <div class="adm-body" id="admBody"></div>`;
+ $("#admView").onclick=closeAdmin;
+ $("#admLogout").onclick=()=>{sessionStorage.removeItem("kb_admin");ADM.authed=false;renderAdmin();};
+ $$("[data-tab]").forEach(b=>b.onclick=()=>{ADM.tab=b.dataset.tab;ADM.editing=null;ADM.editingPost=null;renderAdmin();});
+ const body=$("#admBody");
+ if(ADM.tab==="projects")body.innerHTML=ADM.editing?"":admProjects(),ADM.editing?admEditor(body):bindAdmProjects();
+ else if(ADM.tab==="blog")body.innerHTML=ADM.editingPost?"":admBlog(),ADM.editingPost?admBlogEditor(body):bindAdmBlog();
+ else if(ADM.tab==="collections")admCollections(body);
+ else if(ADM.tab==="about")admAbout(body);
+ else if(ADM.tab==="homepage")admHome(body);
+ else if(ADM.tab==="backup")admBackup(body);
+}
+function adminLogin(){
+ return `<div class="adm-bar"><span class="brand-name">CONTROL ROOM</span><button class="adm-tab" id="admExit0">Close ✕</button></div>
+ <div class="adm-login">
+   <h2 class="adm-h" style="text-align:center">Admin access</h2>
+   <p class="adm-note" style="text-align:center">Enter your passcode to manage the portfolio.</p>
+   <div class="field"><input id="admPin" type="password" placeholder="Passcode" style="text-align:center"></div>
+   <button class="adm-primary" id="admPinBtn" style="width:100%">Unlock</button>
+   <p class="field-hint" style="margin-top:14px">Default passcode: <b>archcell</b> — change it under Homepage → Settings. Client-side gate only; for a public deployment use real server auth.</p>
+ </div>`;
+}
+function tryLogin(){const v=$("#admPin").value;if(v===(DB.settings.pin||"archcell")){ADM.authed=true;sessionStorage.setItem("kb_admin","1");renderAdmin();}else{toast("Wrong passcode");}}
+
+/* ---- Projects list ---- */
+function admProjects(){
+ const ps=[...DB.projects].sort((a,b)=>(a.order||0)-(b.order||0));
+ return `<div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap">
+   <div><div class="adm-h">Projects</div><div class="adm-note">Drag ⠿ to reorder (or use ↑ ↓) — controls home & archive order. Toggle Featured / Publish. Edit opens the full case-study editor.</div></div>
+   <button class="adm-primary" id="admNew">+ New Project</button></div>
+ <div class="adm-list">${ps.map((p,i)=>`
+   <div class="adm-item" data-id="${p.id}">
+     <span class="adm-drag" data-drag draggable="true" title="Drag to reorder">⠿</span>
+     <img class="adm-thumb" src="${p.hero||""}" alt="">
+     <div><div class="adm-it-t">${L(p.title)||"Untitled"}</div>
+       <div class="adm-it-m"><span class="badge ${p.featured?"on":""}">${p.featured?"★ Featured":"Feature"}</span><span class="badge ${p.published?"on":""}">${p.published?"Published":"Draft"}</span> ${p.location||""} · ${p.year||""}</div></div>
+     <div class="adm-ctrls">
+       <button data-up>↑</button><button data-down>↓</button>
+       <button data-feat>${p.featured?"Unfeature":"Feature"}</button>
+       <button data-pub>${p.published?"Unpublish":"Publish"}</button>
+       <button data-edit>Edit</button><button data-dup>Duplicate</button>
+       <button class="adm-danger" data-del>Delete</button>
+     </div></div>`).join("")}</div>`;
+}
+function bindAdmProjects(){
+ $("#admNew").onclick=()=>{const p={id:uid(),slug:"new-project-"+uid().slice(0,4),title:{en:"New Project",bn:""},category:["Residential"],location:"",year:new Date().getFullYear(),status:"",clientType:"",oneLiner:{en:"",bn:""},intro:{en:"",bn:""},hero:"",facts:{architect:"Kamanashish Barua"},sections:[],images:[],drawings:[],sustainability:[],video:"",lat:null,lng:null,featured:false,published:false,order:DB.projects.length};DB.projects.push(p);save();ADM.editing=p.id;renderAdmin();};
+ const ps=[...DB.projects].sort((a,b)=>(a.order||0)-(b.order||0));
+ let dragId=null;
+ $$(".adm-item").forEach(row=>{
+   const id=row.dataset.id;const p=projById(id);
+   const idx=ps.findIndex(x=>x.id===id);
+   row.querySelector("[data-up]").onclick=()=>reorder(id,-1);
+   row.querySelector("[data-down]").onclick=()=>reorder(id,1);
+   row.querySelector("[data-feat]").onclick=()=>{p.featured=!p.featured;save();renderAdmin();};
+   row.querySelector("[data-pub]").onclick=()=>{p.published=!p.published;save();renderAdmin();};
+   row.querySelector("[data-edit]").onclick=()=>{ADM.editing=id;renderAdmin();};
+   row.querySelector("[data-dup]").onclick=()=>{const c=JSON.parse(JSON.stringify(p));c.id=uid();c.slug=p.slug+"-copy";c.title={en:L(p.title)+" (copy)",bn:p.title.bn||""};c.published=false;c.order=DB.projects.length;DB.projects.push(c);save();renderAdmin();};
+   row.querySelector("[data-del]").onclick=()=>{if(confirm("Delete this project permanently?")){DB.projects=DB.projects.filter(x=>x.id!==id);save();renderAdmin();}};
+   const handle=row.querySelector("[data-drag]");
+   handle.addEventListener("dragstart",e=>{dragId=id;row.classList.add("dragging");e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",id);});
+   handle.addEventListener("dragend",()=>{row.classList.remove("dragging");$$(".adm-item").forEach(r=>r.classList.remove("drag-over"));});
+   row.addEventListener("dragover",e=>{if(!dragId||dragId===id)return;e.preventDefault();e.dataTransfer.dropEffect="move";row.classList.add("drag-over");});
+   row.addEventListener("dragleave",()=>row.classList.remove("drag-over"));
+   row.addEventListener("drop",e=>{e.preventDefault();row.classList.remove("drag-over");if(!dragId||dragId===id)return;reorderDrag(dragId,id);dragId=null;});
+ });
+}
+function reorder(id,dir){
+ const ps=[...DB.projects].sort((a,b)=>(a.order||0)-(b.order||0));
+ const i=ps.findIndex(x=>x.id===id);const j=i+dir;if(j<0||j>=ps.length)return;
+ [ps[i].order,ps[j].order]=[ps[j].order,ps[i].order];save();renderAdmin();
+}
+function reorderDrag(fromId,toId){
+ const ps=[...DB.projects].sort((a,b)=>(a.order||0)-(b.order||0));
+ const from=ps.findIndex(x=>x.id===fromId);const to=ps.findIndex(x=>x.id===toId);
+ if(from<0||to<0)return;
+ const [moved]=ps.splice(from,1);ps.splice(to,0,moved);
+ ps.forEach((p,i)=>p.order=i);
+ save();renderAdmin();
+}
+
+/* ---- Project editor ---- */
+function admEditor(body){
+ const p=projById(ADM.editing);if(!p){ADM.editing=null;return renderAdmin();}
+ const cats=allCats();
+ body.innerHTML=`
+ <button class="adm-tab" id="admBack" style="margin-bottom:16px">← Back to projects</button>
+ <div class="adm-h">${L(p.title)||"Edit project"}</div>
+ <div class="adm-note">Bilingual fields show EN / বাংলা. Bengali is optional — English is used as fallback.</div>
+
+ <div class="field-row">
+   <div class="field"><label>Title — English</label><input data-f="title.en" value="${esc(p.title?.en)}"></div>
+   <div class="field"><label>শিরোনাম — বাংলা</label><input data-f="title.bn" value="${esc(p.title?.bn)}"></div>
+ </div>
+ <div class="field-row">
+   <div class="field"><label>URL slug</label><input data-f="slug" value="${esc(p.slug)}"></div>
+   <div class="field"><label>Year</label><input data-f="year" value="${esc(p.year)}"></div>
+ </div>
+ <div class="field-row">
+   <div class="field"><label>Location</label><input data-f="location" value="${esc(p.location)}"></div>
+   <div class="field"><label>Status</label><input data-f="status" value="${esc(p.status)}"></div>
+ </div>
+ <div class="field-row">
+   <div class="field"><label>Latitude (map)</label><input data-f="lat" value="${esc(p.lat)}"></div>
+   <div class="field"><label>Longitude (map)</label><input data-f="lng" value="${esc(p.lng)}"></div>
+ </div>
+ <div class="field"><label>Categories</label><div class="catbox">${cats.map(c=>`<button class="chip ${p.category.includes(c)?"active":""}" data-cat="${esc(c)}">${c}</button>`).join("")}</div></div>
+ <div class="field-row">
+   <div class="field"><label>One-line idea — EN</label><input data-f="oneLiner.en" value="${esc(p.oneLiner?.en)}"></div>
+   <div class="field"><label>এক লাইনের ধারণা — BN</label><input data-f="oneLiner.bn" value="${esc(p.oneLiner?.bn)}"></div>
+ </div>
+ <div class="field"><label>Introduction — EN (80–150 words)</label><textarea data-f="intro.en">${esc(p.intro?.en)}</textarea></div>
+ <div class="field"><label>সারসংক্ষেপ — BN</label><textarea data-f="intro.bn">${esc(p.intro?.bn)}</textarea></div>
+
+ <div class="field"><label>Hero image (URL or upload)</label><input data-f="hero" value="${esc(p.hero)}" placeholder="https://…">
+   <div class="field-hint">or <label style="display:inline;text-transform:none;letter-spacing:0;color:#000;text-decoration:underline;cursor:pointer">upload file<input type="file" accept="image/*" id="heroUp" class="hide"></label> (stored in-browser as data URL)</div></div>
+
+ <div class="adm-h" style="font-size:18px;margin:22px 0 8px">Facts / Title block</div>
+ <div class="field-row">${FACTS.map(([k,en])=>`<div class="field"><label>${en}</label><input data-fact="${k}" value="${esc(p.facts?.[k])}"></div>`).join("")}</div>
+
+ <div class="adm-h" style="font-size:18px;margin:22px 0 8px">Narrative sections</div>
+ <div id="secList">${(p.sections||[]).map((s,i)=>secEditor(s,i)).join("")}</div>
+ <button class="adm-tab" id="addSec">+ Add section</button>
+
+ <div class="adm-h" style="font-size:18px;margin:22px 0 8px">Image story</div>
+ <div class="field-hint" style="margin-bottom:8px">First image = large lead; next two = pair; rest = swipe strip. Paste URLs or upload.</div>
+ <div class="img-manager" id="imgMgr"></div>
+ <div style="display:flex;gap:8px;margin-top:10px"><button class="adm-tab" id="addImg">+ Add image URL</button><label class="adm-tab" style="cursor:pointer">+ Upload images<input type="file" accept="image/*" multiple id="imgUp" class="hide"></label></div>
+
+ <div class="adm-h" style="font-size:18px;margin:22px 0 8px">Drawings</div>
+ <div class="img-manager" id="drawMgr"></div>
+ <button class="adm-tab" id="addDraw" style="margin-top:10px">+ Add drawing</button>
+
+ <div class="adm-h" style="font-size:18px;margin:22px 0 8px">Sustainability tags</div>
+ <div class="catbox">${SUSTAIN.map(s=>`<button class="chip ${p.sustainability.includes(s)?"active":""}" data-sus="${esc(s)}">${s}</button>`).join("")}</div>
+
+ <div class="field" style="margin-top:18px"><label>Video (YouTube / Vimeo / MP4 URL)</label><input data-f="video" value="${esc(p.video)}"></div>
+
+ <div class="editor-actions">
+   <button class="adm-primary" id="saveProj">Save</button>
+   <label class="chk"><input type="checkbox" id="pubChk" ${p.published?"checked":""}> Published</label>
+   <label class="chk"><input type="checkbox" id="featChk" ${p.featured?"checked":""}> Featured</label>
+   <button class="adm-tab" id="previewProj">Preview ↗</button>
+ </div>`;
+ // bindings
+ $("#admBack").onclick=()=>{ADM.editing=null;renderAdmin();};
+ $$("[data-cat]",body).forEach(b=>b.onclick=()=>{b.classList.toggle("active");const c=b.dataset.cat;p.category.includes(c)?p.category=p.category.filter(x=>x!==c):p.category.push(c);});
+ $$("[data-sus]",body).forEach(b=>b.onclick=()=>{b.classList.toggle("active");const c=b.dataset.sus;p.sustainability.includes(c)?p.sustainability=p.sustainability.filter(x=>x!==c):p.sustainability.push(c);});
+ renderImgMgr(p);renderDrawMgr(p);
+ $("#addImg").onclick=()=>{p.images.push({url:"",caption:"",credit:""});renderImgMgr(p);};
+ $("#addDraw").onclick=()=>{p.drawings.push({url:"",type:"Drawing"});renderDrawMgr(p);};
+ $("#addSec").onclick=()=>{p.sections.push({title:{en:"",bn:""},body:{en:"",bn:""}});$("#secList").insertAdjacentHTML("beforeend",secEditor(p.sections[p.sections.length-1],p.sections.length-1));bindSecs(p);};
+ bindSecs(p);
+ fileToData($("#heroUp"),d=>{$("[data-f='hero']").value=d;});
+ $("#imgUp").onchange=e=>{[...e.target.files].forEach(f=>readFile(f,d=>{p.images.push({url:d,caption:"",credit:""});renderImgMgr(p);}));};
+ $("#saveProj").onclick=()=>{collectEditor(p,body);save();toast("Saved");ADM.editing=null;renderAdmin();};
+ $("#previewProj").onclick=()=>{collectEditor(p,body);save();closeAdmin();go("/project/"+p.slug);};
+}
+function secEditor(s,i){return `<div class="sec-editor" data-sec="${i}">
+   <div class="field-row"><div class="field"><label>Heading EN</label><input data-sf="title.en" value="${esc(s.title?.en)}" placeholder="Context / Concept / Climate Response…"></div>
+   <div class="field"><label>শিরোনাম BN</label><input data-sf="title.bn" value="${esc(s.title?.bn)}"></div></div>
+   <div class="field"><label>Body EN</label><textarea data-sf="body.en">${esc(s.body?.en)}</textarea></div>
+   <div class="field"><label>বিবরণ BN</label><textarea data-sf="body.bn">${esc(s.body?.bn)}</textarea></div>
+   <button class="adm-tab adm-danger" data-secdel="${i}">Remove section</button></div>`;}
+function bindSecs(p){$$("[data-secdel]").forEach(b=>b.onclick=()=>{p.sections.splice(+b.dataset.secdel,1);$("#secList").innerHTML=p.sections.map((s,i)=>secEditor(s,i)).join("");bindSecs(p);});}
+function renderImgMgr(p){const el=$("#imgMgr");el.innerHTML=p.images.map((g,i)=>`
+   <div class="img-cell"><img src="${g.url||IMG('ph'+i,300,200)}" alt="">
+     <div class="mv"><button data-imv="${i}" data-d="-1">↑</button><button data-imv="${i}" data-d="1">↓</button></div>
+     <button class="rm" data-irm="${i}">✕</button>
+     <input data-iurl="${i}" value="${esc(g.url)}" placeholder="image URL">
+     <input data-icap="${i}" value="${esc(g.caption)}" placeholder="caption">
+   </div>`).join("");
+ $$("[data-irm]",el).forEach(b=>b.onclick=()=>{p.images.splice(+b.dataset.irm,1);renderImgMgr(p);});
+ $$("[data-imv]",el).forEach(b=>b.onclick=()=>{const i=+b.dataset.imv,d=+b.dataset.d,j=i+d;if(j<0||j>=p.images.length)return;[p.images[i],p.images[j]]=[p.images[j],p.images[i]];renderImgMgr(p);});
+ $$("[data-iurl]",el).forEach(inp=>inp.oninput=()=>p.images[+inp.dataset.iurl].url=inp.value);
+ $$("[data-icap]",el).forEach(inp=>inp.oninput=()=>p.images[+inp.dataset.icap].caption=inp.value);
+}
+function renderDrawMgr(p){const el=$("#drawMgr");el.innerHTML=p.drawings.map((g,i)=>`
+   <div class="img-cell"><img src="${g.url||IMG('phd'+i,300,200)}" alt="">
+     <button class="rm" data-drm="${i}">✕</button>
+     <input data-durl="${i}" value="${esc(g.url)}" placeholder="drawing URL">
+     <input data-dtype="${i}" value="${esc(g.type)}" placeholder="type e.g. Section">
+   </div>`).join("");
+ $$("[data-drm]",el).forEach(b=>b.onclick=()=>{p.drawings.splice(+b.dataset.drm,1);renderDrawMgr(p);});
+ $$("[data-durl]",el).forEach(inp=>inp.oninput=()=>p.drawings[+inp.dataset.durl].url=inp.value);
+ $$("[data-dtype]",el).forEach(inp=>inp.oninput=()=>p.drawings[+inp.dataset.dtype].type=inp.value);
+}
+function collectEditor(p,body){
+ $$("[data-f]",body).forEach(inp=>{const path=inp.dataset.f.split(".");if(path.length===2){p[path[0]]=p[path[0]]||{};p[path[0]][path[1]]=inp.value;}else{p[path[0]]=inp.value;}});
+ p.year=p.year;p.lat=p.lat?parseFloat(p.lat):null;p.lng=p.lng?parseFloat(p.lng):null;
+ p.facts=p.facts||{};$$("[data-fact]",body).forEach(inp=>{if(inp.value)p.facts[inp.dataset.fact]=inp.value;else delete p.facts[inp.dataset.fact];});
+ $$("[data-sec]",body).forEach(sec=>{const i=+sec.dataset.sec;$$("[data-sf]",sec).forEach(inp=>{const pa=inp.dataset.sf.split(".");p.sections[i][pa[0]]=p.sections[i][pa[0]]||{};p.sections[i][pa[0]][pa[1]]=inp.value;});});
+ if(!p.slug)p.slug=slugify(L(p.title))||"project-"+uid().slice(0,4);
+ p.published=$("#pubChk").checked;p.featured=$("#featChk").checked;
+}
+
+/* ---- Collections admin ---- */
+function admCollections(body){
+ body.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:12px"><div><div class="adm-h">Collections</div><div class="adm-note">Curated groups with their own shareable URL. Reorder with ↑ ↓ — this controls the order shown on the public Collections page. Toggle which projects belong.</div></div><button class="adm-primary" id="newCol">+ New Collection</button></div>
+ ${DB.collections.map((c,i)=>`<div class="sec-editor" data-col="${c.id}">
+   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+     <span class="eyebrow">Position ${i+1} of ${DB.collections.length}</span>
+     <div class="adm-ctrls"><button data-cup ${i===0?"disabled":""}>↑</button><button data-cdown ${i===DB.collections.length-1?"disabled":""}>↓</button></div>
+   </div>
+   <div class="field-row"><div class="field"><label>Title EN</label><input data-cf="title.en" value="${esc(c.title?.en)}"></div><div class="field"><label>Slug</label><input data-cf="slug" value="${esc(c.slug)}"></div></div>
+   <div class="field"><label>Intro EN</label><textarea data-cf="intro.en">${esc(c.intro?.en)}</textarea></div>
+   <div class="field"><label>Cover URL</label><input data-cf="cover" value="${esc(c.cover)}"></div>
+   <div class="field"><label>Projects in collection</label><div class="catbox">${DB.projects.map(p=>`<button class="chip ${c.projectIds.includes(p.id)?"active":""}" data-cp="${p.id}">${L(p.title)}</button>`).join("")}</div></div>
+   <div style="display:flex;gap:8px"><button class="adm-primary" data-csave>Save</button><button class="adm-tab adm-danger" data-cdel>Delete</button><a class="adm-tab" href="#/collection/${c.slug}" onclick="closeAdmin()">View ↗</a></div>
+ </div>`).join("")}`;
+ $("#newCol").onclick=()=>{DB.collections.push({id:uid(),slug:"collection-"+uid().slice(0,4),title:{en:"New Collection",bn:""},intro:{en:"",bn:""},cover:"",projectIds:[]});save();renderAdmin();};
+ $$("[data-col]").forEach(el=>{const c=DB.collections.find(x=>x.id===el.dataset.col);
+   $$("[data-cp]",el).forEach(b=>b.onclick=()=>{b.classList.toggle("active");const id=b.dataset.cp;c.projectIds.includes(id)?c.projectIds=c.projectIds.filter(x=>x!==id):c.projectIds.push(id);});
+   el.querySelector("[data-csave]").onclick=()=>{$$("[data-cf]",el).forEach(inp=>{const pa=inp.dataset.cf.split(".");if(pa.length===2){c[pa[0]]=c[pa[0]]||{};c[pa[0]][pa[1]]=inp.value;}else c[pa[0]]=inp.value;});save();toast("Collection saved");renderAdmin();};
+   el.querySelector("[data-cdel]").onclick=()=>{if(confirm("Delete collection?")){DB.collections=DB.collections.filter(x=>x.id!==c.id);save();renderAdmin();}};
+   el.querySelector("[data-cup]").onclick=()=>moveCol(c.id,-1);
+   el.querySelector("[data-cdown]").onclick=()=>moveCol(c.id,1);
+ });
+}
+function moveCol(id,dir){
+ const i=DB.collections.findIndex(x=>x.id===id);const j=i+dir;
+ if(i<0||j<0||j>=DB.collections.length)return;
+ [DB.collections[i],DB.collections[j]]=[DB.collections[j],DB.collections[i]];
+ save();renderAdmin();
+}
+
+/* ---- Blog admin ---- */
+function admBlog(){
+ const ps=[...(DB.posts||[])].sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+ return `<div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap">
+   <div><div class="adm-h">Blog</div><div class="adm-note">Posts with pictures and text, newest first. Toggle Published to control what's live on the site.</div></div>
+   <button class="adm-primary" id="admNewPost">+ New Post</button></div>
+ <div class="adm-list">${ps.map(p=>`
+   <div class="adm-item" data-id="${p.id}" style="grid-template-columns:56px 1fr auto">
+     <img class="adm-thumb" src="${p.cover||""}" alt="">
+     <div><div class="adm-it-t">${L(p.title)||"Untitled"}</div>
+       <div class="adm-it-m"><span class="badge ${p.published?"on":""}">${p.published?"Published":"Draft"}</span> ${fmtDate(p.date)}</div></div>
+     <div class="adm-ctrls">
+       <button data-pub>${p.published?"Unpublish":"Publish"}</button>
+       <button data-edit>Edit</button>
+       <button class="adm-danger" data-del>Delete</button>
+     </div></div>`).join("")||`<div class="empty">No posts yet</div>`}</div>`;
+}
+function bindAdmBlog(){
+ $("#admNewPost").onclick=()=>{
+   if(!DB.posts)DB.posts=[];
+   const p={id:uid(),slug:"new-post-"+uid().slice(0,4),title:{en:"New Post",bn:""},date:new Date().toISOString().slice(0,10),cover:"",excerpt:{en:"",bn:""},body:{en:"",bn:""},images:[],published:false};
+   DB.posts.push(p);save();ADM.editingPost=p.id;renderAdmin();
+ };
+ $$(".adm-item").forEach(row=>{
+   const id=row.dataset.id;const p=(DB.posts||[]).find(x=>x.id===id);if(!p)return;
+   row.querySelector("[data-pub]").onclick=()=>{p.published=!p.published;save();renderAdmin();};
+   row.querySelector("[data-edit]").onclick=()=>{ADM.editingPost=id;renderAdmin();};
+   row.querySelector("[data-del]").onclick=()=>{if(confirm("Delete this post permanently?")){DB.posts=DB.posts.filter(x=>x.id!==id);save();renderAdmin();}};
+ });
+}
+function admBlogEditor(body){
+ const p=(DB.posts||[]).find(x=>x.id===ADM.editingPost);
+ if(!p){ADM.editingPost=null;return renderAdmin();}
+ body.innerHTML=`
+ <button class="adm-tab" id="admBackPost" style="margin-bottom:16px">← Back to posts</button>
+ <div class="adm-h">${L(p.title)||"Edit post"}</div>
+ <div class="field-row">
+   <div class="field"><label>Title — English</label><input id="pf-title-en" value="${esc(p.title?.en)}"></div>
+   <div class="field"><label>শিরোনাম — বাংলা</label><input id="pf-title-bn" value="${esc(p.title?.bn)}"></div>
+ </div>
+ <div class="field-row">
+   <div class="field"><label>URL slug</label><input id="pf-slug" value="${esc(p.slug)}"></div>
+   <div class="field"><label>Date</label><input id="pf-date" type="date" value="${esc(p.date)}"></div>
+ </div>
+ <div class="field"><label>Cover image</label>
+   <div style="display:flex;gap:14px;align-items:flex-start">
+     <img id="pf-cover-preview" src="${esc(p.cover)}" alt="" style="width:120px;height:80px;object-fit:cover;background:var(--paper);border:1px solid var(--line);flex:0 0 auto">
+     <div style="flex:1;min-width:200px">
+       <input id="pf-cover" value="${esc(p.cover)}" placeholder="Image URL">
+       <label class="adm-tab" style="cursor:pointer;display:inline-block;margin-top:8px">+ Upload from computer<input type="file" accept="image/*" id="pf-coverUp" class="hide"></label>
+     </div>
+   </div>
+ </div>
+ <div class="field"><label>Excerpt EN (short summary shown in the listing)</label><textarea id="pf-excerpt">${esc(p.excerpt?.en)}</textarea></div>
+ <div class="field"><label>Body EN (one paragraph per line)</label><textarea id="pf-body" style="min-height:220px">${esc(p.body?.en)}</textarea></div>
+ <div class="adm-h" style="font-size:18px;margin:22px 0 8px">Photos</div>
+ <div class="field-hint" style="margin-bottom:8px">Shown as a gallery below the post text.</div>
+ <div class="img-manager" id="postImgMgr"></div>
+ <div style="display:flex;gap:8px;margin-top:10px"><button class="adm-tab" id="pfAddImg">+ Add image URL</button><label class="adm-tab" style="cursor:pointer">+ Upload images<input type="file" accept="image/*" multiple id="pfImgUp" class="hide"></label></div>
+ <div class="editor-actions">
+   <button class="adm-primary" id="savePost">Save</button>
+   <label class="chk"><input type="checkbox" id="pubPostChk" ${p.published?"checked":""}> Published</label>
+   <button class="adm-tab" id="previewPost">Preview ↗</button>
+ </div>`;
+ renderPostImgMgr(p);
+ $("#admBackPost").onclick=()=>{ADM.editingPost=null;renderAdmin();};
+ $("#pf-cover").oninput=()=>{$("#pf-cover-preview").src=$("#pf-cover").value;};
+ fileToData($("#pf-coverUp"),d=>{$("#pf-cover").value=d;$("#pf-cover-preview").src=d;});
+ $("#pfAddImg").onclick=()=>{p.images.push({url:"",caption:""});renderPostImgMgr(p);};
+ $("#pfImgUp").onchange=e=>{[...e.target.files].forEach(f=>readFile(f,d=>{p.images.push({url:d,caption:""});renderPostImgMgr(p);}));};
+ function collectPost(){
+   p.title={en:$("#pf-title-en").value,bn:$("#pf-title-bn").value};
+   p.slug=$("#pf-slug").value||slugify(p.title.en)||"post-"+uid().slice(0,4);
+   p.date=$("#pf-date").value;
+   p.cover=$("#pf-cover").value;
+   p.excerpt={en:$("#pf-excerpt").value,bn:p.excerpt?.bn||""};
+   p.body={en:$("#pf-body").value,bn:p.body?.bn||""};
+ }
+ $("#savePost").onclick=()=>{collectPost();p.published=$("#pubPostChk").checked;save();toast("Post saved");ADM.editingPost=null;renderAdmin();};
+ $("#previewPost").onclick=()=>{collectPost();save();closeAdmin();go("/post/"+p.slug);};
+}
+function renderPostImgMgr(p){const el=$("#postImgMgr");if(!el)return;el.innerHTML=(p.images||[]).map((g,i)=>`
+   <div class="img-cell"><img src="${g.url||IMG("postimg"+i,300,200)}" alt="">
+     <div class="mv"><button data-pimv="${i}" data-d="-1">↑</button><button data-pimv="${i}" data-d="1">↓</button></div>
+     <button class="rm" data-pirm="${i}">✕</button>
+     <input data-piurl="${i}" value="${esc(g.url)}" placeholder="image URL">
+     <input data-picap="${i}" value="${esc(g.caption)}" placeholder="caption">
+   </div>`).join("");
+ $$("[data-pirm]",el).forEach(b=>b.onclick=()=>{p.images.splice(+b.dataset.pirm,1);renderPostImgMgr(p);});
+ $$("[data-pimv]",el).forEach(b=>b.onclick=()=>{const i=+b.dataset.pimv,d=+b.dataset.d,j=i+d;if(j<0||j>=p.images.length)return;[p.images[i],p.images[j]]=[p.images[j],p.images[i]];renderPostImgMgr(p);});
+ $$("[data-piurl]",el).forEach(inp=>inp.oninput=()=>p.images[+inp.dataset.piurl].url=inp.value);
+ $$("[data-picap]",el).forEach(inp=>inp.oninput=()=>p.images[+inp.dataset.picap].caption=inp.value);
+}
+
+/* ---- About admin ---- */
+function admAbout(body){const a=DB.about;
+ body.innerHTML=`<div class="adm-h">About the architect</div><div class="adm-note">Biography, philosophy, timeline and expertise.</div>
+ <div class="field-row"><div class="field"><label>Name EN</label><input id="ab-name-en" value="${esc(a.name?.en)}"></div><div class="field"><label>নাম BN</label><input id="ab-name-bn" value="${esc(a.name?.bn)}"></div></div>
+ <div class="field"><label>Tagline EN</label><input id="ab-tag" value="${esc(a.tagline?.en)}"></div>
+ <div class="field"><label>Portrait image</label>
+   <div style="display:flex;gap:14px;align-items:flex-start">
+     <img id="ab-port-preview" src="${esc(a.portrait)}" alt="" style="width:90px;height:120px;object-fit:cover;background:var(--paper);border:1px solid var(--line);flex:0 0 auto">
+     <div style="flex:1;min-width:200px">
+       <input id="ab-port" value="${esc(a.portrait)}" placeholder="Image URL">
+       <label class="adm-tab" style="cursor:pointer;display:inline-block;margin-top:8px">+ Upload from computer<input type="file" accept="image/*" id="ab-portUp" class="hide"></label>
+     </div>
+   </div>
+ </div>
+ <div class="field"><label>Biography EN</label><textarea id="ab-bio">${esc(a.bio?.en)}</textarea></div>
+ <div class="field"><label>Philosophy EN</label><textarea id="ab-phil">${esc(a.philosophy?.en)}</textarea></div>
+ <div class="field"><label>Timeline (one per line — YEAR | text)</label><textarea id="ab-tl" style="min-height:150px">${(a.timeline||[]).map(r=>r.year+" | "+L(r.txt)).join("\n")}</textarea></div>
+ <div class="field"><label>Expertise (one per line)</label><textarea id="ab-exp" style="min-height:150px">${(a.expertise||[]).join("\n")}</textarea></div>
+ <div class="field"><label>Publications (one per line — YEAR | Title | Abstract | URL)</label><textarea id="ab-pub" style="min-height:120px">${(a.publications||[]).map(p=>[p.year,L(p.title),L(p.abstract),p.url||""].join(" | ")).join("\n")}</textarea></div>
+ <div class="editor-actions"><button class="adm-primary" id="saveAbout">Save</button></div>`;
+ $("#ab-port").oninput=()=>{$("#ab-port-preview").src=$("#ab-port").value;};
+ fileToData($("#ab-portUp"),d=>{$("#ab-port").value=d;$("#ab-port-preview").src=d;});
+ $("#saveAbout").onclick=()=>{
+   a.name={en:$("#ab-name-en").value,bn:$("#ab-name-bn").value};
+   a.tagline={en:$("#ab-tag").value,bn:a.tagline?.bn||""};a.portrait=$("#ab-port").value;
+   a.bio={en:$("#ab-bio").value,bn:a.bio?.bn||""};a.philosophy={en:$("#ab-phil").value,bn:a.philosophy?.bn||""};
+   a.timeline=$("#ab-tl").value.split("\n").filter(Boolean).map(l=>{const[y,...r]=l.split("|");return{year:(y||"").trim(),txt:{en:r.join("|").trim(),bn:""}};});
+   a.expertise=$("#ab-exp").value.split("\n").map(s=>s.trim()).filter(Boolean);
+   a.publications=$("#ab-pub").value.split("\n").filter(Boolean).map(l=>{const[y,ti,ab,u]=l.split("|").map(s=>(s||"").trim());return{year:y,title:{en:ti,bn:""},abstract:{en:ab,bn:""},url:u,keywords:""};});
+   save();toast("About saved");
+ };
+}
+
+/* ---- Homepage / Settings admin ---- */
+function admHome(body){const s=DB.settings;
+ if(!s.heroImages)s.heroImages=[];
+ body.innerHTML=`<div class="adm-h">Homepage & Settings</div><div class="adm-note">Set the hero images, contact details and admin passcode.</div>
+ <div class="adm-h" style="font-size:18px;margin:8px 0 8px">Hero images</div>
+ <div class="field-hint" style="margin-bottom:8px">Add one or more images — with more than one, the homepage hero crossfades between them every few seconds. Leave empty to fall back to a featured project's image.</div>
+ <div class="img-manager" id="heroMgr"></div>
+ <div style="display:flex;gap:8px;margin-top:10px"><button class="adm-tab" id="addHero">+ Add image URL</button><label class="adm-tab" style="cursor:pointer">+ Upload images<input type="file" accept="image/*" multiple id="heroUpMulti" class="hide"></label></div>
+ <div class="field" style="margin-top:14px"><label>Fallback hero project (used only if no hero images above)</label><select id="hs-heroP">${DB.projects.map(p=>`<option value="${p.id}" ${s.heroProjectId===p.id?"selected":""}>${L(p.title)}</option>`).join("")}</select></div>
+ <div class="adm-h" style="font-size:18px;margin:20px 0 8px">Background music</div>
+ <div class="field-hint" style="margin-bottom:8px">Adds a small music toggle button to the homepage — visitors choose to turn it on (browsers block sound from playing automatically). Prefer pasting a link to an MP3 hosted elsewhere over uploading — an uploaded file is stored as text inside your saved data and can fill up browser storage or bloat an exported HTML file quickly.</div>
+ <div class="field"><label>MP3 URL</label><input id="hs-music" value="${esc(s.bgMusic)}" placeholder="https://…/track.mp3"></div>
+ <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+   <label class="adm-tab" style="cursor:pointer">⭱ Upload MP3<input type="file" accept="audio/*" id="musicUp" class="hide"></label>
+   <button class="adm-tab adm-danger" id="musicClear">Remove music</button>
+   <span id="musicFileNote" class="field-hint"></span>
+ </div>
+ <div class="adm-h" style="font-size:18px;margin:20px 0 8px">Contact</div>
+ <div class="field-row"><div class="field"><label>Email</label><input id="hs-email" value="${esc(s.contact?.email)}"></div><div class="field"><label>Phone</label><input id="hs-phone" value="${esc(s.contact?.phone)}"></div></div>
+ <div class="field-row"><div class="field"><label>WhatsApp (digits)</label><input id="hs-wa" value="${esc(s.contact?.whatsapp)}"></div><div class="field"><label>Website</label><input id="hs-web" value="${esc(s.contact?.web)}"></div></div>
+ <div class="field"><label>Office address</label><input id="hs-addr" value="${esc(s.contact?.address)}"></div>
+ <div class="adm-h" style="font-size:18px;margin:20px 0 8px">Extra categories</div>
+ <div class="field"><label>Additional categories (one per line)</label><textarea id="hs-cats">${(s.extraCats||[]).join("\n")}</textarea></div>
+ <div class="adm-h" style="font-size:18px;margin:20px 0 8px">Security</div>
+ <div class="field"><label>Admin passcode</label><input id="hs-pin" value="${esc(s.pin)}"><div class="field-hint">Client-side only. A public deployment should add real server authentication (Supabase Auth / Netlify Identity).</div></div>
+ <div class="editor-actions"><button class="adm-primary" id="saveHome">Save</button></div>`;
+ renderHeroMgr(s);
+ $("#addHero").onclick=()=>{s.heroImages.push("");renderHeroMgr(s);};
+ $("#heroUpMulti").onchange=e=>{[...e.target.files].forEach(f=>readFile(f,d=>{s.heroImages.push(d);renderHeroMgr(s);}));};
+ $("#musicUp").onchange=e=>{const f=e.target.files[0];if(!f)return;readFile(f,d=>{s.bgMusic=d;$("#hs-music").value=d;$("#musicFileNote").textContent=f.name+" — click Save to keep it";});};
+ $("#musicClear").onclick=()=>{s.bgMusic="";$("#hs-music").value="";$("#musicFileNote").textContent="";};
+ $("#saveHome").onclick=()=>{
+   s.heroProjectId=$("#hs-heroP").value;
+   s.bgMusic=$("#hs-music").value;
+   s.contact=Object.assign(s.contact||{},{email:$("#hs-email").value,phone:$("#hs-phone").value,whatsapp:$("#hs-wa").value,web:$("#hs-web").value,address:$("#hs-addr").value});
+   s.extraCats=$("#hs-cats").value.split("\n").map(x=>x.trim()).filter(Boolean);
+   s.pin=$("#hs-pin").value||"archcell";save();toast("Settings saved");updateMusicUI();
+ };
+}
+function renderHeroMgr(s){const el=$("#heroMgr");if(!el)return;el.innerHTML=s.heroImages.map((url,i)=>`
+   <div class="img-cell"><img src="${url||IMG("herophh"+i,300,200)}" alt="">
+     <div class="mv"><button data-hmv="${i}" data-d="-1">↑</button><button data-hmv="${i}" data-d="1">↓</button></div>
+     <button class="rm" data-hrm="${i}">✕</button>
+     <input data-hurl="${i}" value="${esc(url)}" placeholder="image URL">
+   </div>`).join("");
+ $$("[data-hrm]",el).forEach(b=>b.onclick=()=>{s.heroImages.splice(+b.dataset.hrm,1);renderHeroMgr(s);});
+ $$("[data-hmv]",el).forEach(b=>b.onclick=()=>{const i=+b.dataset.hmv,d=+b.dataset.d,j=i+d;if(j<0||j>=s.heroImages.length)return;[s.heroImages[i],s.heroImages[j]]=[s.heroImages[j],s.heroImages[i]];renderHeroMgr(s);});
+ $$("[data-hurl]",el).forEach(inp=>inp.oninput=()=>s.heroImages[+inp.dataset.hurl]=inp.value);
+}
+
+/* ---- Backup ---- */
+function buildUpdatedHtml(){
+ const doc=document.cloneNode(true);
+ let tag=doc.getElementById("embedded-data");
+ if(!tag){tag=doc.createElement("script");tag.id="embedded-data";tag.type="application/json";doc.body.appendChild(tag);}
+ tag.textContent=JSON.stringify(DB).replace(/</g,"\\u003c");
+ const app=doc.getElementById("app");if(app)app.innerHTML="";
+ ["menu","search","lightbox","present","admin"].forEach(id=>{const el=doc.getElementById(id);if(el)el.classList.remove("open");});
+ const tb=doc.getElementById("topbar");if(tb)tb.className="hero-mode";
+ const body=doc.body;if(body)body.style.overflow="";
+ return "<!doctype html>\n"+doc.documentElement.outerHTML;
+}
+function admBackup(body){
+ const hist=getHistory();
+ body.innerHTML=`<div class="adm-h">Backup & Restore</div><div class="adm-note">All content lives in this browser. "Save updated HTML" bakes your current edits into a standalone file you can upload to replace index.html on your server — open it anywhere and it shows this content by default, no browser storage needed. Export a JSON backup too, for safety and for moving content between devices. Import replaces everything.</div>
+ <div style="display:flex;gap:8px;flex-wrap:wrap">
+   <button class="adm-primary" id="expHtmlBtn">⭳ Save updated HTML file</button>
+   <button class="adm-tab" id="expBtn">⭳ Export backup (.json)</button>
+   <label class="adm-tab" style="cursor:pointer;padding:12px 20px">⭱ Import backup<input type="file" accept="application/json" id="impFile" class="hide"></label>
+   <button class="adm-tab adm-danger" id="resetBtn" style="padding:12px 20px">Reset to sample data</button>
+ </div>
+ <div class="adm-h" style="font-size:18px;margin:26px 0 8px">Version history — undo a mistake</div>
+ <div class="adm-note">Every time something is saved, the version right before it is kept here automatically (last 5, this browser only). If an update went wrong, restore an earlier one — restoring is itself saved to history, so you can undo the undo.</div>
+ <div id="histList" style="margin-top:6px">${hist.length?hist.map((h,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)">
+     <span class="mono" style="font-size:12px;color:var(--grey-1)">${i===0?"Most recent — ":""}${new Date(h.ts).toLocaleString()}</span>
+     <button class="adm-tab" data-restore="${i}">Restore this version</button>
+   </div>`).join(""):`<div class="empty" style="padding:20px 0">No earlier versions yet — they appear here after your next save.</div>`}</div>
+ <div class="field" style="margin-top:24px"><label>Raw data (copy/paste)</label><textarea id="rawData" style="min-height:200px;font-family:var(--mono);font-size:11px">${esc(JSON.stringify(DB))}</textarea><button class="adm-tab" id="loadRaw" style="margin-top:8px">Load pasted data</button></div>`;
+ $("#expHtmlBtn").onclick=()=>{const html=buildUpdatedHtml();const blob=new Blob([html],{type:"text/html"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="index.html";a.click();toast("HTML file saved — upload it to replace your site");};
+ $("#expBtn").onclick=()=>{const blob=new Blob([JSON.stringify(DB,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="kb-portfolio-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();};
+ $("#impFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{DB=JSON.parse(r.result);save();toast("Imported");renderAdmin();}catch(x){toast("Invalid file");}};r.readAsText(f);};
+ $("#resetBtn").onclick=()=>{if(confirm("Reset all content to sample data? This erases your edits.")){DB=seed();save();toast("Reset");renderAdmin();}};
+ $("#loadRaw").onclick=()=>{try{DB=JSON.parse($("#rawData").value);save();toast("Loaded");renderAdmin();}catch(x){toast("Invalid JSON");}};
+ $$("[data-restore]").forEach(b=>b.onclick=()=>restoreHistory(+b.dataset.restore));
+}
+
+/* ---- file helpers ---- */
+function readFile(f,cb){
+ const fr=new FileReader();
+ fr.onload=()=>{
+   if(!/^image\//.test(f.type)){cb(fr.result);return;}
+   const img=new Image();
+   img.onload=()=>{
+     const maxDim=1600;let w=img.width,h=img.height;
+     if(w>maxDim||h>maxDim){if(w>h){h=Math.round(h*maxDim/w);w=maxDim;}else{w=Math.round(w*maxDim/h);h=maxDim;}}
+     const canvas=document.createElement("canvas");canvas.width=w;canvas.height=h;
+     const ctx=canvas.getContext("2d");ctx.drawImage(img,0,0,w,h);
+     try{cb(canvas.toDataURL("image/jpeg",0.82));}catch(e){cb(fr.result);}
+   };
+   img.onerror=()=>cb(fr.result);
+   img.src=fr.result;
+ };
+ fr.onerror=()=>toast("Couldn't read that file");
+ fr.readAsDataURL(f);
+}
+function fileToData(input,cb){if(!input)return;input.onchange=e=>{const f=e.target.files[0];if(f)readFile(f,cb);};}
+function esc(s){return (s==null?"":String(s)).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+window.closeAdmin=closeAdmin;
+
+/* ============================ INIT ============================ */
+(function init(){
+ const savedLang=localStorage.getItem("kb_lang");
+ if(savedLang){document.documentElement.setAttribute("data-lang",savedLang);$("#langToggle").textContent=savedLang==="en"?"বাংলা":"EN";}
+ window.addEventListener("hashchange",()=>{
+   if(location.hash==="#/admin"){openAdmin();return;}
+   if(adm.classList.contains("open")&&location.hash!=="#/admin")closeAdmin();
+   route();
+ });
+ window.addEventListener("scroll",onScroll,{passive:true});
+ window.addEventListener("storage",e=>{
+   if(e.key!==KEY||!e.newValue)return;
+   try{const d=JSON.parse(e.newValue);if(d&&d.projects)DB=d;}catch(err){return;}
+   if(adm.classList.contains("open"))renderAdmin();else route();
+ });
+ $("#musicToggle").onclick=toggleMusic;
+ if(location.hash==="#/admin"){renderHome();openAdmin();}
+ else route();
+ onScroll();
+})();
+</script>
+</body>
+</html>
