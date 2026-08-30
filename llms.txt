@@ -1,0 +1,149 @@
+# Kamanashish Barua — Architecture / Selected Works
+
+> Principal Architect at ARCHCELL Design Development, Dhaka, Bangladesh. B.Arch (Bangladesh University of Engineering and Technology), IAB Reg. CB-066. 17+ years designing hospitality, civic, cultural and research projects across the Bengal delta and Chittagong Hill Tracts. Founder of METTA Heritage Platform and Green BD Environmental Solutions.
+
+This file is a plain-text index of the site's content for AI systems and crawlers that don't execute JavaScript. The live, interactive site is at https://kbarua.com/.
+
+## Biography
+
+I'm a passionate, licensed architect with over 14 years of experience in architectural design, interior solutions, and sustainable space planning. I specialize in residential, commercial, urban, and institutional projects, blending aesthetic creativity with practical engineering and a deep commitment to eco-conscious design.
+
+As the Principal Architect and Co-Founder at ARCHCELL, I lead a talented team that delivers innovative architectural and interior design solutions across Bangladesh and beyond. My work spans every stage-from concept development to site execution-ensuring that every design meets client needs, regulatory standards, and sustainable goals. My goal is to design spaces that elevate human experience and contribute positively to communities and the environment.
+
+
+## Philosophy
+
+As an architect, my greatest motivation has always been the desire to create better, more sustainable spaces for people to live and thrive in. With over 14 years of experience as a registered architect, I am deeply passionate about designing large-scale architectural and interior projects that not only meet aesthetic and functional needs but also prioritize sustainability and renewable energy. Throughout my career, I’ve had the privilege of working on projects for both public and private organizations, where I’ve developed a profound understanding of space planning, design concepts, and the importance of reducing carbon footprints. My journey in architecture has also allowed me to collaborate with adverse range of professionals, including business leaders, finance experts, real estate developers, engineers, legal consultants, and environmental specialists. This cross-disciplinary experience has given me a holistic understanding of the industry and the ability to translate creative ideas into practical, feasible realities. 
+
+If you’re looking for an architect who combines creativity, technical expertise, and a commitment to sustainability, I would love to connect and explore how we can work together.
+
+
+## Timeline
+
+- 2008–09: B.Arch, Bangladesh University of Engineering & Technology (BUET), Dhaka
+- 2011–13: Architect (Intern), Department of Architecture, Public Works Department
+- 2013–15: Architect, Ecliptic Architects
+- 2015–20: Principal Architect, Genetic Limited
+- 2020–: Principal Architect & Co-Founder, ARCHCELL, Banani, Dhaka
+- 2023–: Founder, METTA (mettabd.org) — promoting Buddhist values and community service
+
+## Expertise
+
+- Sustainable & Energy-Efficient Design
+- Concept Development & Technical Drawings
+- BIM & CAD (AutoCAD, Revit, 3ds Max)
+- Construction Supervision & Site Coordination
+- Team Leadership & Cross-Disciplinary Collaboration
+- Regulatory Compliance & Safety Codes
+- Client Liaison & Stakeholder Coordination
+- 3D Visualization & Rendering
+- Animation & Virtual Presentation (Twinmotion)
+- Urban & Landscape Design
+- Interior Design
+- Vendor & Supplier Management
+
+## Research & Publications
+
+### 2018 — BIMSTEC Scholar, Nalanda University
+
+Selected as a BIMSTEC Scholar for postgraduate study in Ecology and Environment Studies at Nalanda University, India.
+
+### 2005 — 2nd Position, IEB Complex Revitalization Design Competition
+
+Placed 2nd in the architectural design competition for revitalization of the Institution of Engineers, Bangladesh (IEB) complex in Ramna, Dhaka.
+
+### 2002–03 — Nippon Foundation Scholarship, Japan
+
+Awarded in recognition of outstanding academic achievement at BUET.
+
+### 2026 — 100-Year Urban Master Plan for Bandarban City
+
+A century-long development vision (2026–2126) for Bandarban under the theme "Hill–River–Culture–Eco Tourism City." The framework addresses climate risks specific to Bangladesh's hill districts — landslides, flash flooding, water scarcity and ecosystem degradation — through climate adaptation, disaster mitigation, ecological conservation, indigenous cultural preservation and nature-based, terrain-responsive planning rather than conventional flatland city models.
+Source: https://www.archcellbd.com/research-and-publications/6776
+
+### 2026 — Core Concept: "Hill, River, Culture & Nature-Based Tourism City"
+
+The conceptual framework underpinning the Bandarban master plan research — an eco-tourism city model built around hill terrain, river ecology and indigenous culture rather than displacing them.
+Source: https://www.archcellbd.com/research-and-publications/6758
+
+### 2026 — Nature-Based, Climate-Resilient Urban Design of Bandarban
+
+An urban design framework for Bandarban that works with natural topography — hills, the Sangu River, forests and indigenous culture — rather than against it. Strategies include contour-based planning, riverfront ecological corridors, rainwater harvesting, landslide mitigation through native vegetation, walkable green mobility networks and climate-responsive architecture integrating water security and eco-tourism.
+Source: https://www.archcellbd.com/research-and-publications/6766
+
+## Organizations
+
+- **ARCHCELL Design Development** (https://archcellbd.com) — core multidisciplinary architecture, interiors, landscape, structural/MEP engineering, and urban planning practice.
+- **METTA Heritage Platform** (https://mettabd.org) — digital platform documenting Bangladesh's Buddhist heritage; interactive atlas at https://map.mettabd.org.
+- **Green BD Environmental Solutions** (https://greenbd23.com) — environmental and sustainability consultancy.
+
+## Selected Work
+
+### JOLMATI — Kaliganga River Agro-Eco Retreat
+
+A riverside agro-ecological retreat carried from concept through architectural programme and environmental assessment to a full-spec development estimate near Tk 67 crore.
+
+### Hillside Hotel — Bandarban
+
+A five-storey terraced RC scheme resolved through slope-stability and seismic review under BNBC 2020 Zone 3 — a terraced box that sits lightly on the hill.
+
+### DC Office — Interior & Landscape, Moulvibazar
+
+A comprehensive interior and landscape design-development package for a district administration, with a net-zero green addendum and an itemised BOQ across 23 sections.
+
+### Mettacit — Buddhist Heritage Atlas
+
+A bilingual web atlas of roughly 1,915 Buddhist heritage sites across Bangladesh — satellite and terrain layers, clustering and geolocation — making a dispersed record navigable to anyone.
+
+### Seismic Intelligence Dashboard — Bangladesh
+
+A civic-technology tool spanning three centuries of seismic record (1726–2026) with a live USGS feed, fault-line mapping and an automated BNBC 2020 site-brief generator — built line by line.
+
+### Sustainable Tourism City — Bandarban Concept
+
+A vision study for a hill-country tourism city that grows development capacity without spending the ecology and indigenous fabric of the Chittagong Hill Tracts.
+
+## Project Archive (30 published works)
+
+- **Medical Convention Centre, BSMMU** (Paribagh, Dhaka, Bangladesh, 2019) — Institutional, Public / Civic, Completed — A 300,000 sq ft convention venue for Bangabandhu Sheikh Mujib Medical University — Bangladesh's central hub for medical conferences and research exchange.
+- **Interior of BSMMU Medical Convention Centre** (Paribagh, Dhaka, Bangladesh, 2019) — Interior, Institutional, Completed — A neutral, technology-integrated interior fit-out for South Asia's medical convention hub — marble, acoustic conference halls and a VIP lounge.
+- **Outpatient Building Block, BSMMU** (Paribagh (Shahbag), Dhaka, Bangladesh, 2019) — Institutional, Healthcare, Public / Civic, Completed — A 278,000 sq ft outpatient block for BSMMU — accessible, patient-centric healthcare architecture in central Dhaka.
+- **Bangladesh Supreme Court Bar Council Bhavan** (Dhaka, Bangladesh) — Institutional, Public / Civic — A civic building for Bangladesh's legal profession, designed around three principles: Tradition, Transparency and Functionality.
+- **Peace Tower at Cox's Bazar** (Cox's Bazar, Bangladesh) — Commercial, Hospitality, High-Rise, Climate-Responsive Design — Twin vertical masses around a central atrium — a climate-resilient coastal hotel tower maximising ocean views on a land-scarce beach frontage.
+- **The Genetic Ataturk Tower** (Gulshan-2, Dhaka, Bangladesh) — Commercial, High-Rise — A 14-storey glass office tower for Gulshan-2 with vertical gardens and living walls threaded through the facade.
+- **BSRM Tower, Chittagong** (Chittagong, Bangladesh) — Commercial, High-Rise, Research — A 30-storey, 339,600 sq ft tower for BSRM — steel-industry strength read through Chittagong's urban and industrial fabric.
+- **Swapnogatha — Triplex at Purbachal, Dhaka** (Purbachal New Town, Dhaka, Bangladesh) — Residential, Climate-Responsive Design, Completed — Interlocking cubic masses generate cantilevered balconies and shaded verandas across a three-storey tropical residence.
+- **Sustainable Housing for Flood-Prone Areas** (Flood-prone char land, Bangladesh) — Residential, Disaster Resilience, Climate-Responsive Design, Research, Conceptual — A two-storey bamboo-and-concrete house lifted two feet above flood level for communities facing 1–4 months of seasonal flooding.
+- **Residence at Bandarban** (Bandarban, Chittagong Hill Tracts) — Residential, Climate-Responsive Design — A hillside residence in the Chittagong Hill Tracts, blending ergonomic, aesthetic form with the region's steep, forested terrain.
+- **Premises Landscape & Green Master Plan — DC Office Moulvibazar** (Moulvibazar, Bangladesh) — Landscape, Institutional, Public / Civic — A tea-district government compound reorganised into seven zones around one rule: not one healthy mature tree is cut.
+- **DC Park, Munshiganj** (Near Idrakpur Fort, Munshiganj, Bangladesh) — Landscape, Public / Civic — A 26,091 sq ft community park by Idrakpur Fort, with an amphitheatre, boardwalked lake and thematic gardens.
+- **PPIMSC Mosque at Munshiganj** (Iazuddin College, Munshiganj, Bangladesh, 2019) — Religious / Spiritual, Institutional, Completed — A 9,806 sq ft campus mosque and community centre blending modern minimalism with traditional Islamic architecture.
+- **Madhyam Pratipada Aranya Kutir — Forest Meditation Centre** (Bhai-Bon Chhara, Panchhari, Khagrachhari) — Religious / Spiritual, Landscape, Climate-Responsive Design, Conceptual — A meditation centre proposed for a 200-acre forest — compact, centralised massing that leaves the tree canopy almost entirely undisturbed.
+- **The Circuit House Lounge, Bandarban** (Bandarban, Chittagong Hill Tracts) — Interior, Hospitality — A hill-tract lounge interior where a dark-timber, glass-balustrade staircase becomes the room's centrepiece.
+- **Zaman Park Place** (Gulshan-2, Dhaka, Bangladesh) — Residential, High-Rise — A single-unit-per-floor tower on Gulshan-2 — 16 apartments of 3,275–4,000 sq ft each, rising Ground+9 over a basement.
+- **Genetic Northern Retreat** (Gulshan Avenue (North), Gulshan-2, Dhaka) — Residential — A biophilic Gulshan-2 residence blending modern urban living with cross-ventilation, rooftop solar and rainwater harvesting.
+- **Mahbuba Wasim** (Gulshan-2, Dhaka, Bangladesh) — Residential, High-Rise — A mid-rise apartment building on a 9-katha Gulshan-2 plot, balancing structural expression with contextual responsiveness.
+- **Genetic Akash Prodeep, Uttara** (Sector 4, Uttara, Dhaka) — Residential, High-Rise — A geometric Uttara high-rise with vertical gardens filling its balconies — Ground+13 over a basement on 6.92 katha.
+- **Verbana, Dhaka Cantonment** (Dhaka Cantonment, Bangladesh) — Residential — 42 apartments across Ground+8 and two basements for Fortune Developers, on a quiet 15-katha Cantonment plot.
+- **Shakkyasingha Sadhana Bishuddha Banabihara Buddhist Temple** (Gujjapara, Manikchari, Khagrachhari) — Religious / Spiritual, Conceptual — A monastery in concentric spiral form, its Dhamma-spiral walkway rising toward a seated Buddha statue crowning the upper terrace.
+- **Shilghata Punurnirman Bihar** (Shilghata, Bandarban, 2015) — Religious / Spiritual, Completed — A reconstructed Buddhist monastery in the hills of Bandarban, rooted in the region's prayer-flag and pagoda traditions.
+- **Santiniketan Ambedkar Buddhist Welfare Mission** (Ballavpur Dhanga, Shantiniketan, West Bengal, India) — Religious / Spiritual, Conceptual — A spiritual and community centre near Tagore's Shantiniketan, honouring Dr. B.R. Ambedkar's values of peace, compassion and social justice.
+- **Hotel Sun-n-Shade** (Tsaralalana, Antananarivo, Madagascar) — Commercial, Hospitality, High-Rise — A 20-storey, 308-room hotel and convention complex for Madagascar's capital — five restaurants, a casino and a rooftop bar over the city.
+- **Prasaad Water World Continental** (Cox's Bazar, Bangladesh) — Commercial, Hospitality — An organic-form water resort on 2.5 acres beside the world's longest sea beach, its architecture mimicking tidal rhythm.
+- **Munshiganj Children's Park** (Near Idrakpur Fort, Munshiganj, Bangladesh) — Landscape, Public / Civic — A 16,091 sq ft inclusive play landscape beside DC Park — wheelchair-friendly paths and play zones for children of every ability.
+- **Cloudcrest Resort Valley** (Near Meghla, Bandarban, Chittagong Hill Tracts) — Commercial, Hospitality, Climate-Responsive Design — "The building should look as if the hill grew it" — three terraced plates stepping down a steep valley without levelling the ridge.
+- **Alokdhara Library — DC Office Moulvibazar** (DC Office, Moulvibazar, Bangladesh) — Interior, Institutional — "Stream of light" — a civic library interior organised around nature, knowledge and light for the Moulvibazar DC office.
+- **PPIMSC Library at Munshiganj** (Iazuddin College, Munshiganj, Bangladesh) — Interior, Institutional, Educational — A vibrant, zoned campus library — a Kids' Corner, workstations and a group study hall in white, yellow and green.
+- **Baro Bhuiyan** (Bangladesh) — Residential — A residential design from arch_CELL's ongoing practice.
+
+## Contact
+
+Email: mebiplob@hotmail.com
+Phone: +88-01711034941
+Address: House #100A, Road 6A, Banani DOHS, Banani, Dhaka, Bangladesh
+Website: archcellbd.com
+
+---
+
+Full interactive site: https://kbarua.com/
+Last updated: 2026-08-30
