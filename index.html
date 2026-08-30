@@ -580,7 +580,7 @@ const I={
 };
 const lang=()=>document.documentElement.getAttribute("data-lang");
 const t=k=>{const o=I[k];return o?(o[lang()]||o.en):k;};
-const L=(o)=>{ if(o==null)return""; if(typeof o==="string")return o; return o[lang()]||o.en||""; };
+const T=(o)=>{ if(o==null)return""; if(typeof o==="string")return o; return o[lang()]||o.en||""; };
 
 /* ---------- FACT field labels ---------- */
 const FACTS=[
@@ -1290,7 +1290,7 @@ function observeReveal(){
 }
 
 /* ============================ HOME ============================ */
-function metaLine(p){return [L(p.category&&p.category[0]),p.location,p.year].filter(Boolean).join(" · ");}
+function metaLine(p){return [T(p.category&&p.category[0]),p.location,p.year].filter(Boolean).join(" · ");}
 function renderHome(){
  const heroList=(DB.settings.heroImages&&DB.settings.heroImages.filter(Boolean).length)?DB.settings.heroImages.filter(Boolean):[(projById(DB.settings.heroProjectId)?.hero)||pubProjects()[0]?.hero].filter(Boolean);
  const feats=pubProjects().filter(p=>p.featured);
@@ -1301,7 +1301,7 @@ function renderHome(){
    ${heroList.length>1?`<div class="hero-dots">${heroList.map((_,i)=>`<span class="hero-dot ${i===0?"on":""}"></span>`).join("")}</div>`:""}
    <div class="hero-inner">
      <div class="hero-eyebrow">Architect · B.Arch (BUET) · BIMSTEC Scholar</div>
-     <h1 class="hero-name">${L(DB.about.name)}</h1>
+     <h1 class="hero-name">${T(DB.about.name)}</h1>
      <div class="hero-disc"><span>Architecture</span><span>Urban Design</span><span>Landscape</span><span>Interior</span><span>Engineering</span><span>Research</span></div>
      <div class="hero-cta">
        <a class="btn btn-fill" href="#/projects" data-nav>${t("explore")}</a>
@@ -1314,12 +1314,12 @@ function renderHome(){
  <section class="feat">
    ${featSet.map((p,i)=>`
    <a class="feat-item" href="#/project/${p.slug}" data-nav>
-     <div class="feat-media"><img loading="lazy" src="${p.hero}" alt="${L(p.title)}"></div>
+     <div class="feat-media"><img loading="lazy" src="${p.hero}" alt="${T(p.title)}"></div>
      <div class="feat-cap">
        <div class="feat-idx">${String(i+1).padStart(2,"0")} / ${String(featSet.length).padStart(2,"0")}</div>
-       <div class="feat-title">${L(p.title)}</div>
-       <div class="feat-meta"><span>${L(p.category[0])}</span><span>${p.location}</span><span>${p.year}</span></div>
-       ${p.oneLiner?`<p class="feat-idea">${L(p.oneLiner)}</p>`:""}
+       <div class="feat-title">${T(p.title)}</div>
+       <div class="feat-meta"><span>${T(p.category[0])}</span><span>${p.location}</span><span>${p.year}</span></div>
+       ${p.oneLiner?`<p class="feat-idea">${T(p.oneLiner)}</p>`:""}
      </div>
    </a>`).join("")}
  </section>
@@ -1397,7 +1397,7 @@ function drawArchive(){
    el.innerHTML=`<div class="indexlist">${list.map((p,i)=>`
      <div class="index-row" data-slug="${p.slug}">
        <div class="index-no">${String(i+1).padStart(2,"0")}</div>
-       <div><div class="index-t">${L(p.title)}</div><div class="index-sub">${L(p.category[0])} · ${p.location}</div></div>
+       <div><div class="index-t">${T(p.title)}</div><div class="index-sub">${T(p.category[0])} · ${p.location}</div></div>
        <div class="index-year">${p.year||""}</div>
      </div>`).join("")}</div>`;
    $$(".index-row").forEach(r=>r.onclick=()=>go("/project/"+r.dataset.slug));
@@ -1412,11 +1412,11 @@ function cardHTML(p,favs){
  return `<div class="card" data-slug="${p.slug}">
    <div class="card-media">
      <button class="card-fav ${favs.includes(p.id)?"on":""}" data-fav="${p.id}" aria-label="Save">${favs.includes(p.id)?"♥":"♡"}</button>
-     <img loading="lazy" src="${p.hero}" alt="${L(p.title)}">
+     <img loading="lazy" src="${p.hero}" alt="${T(p.title)}">
    </div>
    <div class="card-body">
-     <div class="card-title">${L(p.title)}</div>
-     <div class="card-meta"><span>${L(p.category[0])}</span><span>${p.location}</span><span>${p.year||""}</span></div>
+     <div class="card-title">${T(p.title)}</div>
+     <div class="card-meta"><span>${T(p.category[0])}</span><span>${p.location}</span><span>${p.year||""}</span></div>
    </div>
  </div>`;
 }
@@ -1438,10 +1438,10 @@ function renderDetail(slug){
  const favs=getFavs();
  app.innerHTML=`
  <section class="d-hero">
-   <img src="${p.hero}" alt="${L(p.title)}" fetchpriority="high">
+   <img src="${p.hero}" alt="${T(p.title)}" fetchpriority="high">
    <div class="d-hero-cap">
      <div class="d-cat">${p.category.map(c=>c).slice(0,3).join(" · ")}</div>
-     <h1 class="d-title">${L(p.title)}</h1>
+     <h1 class="d-title">${T(p.title)}</h1>
      <div class="d-locyear"><span>${p.location}</span><span>${p.year||""}</span></div>
    </div>
  </section>
@@ -1458,8 +1458,8 @@ function renderDetail(slug){
      ${facts.map(([k,en,bn])=>`<div class="tb-cell"><div class="tb-key">${lang()==="bn"?bn:en}</div><div class="tb-val">${p.facts[k]}</div></div>`).join("")}
    </div></div>`:""}
    <div class="d-body">
-     ${p.intro?`<div class="eyebrow reveal">${t("intro")}</div><p class="d-intro reveal">${L(p.intro)}</p>`:""}
-     ${(p.sections||[]).map(s=>`<div class="d-sec reveal"><h3>${L(s.title)}</h3>${String(L(s.body)).split(/\n+/).map(x=>`<p>${x}</p>`).join("")}</div>`).join("")}
+     ${p.intro?`<div class="eyebrow reveal">${t("intro")}</div><p class="d-intro reveal">${T(p.intro)}</p>`:""}
+     ${(p.sections||[]).map(s=>`<div class="d-sec reveal"><h3>${T(s.title)}</h3>${String(T(s.body)).split(/\n+/).map(x=>`<p>${x}</p>`).join("")}</div>`).join("")}
    </div>
  </div>
  ${galleryHTML(p)}
@@ -1472,7 +1472,7 @@ function renderDetail(slug){
    <div class="grid three">${related.map(r=>cardHTML(r,favs)).join("")}</div></div>`:""}
  <a class="next-proj" href="#/project/${next.slug}" data-nav>
    <img src="${next.hero}" alt="">
-   <div class="next-cap"><div class="next-lab">${t("next")}</div><div class="next-t">${L(next.title)}</div></div>
+   <div class="next-cap"><div class="next-lab">${t("next")}</div><div class="next-t">${T(next.title)}</div></div>
  </a>
  ${footer()}`;
  // bind
@@ -1511,7 +1511,7 @@ function renderCollections(){
    <div class="grid two">
    ${DB.collections.map(c=>`<a class="card" href="#/collection/${c.slug}" data-nav>
      <div class="card-media"><img loading="lazy" src="${c.cover||(projById(c.projectIds[0])?.hero)||IMG(c.slug)}" alt=""></div>
-     <div class="card-body"><div class="card-title">${L(c.title)}</div>
+     <div class="card-body"><div class="card-title">${T(c.title)}</div>
      <div class="card-meta"><span>${(c.projectIds||[]).length} Projects</span></div></div></a>`).join("")}
    </div>
  </div>${footer()}`;
@@ -1524,8 +1524,8 @@ function renderCollection(slug){
  app.innerHTML=`<div style="height:58px"></div>
  <div class="wrap section" style="padding-bottom:20px">
    <a class="backlink" href="#/collections" data-nav>← ${t("collections")}</a>
-   <h2 class="section-title reveal" style="margin:20px 0 8px;font-size:clamp(28px,5vw,52px)">${L(c.title)}</h2>
-   ${c.intro?`<p class="reveal" style="max-width:640px;color:var(--grey-1);font-size:17px">${L(c.intro)}</p>`:""}
+   <h2 class="section-title reveal" style="margin:20px 0 8px;font-size:clamp(28px,5vw,52px)">${T(c.title)}</h2>
+   ${c.intro?`<p class="reveal" style="max-width:640px;color:var(--grey-1);font-size:17px">${T(c.intro)}</p>`:""}
    <div class="d-actions" style="margin-top:18px"><button id="colShare">↗ Copy share link</button></div>
  </div>
  <div class="wrap"><div class="grid two">${ps.map(p=>cardHTML(p,favs)).join("")||`<div class="empty">No projects yet</div>`}</div></div>
@@ -1551,12 +1551,12 @@ function renderMap(){
    if(typeof L==="undefined"){mapEl.innerHTML='<div class="empty" style="padding:60px 0">Map failed to load — check your connection and reload the page.</div>';return;}
    const pts=pubProjects().filter(p=>p.lat&&p.lng);
    mapObj=L.map("map",{scrollWheelZoom:false}).setView([23.7,90.4],7);
-   L.tileLayer("https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png",{attribution:"© OpenStreetMap © CARTO",maxZoom:18}).addTo(mapObj);
+   L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",{attribution:"Esri, HERE, Garmin, © OpenStreetMap contributors",maxZoom:16}).addTo(mapObj);
    const grp=[];
    pts.forEach(p=>{
      const ic=L.divIcon({className:"",html:`<div style="width:12px;height:12px;background:#0b0b0b;border:2px solid #fff;box-shadow:0 0 0 1px #0b0b0b"></div>`,iconSize:[12,12]});
      const m=L.marker([p.lat,p.lng],{icon:ic}).addTo(mapObj);
-     m.bindPopup(`<div class="mp-pop"><img src="${p.hero}"><div class="mp-b"><div class="mp-t">${L(p.title)}</div><div class="mp-m">${L(p.category[0])} · ${p.year||""}</div><a class="mp-m" style="color:#000;text-decoration:underline;display:inline-block;margin-top:6px" href="#/project/${p.slug}">Open project →</a></div></div>`);
+     m.bindPopup(`<div class="mp-pop"><img src="${p.hero}"><div class="mp-b"><div class="mp-t">${T(p.title)}</div><div class="mp-m">${T(p.category[0])} · ${p.year||""}</div><a class="mp-m" style="color:#000;text-decoration:underline;display:inline-block;margin-top:6px" href="#/project/${p.slug}">Open project →</a></div></div>`);
      grp.push([p.lat,p.lng]);
    });
    if(grp.length)mapObj.fitBounds(grp,{padding:[50,50],maxZoom:9});
@@ -1574,8 +1574,8 @@ function renderResearch(){
    <div class="indexlist">
    ${pubs.map((pb,i)=>`<div class="index-row" ${pb.url?`data-url="${pb.url}"`:""} style="align-items:start">
      <div class="index-no">${String(i+1).padStart(2,"0")}</div>
-     <div><div class="index-t" style="font-size:clamp(17px,2.4vw,24px)">${L(pb.title)}</div>
-       ${pb.abstract?`<p style="color:var(--grey-1);font-size:15px;margin-top:8px;max-width:64ch">${L(pb.abstract)}</p>`:""}
+     <div><div class="index-t" style="font-size:clamp(17px,2.4vw,24px)">${T(pb.title)}</div>
+       ${pb.abstract?`<p style="color:var(--grey-1);font-size:15px;margin-top:8px;max-width:64ch">${T(pb.abstract)}</p>`:""}
        ${pb.keywords?`<div class="index-sub" style="margin-top:8px">${pb.keywords}</div>`:""}</div>
      <div class="index-year">${pb.year||""}</div></div>`).join("")||`<div class="empty">No publications yet</div>`}
    </div>
@@ -1589,21 +1589,21 @@ function renderAbout(){
  const a=DB.about;
  app.innerHTML=`<div style="height:58px"></div>
  <div class="wrap about-hero">
-   <div class="eyebrow reveal">${L(a.tagline)}</div>
-   <h1 class="about-name reveal" style="margin-top:14px">${L(a.name)}</h1>
+   <div class="eyebrow reveal">${T(a.tagline)}</div>
+   <h1 class="about-name reveal" style="margin-top:14px">${T(a.name)}</h1>
  </div>
  <div class="wrap">
    <div class="about-cols">
-     <div class="about-portrait reveal"><img src="${a.portrait}" alt="${L(a.name)}"></div>
+     <div class="about-portrait reveal"><img src="${a.portrait}" alt="${T(a.name)}"></div>
      <div>
-       <div class="about-block reveal"><h3>Biography</h3>${String(L(a.bio)).split(/\n+/).map(x=>`<p>${x}</p>`).join("")}</div>
-       <div class="about-block reveal"><h3>Architectural Philosophy</h3>${String(L(a.philosophy)).split(/\n+/).map(x=>`<p>${x}</p>`).join("")}</div>
+       <div class="about-block reveal"><h3>Biography</h3>${String(T(a.bio)).split(/\n+/).map(x=>`<p>${x}</p>`).join("")}</div>
+       <div class="about-block reveal"><h3>Architectural Philosophy</h3>${String(T(a.philosophy)).split(/\n+/).map(x=>`<p>${x}</p>`).join("")}</div>
      </div>
    </div>
  </div>
  <div class="wrap section">
    <div class="section-head reveal"><h2 class="section-title">${t("timeline")}</h2></div>
-   <div class="tl reveal">${(a.timeline||[]).map(r=>`<div class="tl-row"><div class="tl-year">${r.year}</div><div class="tl-txt">${L(r.txt)}</div></div>`).join("")}</div>
+   <div class="tl reveal">${(a.timeline||[]).map(r=>`<div class="tl-row"><div class="tl-year">${r.year}</div><div class="tl-txt">${T(r.txt)}</div></div>`).join("")}</div>
  </div>
  <div class="wrap section" style="padding-top:0">
    <div class="section-head reveal"><h2 class="section-title">${t("expertise")}</h2></div>
@@ -1642,11 +1642,11 @@ function renderBlog(){
    <h2 class="section-title reveal" style="margin:10px 0 34px">Blog</h2>
    <div class="grid two">
    ${posts.length?posts.map(p=>`<a class="card" href="#/post/${p.slug}" data-nav>
-     <div class="card-media"><img loading="lazy" src="${p.cover||IMG(p.slug)}" alt="${L(p.title)}"></div>
+     <div class="card-media"><img loading="lazy" src="${p.cover||IMG(p.slug)}" alt="${T(p.title)}"></div>
      <div class="card-body">
        <div class="card-meta" style="margin-bottom:6px">${fmtDate(p.date)}</div>
-       <div class="card-title">${L(p.title)}</div>
-       ${p.excerpt?`<p style="margin-top:8px;color:var(--grey-1);font-size:14px;line-height:1.5">${L(p.excerpt)}</p>`:""}
+       <div class="card-title">${T(p.title)}</div>
+       ${p.excerpt?`<p style="margin-top:8px;color:var(--grey-1);font-size:14px;line-height:1.5">${T(p.excerpt)}</p>`:""}
      </div></a>`).join(""):`<div class="empty">No posts yet</div>`}
    </div>
  </div>${footer()}`;
@@ -1657,13 +1657,13 @@ function renderBlogPost(slug){
  if(!p){app.innerHTML=`<div style="height:120px"></div><div class="empty">Post not found</div>${footer()}`;bindNav();return;}
  const gallery=(p.images||[]).filter(g=>g.url);
  app.innerHTML=`
- <div class="d-hero"><img src="${p.cover||""}" alt="${L(p.title)}">
-   <div class="d-hero-cap"><div class="d-cat">Blog · ${fmtDate(p.date)}</div><h1 class="d-title">${L(p.title)}</h1></div>
+ <div class="d-hero"><img src="${p.cover||""}" alt="${T(p.title)}">
+   <div class="d-hero-cap"><div class="d-cat">Blog · ${fmtDate(p.date)}</div><h1 class="d-title">${T(p.title)}</h1></div>
  </div>
  <div class="backbar"><a class="backlink" href="#/blog" data-nav>← Blog</a></div>
  <div class="wrap d-body section">
-   ${p.excerpt?`<p class="d-intro">${L(p.excerpt)}</p>`:""}
-   ${String(L(p.body)||"").split(/\n+/).filter(Boolean).map(x=>`<p style="margin-bottom:16px;color:var(--ink-2);font-size:16px;line-height:1.7">${x}</p>`).join("")}
+   ${p.excerpt?`<p class="d-intro">${T(p.excerpt)}</p>`:""}
+   ${String(T(p.body)||"").split(/\n+/).filter(Boolean).map(x=>`<p style="margin-bottom:16px;color:var(--ink-2);font-size:16px;line-height:1.7">${x}</p>`).join("")}
  </div>
  ${gallery.length?`<div class="wrap gallery">
    <div class="g-two">${gallery.map((g,i)=>`<div class="gi" data-lb="${i}"><img loading="lazy" src="${g.url}" alt="${g.caption||""}">${g.caption?`<div class="gi-cap">${g.caption}</div>`:""}</div>`).join("")}</div>
@@ -1690,7 +1690,7 @@ function footer(){
  const c=DB.settings.contact||{};
  return `<footer class="foot"><div class="wrap">
    <div class="foot-top">
-     <div class="foot-name">${L(DB.about.name)}</div>
+     <div class="foot-name">${T(DB.about.name)}</div>
      <div class="foot-links">
        <a href="#/projects" data-nav>Projects</a><a href="#/collections" data-nav>Collections</a>
        <a href="#/explore" data-nav>Map</a><a href="#/research" data-nav>Research</a>
@@ -1699,7 +1699,7 @@ function footer(){
        <a href="#/admin" id="footAdmin">Admin</a>
      </div>
    </div>
-   <div class="foot-bottom"><span>© ${new Date().getFullYear()} ${L(DB.about.name)} · ${c.web||""}</span><span class="mono">Selected Works · Digital Monograph</span></div>
+   <div class="foot-bottom"><span>© ${new Date().getFullYear()} ${T(DB.about.name)} · ${c.web||""}</span><span class="mono">Selected Works · Digital Monograph</span></div>
  </div></footer>`;
 }
 
@@ -1732,7 +1732,7 @@ $("#lbZoom").onclick=()=>{lb.zoom=lb.zoom>1?1:2.2;lb.x=0;lb.y=0;applyLbTransform
 /* ============================ PRESENTATION MODE ============================ */
 let pr={slides:[],i:0,auto:null};
 function openPresent(p){
- const im=[{url:p.hero,caption:L(p.title),sub:p.location+" · "+p.year},...(p.images||[]).map(g=>({url:g.url,caption:g.caption,sub:""})),...(p.drawings||[]).map(d=>({url:d.url,caption:d.type,sub:""}))];
+ const im=[{url:p.hero,caption:T(p.title),sub:p.location+" · "+p.year},...(p.images||[]).map(g=>({url:g.url,caption:g.caption,sub:""})),...(p.drawings||[]).map(d=>({url:d.url,caption:d.type,sub:""}))];
  pr.slides=im;pr.i=0;
  $("#prSlides").innerHTML=im.map((s,i)=>`<div class="pr-slide ${i===0?"active":""}"><img src="${s.url}" alt=""><div class="pr-cap"><div class="pr-t">${s.caption||""}</div><div class="feat-meta">${s.sub||""}</div></div></div>`).join("");
  $("#prDots").innerHTML=im.map((s,i)=>`<div class="pr-dot ${i===0?"on":""}"></div>`).join("");
@@ -1752,10 +1752,10 @@ $("#searchInput").addEventListener("input",e=>{
  const q=e.target.value.trim().toLowerCase();
  if(!q){$("#searchResults").innerHTML="";return;}
  const res=pubProjects().filter(p=>{
-   const hay=[L(p.title),p.location,p.facts?.client,L(p.oneLiner),L(p.intro),p.year,...(p.category||[]),...(p.sustainability||[]),...(p.sections||[]).map(s=>L(s.body))].join(" ").toLowerCase();
+   const hay=[T(p.title),p.location,p.facts?.client,T(p.oneLiner),T(p.intro),p.year,...(p.category||[]),...(p.sustainability||[]),...(p.sections||[]).map(s=>T(s.body))].join(" ").toLowerCase();
    return q.split(/\s+/).every(w=>hay.includes(w));
  });
- $("#searchResults").innerHTML=res.length?`<div class="indexlist">${res.map((p,i)=>`<div class="index-row" data-slug="${p.slug}"><div class="index-no">${String(i+1).padStart(2,"0")}</div><div><div class="index-t" style="font-size:20px">${L(p.title)}</div><div class="index-sub">${L(p.category[0])} · ${p.location} · ${p.year||""}</div></div></div>`).join("")}</div>`:`<div class="empty">No matches for "${e.target.value}"</div>`;
+ $("#searchResults").innerHTML=res.length?`<div class="indexlist">${res.map((p,i)=>`<div class="index-row" data-slug="${p.slug}"><div class="index-no">${String(i+1).padStart(2,"0")}</div><div><div class="index-t" style="font-size:20px">${T(p.title)}</div><div class="index-sub">${T(p.category[0])} · ${p.location} · ${p.year||""}</div></div></div>`).join("")}</div>`:`<div class="empty">No matches for "${e.target.value}"</div>`;
  $$("#searchResults .index-row").forEach(r=>r.onclick=()=>{closeSearch();go("/project/"+r.dataset.slug);});
 });
 
@@ -1763,7 +1763,7 @@ $("#searchInput").addEventListener("input",e=>{
 function copy(txt){navigator.clipboard?.writeText(txt).catch(()=>{});}
 function shareProject(p){
  const url=location.origin+location.pathname+"#/project/"+p.slug;
- const title=L(p.title)+" — Kamanashish Barua";
+ const title=T(p.title)+" — Kamanashish Barua";
  if(navigator.share){navigator.share({title,url}).catch(()=>{});return;}
  const menu=`Copy Link|WhatsApp|Email|LinkedIn`;
  // simple share sheet
@@ -1833,7 +1833,7 @@ function adminLogin(){
    <button class="adm-login-close" id="admExit0">Close ✕</button>
    <div class="adm-login-card">
      <div class="adm-login-logo">
-       <div class="brand-name">${esc(L(DB.about.name))||"CONTROL ROOM"}</div>
+       <div class="brand-name">${esc(T(DB.about.name))||"CONTROL ROOM"}</div>
        <div class="brand-sub">Portfolio CMS</div>
      </div>
      <h2>Management Login</h2>
@@ -1868,7 +1868,7 @@ function admProjects(){
    <div class="adm-item" data-id="${p.id}">
      <span class="adm-drag" data-drag draggable="true" title="Drag to reorder">⠿</span>
      <img class="adm-thumb" src="${p.hero||""}" alt="">
-     <div><div class="adm-it-t">${L(p.title)||"Untitled"}</div>
+     <div><div class="adm-it-t">${T(p.title)||"Untitled"}</div>
        <div class="adm-it-m"><span class="badge ${p.featured?"on":""}">${p.featured?"★ Featured":"Feature"}</span><span class="badge ${p.published?"on":""}">${p.published?"Published":"Draft"}</span> ${p.location||""} · ${p.year||""}</div></div>
      <div class="adm-ctrls">
        <button data-up>↑</button><button data-down>↓</button>
@@ -1890,7 +1890,7 @@ function bindAdmProjects(){
    row.querySelector("[data-feat]").onclick=()=>{p.featured=!p.featured;save();renderAdmin();};
    row.querySelector("[data-pub]").onclick=()=>{p.published=!p.published;save();renderAdmin();};
    row.querySelector("[data-edit]").onclick=()=>{ADM.editing=id;renderAdmin();};
-   row.querySelector("[data-dup]").onclick=()=>{const c=JSON.parse(JSON.stringify(p));c.id=uid();c.slug=p.slug+"-copy";c.title={en:L(p.title)+" (copy)",bn:p.title.bn||""};c.published=false;c.order=DB.projects.length;DB.projects.push(c);save();renderAdmin();};
+   row.querySelector("[data-dup]").onclick=()=>{const c=JSON.parse(JSON.stringify(p));c.id=uid();c.slug=p.slug+"-copy";c.title={en:T(p.title)+" (copy)",bn:p.title.bn||""};c.published=false;c.order=DB.projects.length;DB.projects.push(c);save();renderAdmin();};
    row.querySelector("[data-del]").onclick=()=>{if(confirm("Delete this project permanently?")){DB.projects=DB.projects.filter(x=>x.id!==id);save();renderAdmin();}};
    const handle=row.querySelector("[data-drag]");
    handle.addEventListener("dragstart",e=>{dragId=id;row.classList.add("dragging");e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",id);});
@@ -1920,7 +1920,7 @@ function admEditor(body){
  const cats=allCats();
  body.innerHTML=`
  <button class="adm-tab" id="admBack" style="margin-bottom:16px">← Back to projects</button>
- <div class="adm-h">${L(p.title)||"Edit project"}</div>
+ <div class="adm-h">${T(p.title)||"Edit project"}</div>
  <div class="adm-note">Bilingual fields show EN / বাংলা. Bengali is optional — English is used as fallback.</div>
 
  <div class="field-row">
@@ -2025,7 +2025,7 @@ function collectEditor(p,body){
  p.year=p.year;p.lat=p.lat?parseFloat(p.lat):null;p.lng=p.lng?parseFloat(p.lng):null;
  p.facts=p.facts||{};$$("[data-fact]",body).forEach(inp=>{if(inp.value)p.facts[inp.dataset.fact]=inp.value;else delete p.facts[inp.dataset.fact];});
  $$("[data-sec]",body).forEach(sec=>{const i=+sec.dataset.sec;$$("[data-sf]",sec).forEach(inp=>{const pa=inp.dataset.sf.split(".");p.sections[i][pa[0]]=p.sections[i][pa[0]]||{};p.sections[i][pa[0]][pa[1]]=inp.value;});});
- if(!p.slug)p.slug=slugify(L(p.title))||"project-"+uid().slice(0,4);
+ if(!p.slug)p.slug=slugify(T(p.title))||"project-"+uid().slice(0,4);
  p.published=$("#pubChk").checked;p.featured=$("#featChk").checked;
 }
 
@@ -2040,7 +2040,7 @@ function admCollections(body){
    <div class="field-row"><div class="field"><label>Title EN</label><input data-cf="title.en" value="${esc(c.title?.en)}"></div><div class="field"><label>Slug</label><input data-cf="slug" value="${esc(c.slug)}"></div></div>
    <div class="field"><label>Intro EN</label><textarea data-cf="intro.en">${esc(c.intro?.en)}</textarea></div>
    <div class="field"><label>Cover URL</label><input data-cf="cover" value="${esc(c.cover)}"></div>
-   <div class="field"><label>Projects in collection</label><div class="catbox">${DB.projects.map(p=>`<button class="chip ${c.projectIds.includes(p.id)?"active":""}" data-cp="${p.id}">${L(p.title)}</button>`).join("")}</div></div>
+   <div class="field"><label>Projects in collection</label><div class="catbox">${DB.projects.map(p=>`<button class="chip ${c.projectIds.includes(p.id)?"active":""}" data-cp="${p.id}">${T(p.title)}</button>`).join("")}</div></div>
    <div style="display:flex;gap:8px"><button class="adm-primary" data-csave>Save</button><button class="adm-tab adm-danger" data-cdel>Delete</button><a class="adm-tab" href="#/collection/${c.slug}" onclick="closeAdmin()">View ↗</a></div>
  </div>`).join("")}`;
  $("#newCol").onclick=()=>{DB.collections.push({id:uid(),slug:"collection-"+uid().slice(0,4),title:{en:"New Collection",bn:""},intro:{en:"",bn:""},cover:"",projectIds:[]});save();renderAdmin();};
@@ -2068,7 +2068,7 @@ function admBlog(){
  <div class="adm-list">${ps.map(p=>`
    <div class="adm-item" data-id="${p.id}" style="grid-template-columns:56px 1fr auto">
      <img class="adm-thumb" src="${p.cover||""}" alt="">
-     <div><div class="adm-it-t">${L(p.title)||"Untitled"}</div>
+     <div><div class="adm-it-t">${T(p.title)||"Untitled"}</div>
        <div class="adm-it-m"><span class="badge ${p.published?"on":""}">${p.published?"Published":"Draft"}</span> ${fmtDate(p.date)}</div></div>
      <div class="adm-ctrls">
        <button data-pub>${p.published?"Unpublish":"Publish"}</button>
@@ -2094,7 +2094,7 @@ function admBlogEditor(body){
  if(!p){ADM.editingPost=null;return renderAdmin();}
  body.innerHTML=`
  <button class="adm-tab" id="admBackPost" style="margin-bottom:16px">← Back to posts</button>
- <div class="adm-h">${L(p.title)||"Edit post"}</div>
+ <div class="adm-h">${T(p.title)||"Edit post"}</div>
  <div class="field-row">
    <div class="field"><label>Title — English</label><input id="pf-title-en" value="${esc(p.title?.en)}"></div>
    <div class="field"><label>শিরোনাম — বাংলা</label><input id="pf-title-bn" value="${esc(p.title?.bn)}"></div>
@@ -2169,9 +2169,9 @@ function admAbout(body){const a=DB.about;
  </div>
  <div class="field"><label>Biography EN</label><textarea id="ab-bio">${esc(a.bio?.en)}</textarea></div>
  <div class="field"><label>Philosophy EN</label><textarea id="ab-phil">${esc(a.philosophy?.en)}</textarea></div>
- <div class="field"><label>Timeline (one per line — YEAR | text)</label><textarea id="ab-tl" style="min-height:150px">${(a.timeline||[]).map(r=>r.year+" | "+L(r.txt)).join("\n")}</textarea></div>
+ <div class="field"><label>Timeline (one per line — YEAR | text)</label><textarea id="ab-tl" style="min-height:150px">${(a.timeline||[]).map(r=>r.year+" | "+T(r.txt)).join("\n")}</textarea></div>
  <div class="field"><label>Expertise (one per line)</label><textarea id="ab-exp" style="min-height:150px">${(a.expertise||[]).join("\n")}</textarea></div>
- <div class="field"><label>Publications (one per line — YEAR | Title | Abstract | URL)</label><textarea id="ab-pub" style="min-height:120px">${(a.publications||[]).map(p=>[p.year,L(p.title),L(p.abstract),p.url||""].join(" | ")).join("\n")}</textarea></div>
+ <div class="field"><label>Publications (one per line — YEAR | Title | Abstract | URL)</label><textarea id="ab-pub" style="min-height:120px">${(a.publications||[]).map(p=>[p.year,T(p.title),T(p.abstract),p.url||""].join(" | ")).join("\n")}</textarea></div>
  <div class="editor-actions"><button class="adm-primary" id="saveAbout">Save</button></div>`;
  $("#ab-port").oninput=()=>{$("#ab-port-preview").src=$("#ab-port").value;};
  fileToData($("#ab-portUp"),d=>{$("#ab-port").value=d;$("#ab-port-preview").src=d;});
@@ -2194,7 +2194,7 @@ function admHome(body){const s=DB.settings;
  <div class="field-hint" style="margin-bottom:8px">Add one or more images — with more than one, the homepage hero crossfades between them every few seconds. Leave empty to fall back to a featured project's image.</div>
  <div class="img-manager" id="heroMgr"></div>
  <div style="display:flex;gap:8px;margin-top:10px"><button class="adm-tab" id="addHero">+ Add image URL</button><label class="adm-tab" style="cursor:pointer">+ Upload images<input type="file" accept="image/*" multiple id="heroUpMulti" class="hide"></label></div>
- <div class="field" style="margin-top:14px"><label>Fallback hero project (used only if no hero images above)</label><select id="hs-heroP">${DB.projects.map(p=>`<option value="${p.id}" ${s.heroProjectId===p.id?"selected":""}>${L(p.title)}</option>`).join("")}</select></div>
+ <div class="field" style="margin-top:14px"><label>Fallback hero project (used only if no hero images above)</label><select id="hs-heroP">${DB.projects.map(p=>`<option value="${p.id}" ${s.heroProjectId===p.id?"selected":""}>${T(p.title)}</option>`).join("")}</select></div>
  <div class="adm-h" style="font-size:18px;margin:20px 0 8px">Display — mobile & desktop</div>
  <div class="field-hint" style="margin-bottom:10px">Controls how the site looks on phones. On applies the full desktop layout to every screen size (multi-column grids, the top navigation bar, large hero text) — visitors on mobile pinch-zoom and scroll horizontally to read it, just like a desktop browser. Off uses the normal mobile-friendly layout (hamburger menu, bottom nav bar, single-column stacking, resized text).</div>
  <label class="chk"><input type="checkbox" id="hs-forceDesktop" ${s.forceDesktopMobile?"checked":""}> Force the desktop layout on mobile devices</label>
