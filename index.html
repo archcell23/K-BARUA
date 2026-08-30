@@ -1182,46 +1182,81 @@ function seed(){
 }
 
 /* ---------- store ---------- */
-let DB=load();
-if(!DB.settings.heroImages||!DB.settings.heroImages.length){DB.settings.heroImages=DB.settings.heroOverride?[DB.settings.heroOverride]:[];}
-if(!DB.posts)DB.posts=[];
-if(DB.settings.forceDesktopMobile===undefined)DB.settings.forceDesktopMobile=true;
-(function applyViewportPref(){
+let DB;
+function applyViewportPref(){
  const vp=document.querySelector('meta[name="viewport"]');
  if(!vp)return;
  vp.setAttribute("content",DB.settings.forceDesktopMobile?"width=1024":"width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=5");
-})();
+}
 let heroTimer=null;
-function load(){
+const IDB_NAME="kb_portfolio_idb",IDB_STORE="kv";
+function idbOpen(){
+ return new Promise((resolve,reject)=>{
+   const req=indexedDB.open(IDB_NAME,1);
+   req.onupgradeneeded=()=>{try{req.result.createObjectStore(IDB_STORE);}catch(e){}};
+   req.onsuccess=()=>resolve(req.result);
+   req.onerror=()=>reject(req.error);
+ });
+}
+function idbGet(key){return idbOpen().then(db=>new Promise((resolve,reject)=>{
+ const tx=db.transaction(IDB_STORE,"readonly"),req=tx.objectStore(IDB_STORE).get(key);
+ req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);
+}));}
+function idbSet(key,value){return idbOpen().then(db=>new Promise((resolve,reject)=>{
+ const tx=db.transaction(IDB_STORE,"readwrite");tx.objectStore(IDB_STORE).put(value,key);
+ tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);
+}));}
+function idbDel(key){return idbOpen().then(db=>new Promise((resolve,reject)=>{
+ const tx=db.transaction(IDB_STORE,"readwrite");tx.objectStore(IDB_STORE).delete(key);
+ tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);
+}));}
+async function loadDB(){
+ try{
+   const legacy=localStorage.getItem(KEY);
+   if(legacy){
+     try{
+       const d=JSON.parse(legacy);
+       if(d&&d.projects){const existing=await idbGet(KEY).catch(()=>null);if(!existing)await idbSet(KEY,d).catch(()=>{});}
+     }catch(e){}
+     localStorage.removeItem(KEY);
+   }
+ }catch(e){}
  let localData=null;
- try{const r=localStorage.getItem(KEY);if(r){const d=JSON.parse(r);if(d&&d.projects)localData=d;}}catch(e){}
+ try{const d=await idbGet(KEY).catch(()=>null);if(d&&d.projects)localData=d;}catch(e){}
  let embedData=null;
  try{const t=document.getElementById("embedded-data");if(t&&t.textContent){const d=JSON.parse(t.textContent);if(d&&d.projects)embedData=d;}}catch(e){}
  if(embedData&&(!localData||(embedData._publishedAt||0)>(localData._publishedAt||0))){
-   try{localStorage.setItem(KEY,JSON.stringify(embedData));}catch(e){}
+   try{await idbSet(KEY,embedData);}catch(e){}
    return embedData;
  }
  if(localData)return localData;
- const s=seed();try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}return s;
+ const s=seed();try{await idbSet(KEY,s);}catch(e){}return s;
 }
 const HKEY=KEY+"_history";
-function getHistory(){try{return JSON.parse(localStorage.getItem(HKEY)||"[]");}catch(e){return [];}}
-function save(){
+async function getHistory(){try{const h=await idbGet(HKEY);return Array.isArray(h)?h:[];}catch(e){return [];}}
+async function save(){
+ let prev=null;
+ try{prev=await idbGet(KEY);}catch(e){}
  try{
-   const prev=localStorage.getItem(KEY);
-   if(prev){
-     let hist=getHistory();
+   await idbSet(KEY,DB);
+ }catch(e){
+   toast("⚠ Storage full — this change did NOT save. Remove some uploaded images or use smaller photos, then try again.",5000);
+   return;
+ }
+ if(prev){
+   try{
+     let hist=await getHistory();
      hist.unshift({ts:Date.now(),data:prev});
      hist=hist.slice(0,5);
-     try{localStorage.setItem(HKEY,JSON.stringify(hist));}catch(e){}
-   }
-   localStorage.setItem(KEY,JSON.stringify(DB));
- }catch(e){toast("⚠ Storage full — this change did NOT save. Remove some uploaded images or use smaller photos, then try again.",5000);}
+     await idbSet(HKEY,hist);
+   }catch(e){try{await idbDel(HKEY);}catch(e2){}}
+ }
 }
-function restoreHistory(i){
- const hist=getHistory();const snap=hist[i];if(!snap)return;
+async function restoreHistory(i){
+ const hist=await getHistory();const snap=hist[i];if(!snap)return;
  if(!confirm("Restore the version from "+new Date(snap.ts).toLocaleString()+"? This replaces everything currently on the site with that saved snapshot (your present state is itself kept in history, so this can be undone)."))return;
- try{DB=JSON.parse(snap.data);}catch(e){toast("Couldn't read that version");return;}
+ if(!snap.data){toast("Couldn't read that version");return;}
+ DB=snap.data;
  save();toast("Restored — pick a newer version below to undo this");renderAdmin();
 }
 const allCats=()=>[...CATS,...(DB.settings.extraCats||[])];
@@ -2246,7 +2281,11 @@ function renderHeroMgr(s){const el=$("#heroMgr");if(!el)return;el.innerHTML=s.he
 function buildUpdatedHtml(){
  const doc=document.cloneNode(true);
  let tag=doc.getElementById("embedded-data");
- if(!tag){tag=doc.createElement("script");tag.id="embedded-data";tag.type="application/json";doc.body.appendChild(tag);}
+ if(!tag){
+   tag=doc.createElement("script");tag.id="embedded-data";tag.type="application/json";
+   const engineScript=[...doc.querySelectorAll("script")].find(s=>!s.src&&!s.id);
+   if(engineScript)engineScript.parentNode.insertBefore(tag,engineScript);else doc.body.appendChild(tag);
+ }
  const exportData=Object.assign({},DB,{_publishedAt:Date.now()});
  tag.textContent=JSON.stringify(exportData).replace(/</g,"\\u003c");
  const app=doc.getElementById("app");if(app)app.innerHTML="";
@@ -2255,8 +2294,7 @@ function buildUpdatedHtml(){
  const body=doc.body;if(body)body.style.overflow="";
  return "<!doctype html>\n"+doc.documentElement.outerHTML;
 }
-function admBackup(body){
- const hist=getHistory();
+async function admBackup(body){
  body.innerHTML=`<div class="adm-h">Backup & Restore</div><div class="adm-note">All content lives in this browser. "Save updated HTML" bakes your current edits into a standalone file you can upload to replace index.html on your server — open it anywhere and it shows this content by default, no browser storage needed. Export a JSON backup too, for safety and for moving content between devices. Import replaces everything.</div>
  <div style="display:flex;gap:8px;flex-wrap:wrap">
    <button class="adm-primary" id="expHtmlBtn">⭳ Save updated HTML file</button>
@@ -2266,16 +2304,20 @@ function admBackup(body){
  </div>
  <div class="adm-h" style="font-size:18px;margin:26px 0 8px">Version history — undo a mistake</div>
  <div class="adm-note">Every time something is saved, the version right before it is kept here automatically (last 5, this browser only). If an update went wrong, restore an earlier one — restoring is itself saved to history, so you can undo the undo.</div>
- <div id="histList" style="margin-top:6px">${hist.length?hist.map((h,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)">
-     <span class="mono" style="font-size:12px;color:var(--grey-1)">${i===0?"Most recent — ":""}${new Date(h.ts).toLocaleString()}</span>
-     <button class="adm-tab" data-restore="${i}">Restore this version</button>
-   </div>`).join(""):`<div class="empty" style="padding:20px 0">No earlier versions yet — they appear here after your next save.</div>`}</div>
+ <div id="histList" style="margin-top:6px"><div class="empty" style="padding:20px 0">Loading…</div></div>
  <div class="field" style="margin-top:24px"><label>Raw data (copy/paste)</label><textarea id="rawData" style="min-height:200px;font-family:var(--mono);font-size:11px">${esc(JSON.stringify(DB))}</textarea><button class="adm-tab" id="loadRaw" style="margin-top:8px">Load pasted data</button></div>`;
  $("#expHtmlBtn").onclick=()=>{const html=buildUpdatedHtml();const blob=new Blob([html],{type:"text/html"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="index.html";a.click();toast("HTML file saved — upload it to replace your site");};
  $("#expBtn").onclick=()=>{const blob=new Blob([JSON.stringify(DB,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="kb-portfolio-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();};
  $("#impFile").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{DB=JSON.parse(r.result);save();toast("Imported");renderAdmin();}catch(x){toast("Invalid file");}};r.readAsText(f);};
  $("#resetBtn").onclick=()=>{if(confirm("Reset all content to sample data? This erases your edits.")){DB=seed();save();toast("Reset");renderAdmin();}};
  $("#loadRaw").onclick=()=>{try{DB=JSON.parse($("#rawData").value);save();toast("Loaded");renderAdmin();}catch(x){toast("Invalid JSON");}};
+ const hist=await getHistory();
+ const histEl=$("#histList");
+ if(!histEl)return;
+ histEl.innerHTML=hist.length?hist.map((h,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)">
+     <span class="mono" style="font-size:12px;color:var(--grey-1)">${i===0?"Most recent — ":""}${new Date(h.ts).toLocaleString()}</span>
+     <button class="adm-tab" data-restore="${i}">Restore this version</button>
+   </div>`).join(""):`<div class="empty" style="padding:20px 0">No earlier versions yet — they appear here after your next save.</div>`;
  $$("[data-restore]").forEach(b=>b.onclick=()=>restoreHistory(+b.dataset.restore));
 }
 
@@ -2303,7 +2345,12 @@ function esc(s){return (s==null?"":String(s)).replace(/&/g,"&amp;").replace(/"/g
 window.closeAdmin=closeAdmin;
 
 /* ============================ INIT ============================ */
-(function init(){
+(async function init(){
+ DB=await loadDB();
+ if(!DB.settings.heroImages||!DB.settings.heroImages.length){DB.settings.heroImages=DB.settings.heroOverride?[DB.settings.heroOverride]:[];}
+ if(!DB.posts)DB.posts=[];
+ if(DB.settings.forceDesktopMobile===undefined)DB.settings.forceDesktopMobile=true;
+ applyViewportPref();
  const savedLang=localStorage.getItem("kb_lang");
  if(savedLang){document.documentElement.setAttribute("data-lang",savedLang);$("#langToggle").textContent=savedLang==="en"?"বাংলা":"EN";}
  window.addEventListener("hashchange",()=>{
@@ -2312,11 +2359,6 @@ window.closeAdmin=closeAdmin;
    route();
  });
  window.addEventListener("scroll",onScroll,{passive:true});
- window.addEventListener("storage",e=>{
-   if(e.key!==KEY||!e.newValue)return;
-   try{const d=JSON.parse(e.newValue);if(d&&d.projects)DB=d;}catch(err){return;}
-   if(adm.classList.contains("open"))renderAdmin();else route();
- });
  $("#musicToggle").onclick=toggleMusic;
  if(location.hash==="#/admin"){renderHome();openAdmin();}
  else route();
